@@ -131,7 +131,7 @@ details.faq summary{cursor:pointer;font-weight:650;list-style:none;display:flex;
 details.faq summary::after{content:"+";font-family:var(--label);color:var(--muted)}
 details.faq[open] summary::after{content:"−"}
 details.faq p{margin-top:8px;color:var(--muted);max-width:70ch}
-.support{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+.support{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);max-width:760px}
 @media (max-width:820px){.support{grid-template-columns:minmax(0,1fr)}}
 .support .sheet p{color:var(--muted);font-size:.95rem}
 .also{margin-top:14px;color:var(--muted)}
@@ -512,7 +512,6 @@ table.plan td.act{min-width:14em}
       <div class="support">
         <div class="sheet"><h3>Give once</h3><p>Choose any amount, by card or wallet, through Stripe. About US$25 pays to translate one page of guidance.</p><a class="btn small" href="https://donate.stripe.com/eVq3cv3XVd9ddrgf2m0sU00" target="_blank" rel="noopener">Give once</a></div>
         <div class="sheet"><h3>Give monthly</h3><p>US$10 a month, or more by raising the quantity. US$40 thanks one local organisation for testing a new language. Cancel any time by email.</p><a class="btn small" href="https://buy.stripe.com/4gM7sL51Zb15cnc9I20sU01" target="_blank" rel="noopener">Give monthly</a></div>
-        <div class="sheet"><h3>Sponsor a language</h3><p>Fund the translation and testing of one language, credited on the site.</p><a class="btn small quiet" href="#work">How it works</a></div>
       </div>
       <p class="note"><a href="https://github.com/tenderaxiom/aidfolio/blob/main/docs/LEDGER.md" target="_blank" rel="noopener">See the monthly ledger</a> · Aidfolio is an independent project, not a registered charity, so gifts are not tax-deductible. Payments are processed securely by Stripe.</p>
     </div>
