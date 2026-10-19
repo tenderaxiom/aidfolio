@@ -105,4 +105,20 @@ footer.site .wrap{display:grid;gap:10px}
 .fcols{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;margin-bottom:10px}
 .fcols ul{list-style:none;padding:0;margin:6px 0 0;display:grid;gap:6px}
 .fhead{font-family:var(--label);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase}
+
+.sharebar{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.story{max-width:70ch;display:grid;gap:18px;font-size:1.08rem}
+.story h2{margin-top:18px}
+.story blockquote{margin:6px 0;padding:18px 22px;border-left:6px solid var(--tab);background:var(--sheet);border-radius:0 12px 12px 0;font-size:1.15rem}
+.story blockquote p+p{margin-top:8px;font-size:.95rem;color:var(--muted)}
+.factbox{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:10px}
+.figure img{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;display:block}
+.figure figcaption{font-size:.9rem;color:var(--muted);margin-top:8px}
+.dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:16px}
+.dl a{display:grid;gap:8px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--sheet)}
+.dl a:hover{border-color:var(--action)}
+.dl img{width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:8px;display:block;background:var(--paper)}
+.dl span{font-weight:650}.dl small{color:var(--muted)}
+@media print{.shareband{display:none!important}}
 @media print{header.site,footer.site,.row{display:none!important}details.faq p{display:block}}

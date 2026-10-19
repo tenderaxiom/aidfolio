@@ -48,5 +48,7 @@ Aidfolio is an independent project by Richard Prouse (New Zealand). It is a self
 
 ## About
 
+- [Launch story: why Aidfolio exists](https://aidfolio.org/news/launch/): only 4.3% of humanitarian funding went directly to local organisations in 2025 (GHA Report 2026), against a 25% Grand Bargain commitment; paperwork is one barrier Aidfolio addresses.
+- [Press kit](https://aidfolio.org/press/): boilerplate, key facts, graphics and contact.
 - [About Aidfolio, privacy and independence](https://aidfolio.org/about/)
 - [Source code (MIT licence)](https://github.com/tenderaxiom/aidfolio)
