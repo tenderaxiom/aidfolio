@@ -39,4 +39,11 @@ for h in https://www.aidfolio.org/ https://aidfolio.com/ https://www.aidfolio.co
   r=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' -A "$BROWSER" --max-time 20 "$h" || echo "no answer")
   echo "::notice title=Domain $h::$r"
 done
+# Email: richard@aidfolio.org depends on Cloudflare Email Routing records (asked of the authoritative nameserver, so no cache).
+ns=$(dig +short NS aidfolio.org | head -1)
+if [ -n "$ns" ]; then
+  mx=$(dig +short MX aidfolio.org @"$ns" | sort | tr '\n' ' ')
+  spf=$(dig +short TXT aidfolio.org @"$ns" | grep -i 'v=spf1' | tr '\n' ' ')
+  if echo "$mx" | grep -qi 'mx.cloudflare.net'; then echo "::notice title=Email routing::MX $mx| SPF ${spf:-none}"; else echo "::warning title=Email routing::No Cloudflare MX records for aidfolio.org (found: ${mx:-none}). Mail to richard@aidfolio.org will bounce."; fi
+fi
 exit $bad
