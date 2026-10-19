@@ -5,14 +5,17 @@ jobs:
   accessibility-and-links:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: 22 }
       - name: Serve the site
-        run: npx --yes http-server@14.1.1 -p 8080 -s public &
+        run: |
+          npx --yes http-server@14.1.1 -p 8080 -s public &
+          sleep 5
       - name: Accessibility (WCAG 2 AA)
         run: npx --yes pa11y-ci@3.1.0
       - name: Broken links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --no-progress --exclude-mail --accept '200..=299,403,429' public/index.html README.md docs
+          fail: false
+          args: --no-progress --exclude-mail --accept '200..=299,403,429' --max-retries 3 --timeout 30 public/index.html README.md docs

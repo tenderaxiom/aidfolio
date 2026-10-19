@@ -1,1 +1,1 @@
-{"defaults":{"standard":"WCAG2AA","timeout":30000},"urls":["http://localhost:8080/","http://localhost:8080/#check"]}
+{"defaults": {"standard": "WCAG2AA", "timeout": 30000, "chromeLaunchConfig": {"args": ["--no-sandbox", "--disable-setuid-sandbox"]}}, "urls": ["http://localhost:8080/", "http://localhost:8080/#check"]}
