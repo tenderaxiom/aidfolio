@@ -1,0 +1,1 @@
+{"defaults":{"standard":"WCAG2AA","timeout":30000},"urls":["http://localhost:8080/","http://localhost:8080/#check"]}
