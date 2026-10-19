@@ -8,7 +8,7 @@ for (const f of files) {
   const text = readFileSync(f, 'utf8');
   for (const m of text.matchAll(/https:\/\/[^\s"'<>)\]`]+/g)) {
     let u = m[0].replace(/[.,;:]+$/, '');
-    if (/^https:\/\/(aidfolio\.org|www\.aidfolio\.org|wa\.me)/.test(u) || u.includes('${') || u.includes('"+')) continue;
+    if (/^https:\/\/(aidfolio\.org|www\.aidfolio\.org|wa\.me|t\.me\/share|bsky\.app\/intent|twitter\.com\/intent|x\.com\/intent|www\.facebook\.com\/sharer|www\.linkedin\.com\/sharing)/.test(u) || u.includes('${') || u.includes('"+')) continue;
     if (!found.has(u)) found.set(u, f);
   }
 }
@@ -30,6 +30,7 @@ async function check(u) {
 const urls = [...found.keys()]; let bad = 0, blocked = 0;
 const results = [];
 for (let i = 0; i < urls.length; i += 8) results.push(...await Promise.all(urls.slice(i, i + 8).map(async u => [u, await check(u)])));
+results.sort((a, b) => (a[1].ok - b[1].ok));
 for (const [u, r] of results) {
   if (!r.ok) { bad++; console.log(`::warning title=Link problem::${found.get(u)}: ${u} -> ${r.status}`); }
   else if (r.status !== 200 && !(r.status >= 200 && r.status < 300)) blocked++;
