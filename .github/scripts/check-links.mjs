@@ -1,7 +1,8 @@
 // Checks every external link in the site and docs. Reports problems as GitHub warnings; never fails the build,
 // because some official sites block automated checks.
 import { readFileSync, readdirSync } from 'node:fs';
-const files = ['public/index.html', 'README.md', ...readdirSync('docs').filter(f => f.endsWith('.md')).map(f => 'docs/' + f)];
+const walk = d => readdirSync(d, { withFileTypes: true }).flatMap(x => x.isDirectory() ? walk(d + '/' + x.name) : [d + '/' + x.name]);
+const files = [...walk('public').filter(f => /\.(html|txt)$/.test(f)), 'README.md', ...readdirSync('docs').filter(f => f.endsWith('.md')).map(f => 'docs/' + f)];
 const found = new Map();
 for (const f of files) {
   const text = readFileSync(f, 'utf8');

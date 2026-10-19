@@ -1,4 +1,6 @@
+# Aidfolio is a free public-interest resource. All search engines and AI assistants are welcome.
 User-agent: *
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
 Sitemap: https://aidfolio.org/sitemap.xml

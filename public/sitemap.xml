@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://aidfolio.org/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/readiness-check/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/fair-overhead-calculator/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/risk-sharing-plan/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/toolbox/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/guides/hact-micro-assessment/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/guides/un-psea-assessment/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/guides/due-diligence-passport/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/guides/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://aidfolio.org/about/</loc><lastmod>2026-10-20</lastmod></url>
 </urlset>

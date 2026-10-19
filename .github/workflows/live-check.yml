@@ -1,0 +1,22 @@
+# Checks the live site after each deploy and every Monday, the way search engines and AI assistants see it.
+name: Live site check
+on:
+  workflow_run:
+    workflows: [Deploy to Cloudflare]
+    types: [completed]
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Wait for the new version to reach Cloudflare
+        if: github.event_name == 'workflow_run'
+        run: sleep 30
+      - name: Check pages, files and crawler access
+        run: bash .github/scripts/live-check.sh
