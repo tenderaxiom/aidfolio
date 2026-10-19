@@ -1,0 +1,52 @@
+# Aidfolio
+
+> Free, private, open-source web tools for local and national NGOs and humanitarian organisations. Aidfolio helps them prepare for partner capacity and due-diligence assessments (such as UN HACT micro-assessments, the UN Implementing Partner PSEA assessment and the Charter for Change due-diligence passport), calculate their true overhead (indirect cost) rate and negotiate a fair overhead, and plan a fair risk-sharing conversation with donors. Everything runs in the browser: nothing typed is uploaded, there is no account, and it is free for every local organisation.
+
+Aidfolio is an independent project by Richard Prouse (New Zealand). It is a self-assessment aid, not a certification, and is not affiliated with the UN, Charter for Change, Humentum or any donor. English now; Sinhala, Tamil, French and Arabic planned. Contact: richard@aidfolio.org.
+
+## Tools
+
+- [Readiness check](https://aidfolio.org/readiness-check/): about 30 minutes. 32 questions in 9 areas (governance, accountability, finance, procurement, assets, people and security, safeguarding and PSEA, fraud and sanctions, data protection) and 41 standard documents. Produces a readiness profile, priority gaps, a dated action plan, practice statements, an evidence index, and a Charter for Change passport summary with an assessor spreadsheet. Open the tool: https://aidfolio.org/#check
+- [Fair cost: NGO overhead calculator](https://aidfolio.org/fair-overhead-calculator/): about 20 minutes. True overhead rate = shared costs / direct costs. Shows what each grant leaves unfunded, the rate grants would need to allow, and writes a negotiation brief. Open the tool: https://aidfolio.org/#cost
+- [Risk-sharing plan](https://aidfolio.org/risk-sharing-plan/): about 30 minutes. Uses the eight risk categories of the Risk Sharing Framework (Risk Sharing Platform, 2023); likelihood x impact rating; who carries each risk; 12 support measures to ask for. Open the tool: https://aidfolio.org/#risk
+
+## Guides
+
+- [HACT micro-assessment](https://aidfolio.org/guides/hact-micro-assessment/): what it covers, the four risk ratings, how to prepare.
+- [UN PSEA partner assessment](https://aidfolio.org/guides/un-psea-assessment/): the eight core standards, full/medium/low capacity, timelines.
+- [Due-diligence passport](https://aidfolio.org/guides/due-diligence-passport/): how the Charter for Change passport works for local partners.
+
+## Toolbox: 27 free resources for local NGOs
+
+- [C4C Due Diligence Passporting Tool](https://humentum.org/charter-for-change-due-diligence-passporting-tool/) (Charter for Change and Humentum): The shared assessment some INGOs reuse, so partners are not assessed again. English, French, Spanish.
+- [PSEA resource package for UN partners](https://supportcso.unpartnerportal.org/hc/en-us/articles/12970598056727-Interagency-PSEA-IP-Protocol-Resource-Package-for-Partners) (UN Partner Portal): The UN PSEA self-assessment, guidance in many languages, and an e-learning course.
+- [Finance Health Check](https://humentum.org/resources/humentum-finance-health-check) (Humentum): Free self-check of budgeting, accounting, controls and reporting, for small and medium NGOs.
+- [Civic Freedom Monitor](https://www.icnl.org/resources/civic-freedom-monitor/) (ICNL): Country reports on the laws that affect civil society, including registration.
+- [Effective governance: a guide for small and diaspora NGOs](https://www.intrac.org/resources/effective-governance-guide-small-diaspora-ngos/) (INTRAC): Tools and tips for building a board that works.
+- [Strategic planning: a toolkit for small NGOs](https://www.intrac.org/resources/strategic-planning-a-toolkit-for-small-ngos/) (INTRAC): Step-by-step planning for small organisations. Open licence.
+- [Budgeting guide for NGOs](https://humentum.org/resources/a-budgeting-guide-for-ngos) (Humentum): Plan, monitor and review a budget, with a monitoring checklist.
+- [Guidance on overheads for local and national partners](https://www.ngocoordination.org/en/library/iasc-guidance-provision-overheads-local-and-national-partners) (IASC (2022)): The sector's guidance on passing overheads to local partners.
+- [How UN pooled funds work](https://www.interaction.org/wp-content/uploads/2026/03/UN-Humanitarian-Funding-Mechanisms-.pdf) (Explainer hosted by InterAction): Country-based pooled funds are open to national NGOs that meet minimum standards.
+- [Logistics Operational Guide](https://log.logcluster.org/en) (Logistics Cluster): Procurement, supplier management, warehousing and stock control, with fraud prevention.
+- [PSEA practical guide and toolkit](https://safeguardingsupporthub.org/documents/protection-sexual-exploitation-and-abuse-psea-practical-guide-and-toolkit-unicef-and) (UNICEF, via the Safeguarding Resource and Support Hub): Policy, reporting, investigation and survivor support, with 13 templates and forms.
+- [Best practice guide: community-based complaint mechanisms](https://psea.interagencystandingcommittee.org/sites/default/files/Best%20Practice%20Guide%20on%20inter-agency%20CBCMs.pdf) (IASC (2016)): How to set up safe channels for communities to report concerns, with a checklist.
+- [SEAH investigation guide](https://www.chsalliance.org/get-support/resource/sexual-exploitation-abuse-and-harassment-seah-investigation-guide/) (CHS Alliance): Survivor-centred investigation practice, in eight languages.
+- [Misconduct Disclosure Scheme](https://misconduct-disclosure-scheme.org/) (CHS Alliance and SCHR): Lets employers check whether a candidate has substantiated SEAH findings. Free to join, according to CHS Alliance; used by over 380 organisations.
+- [Essentials of anti-corruption (online course)](https://u4.no/courses/essentials-of-anti-corruption-ii-development-programming) (U4 Anti-Corruption Resource Centre): Free, self-paced, about three hours.
+- [UN Security Council Consolidated List](https://scsanctions.un.org/search) (United Nations): Search the UN sanctions list before contracting a partner or supplier. Six languages.
+- [OpenSanctions research tool](https://opensanctions.org/research/) (OpenSanctions): Search many sanctions and watch lists at once in your browser; free for non-commercial users.
+- [Security risk management: a basic guide for smaller NGOs](https://www.gisf.ngo/wp-content/uploads/2020/12/Security-Risk-Management-A-basic-guide-for-smaller-NGOs.pdf) (GISF (EISF, 2017)): Written for staff in smaller NGOs who are responsible for security.
+- [Digital Security Helpline](https://www.accessnow.org/help/) (Access Now): Free, 24/7 help for civil society with hacked accounts, device security and backups. Ten languages.
+- [Core Humanitarian Standard (2024)](https://corehumanitarianstandard.org/) (CHS Alliance, Sphere, Groupe URD): The shared commitments on quality and accountability, including feedback and complaints. Many languages.
+- [Operational guidance on data responsibility](https://centre.humdata.org/revised-iasc-operational-guidance-on-data-responsibility-in-humanitarian-action/) (IASC (2023), via the Centre for Humanitarian Data): Handling personal and sensitive data safely in humanitarian work.
+- [KoboToolbox](https://kobotoolbox.org/kobo) (Kobo): Free mobile data collection for non-profits, including offline forms.
+- [Risk Sharing Framework](https://interagencystandingcommittee.org/system/files/2023-06/Risk%20Sharing%20Framework.pdf) (Risk Sharing Platform): How partners can agree who carries each risk, and how to share it.
+- [Kaya free courses](https://www.humanitarianleadershipacademy.org/learning-with-us/) (Humanitarian Leadership Academy): Over 900 free online courses, in up to 12 languages.
+- [DisasterReady](https://disasterready.org/free-leadership-training) (Cornerstone Foundation): Over 1,800 free courses, including safety, security and safeguarding; offline mobile app.
+- [HELP Library](https://alnap.org/about-library/about-the-help-library/) (ALNAP): More than 20,000 evaluations, guidance documents and tools.
+- [ReliefWeb Response](https://response.reliefweb.int/about) (UN OCHA): Operational information for each country and emergency.
+
+## About
+
+- [About Aidfolio, privacy and independence](https://aidfolio.org/about/)
+- [Source code (MIT licence)](https://github.com/tenderaxiom/aidfolio)
