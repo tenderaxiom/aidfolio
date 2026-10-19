@@ -24,10 +24,9 @@ jobs:
       - name: Report link check results
         if: always()
         run: |
-          echo "lychee exit code: ${{ steps.lychee.outputs.exit_code }}"
-          if [ -f lychee/out.md ]; then
-            echo "::notice title=Link check summary::$(grep -E '^\|' lychee/out.md | tr -d '|' | tr -s ' ' | tr '\n' ';')"
-            grep -E '^\s*[*-] ' lychee/out.md | sed 's/^/::warning title=Link problem::/' || true
+          if [ -s lychee/out.md ]; then
+            msg=$(head -c 6000 lychee/out.md | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')
+            echo "::notice title=Link check report (exit ${{ steps.lychee.outputs.exit_code }})::$msg"
           else
-            echo "::warning title=Link check::no report file"
+            echo "::warning title=Link check::report file missing or empty"
           fi
