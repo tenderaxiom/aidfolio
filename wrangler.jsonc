@@ -1,0 +1,9 @@
+// Cloudflare settings for Aidfolio. You do not need to change anything here.
+// It tells Cloudflare to publish the files in the "public" folder as a static website.
+{
+  "name": "aidfolio",
+  "compatibility_date": "2026-10-13",
+  "assets": {
+    "directory": "./public"
+  }
+}

@@ -1,0 +1,15 @@
+name: Feedback or problem
+description: Tell us what was confusing, wrong or missing. Please do not paste any of your organisation's answers.
+labels: [feedback]
+body:
+  - type: dropdown
+    id: kind
+    attributes: { label: What kind of feedback?, options: [Something was confusing, A question is wrong for my country, Something is missing, Something broke, Translation] }
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes: { label: What happened?, description: Which area or question, and what you expected. }
+    validations: { required: true }
+  - type: input
+    id: country
+    attributes: { label: Country (optional) }

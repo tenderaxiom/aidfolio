@@ -1,0 +1,1470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Aidfolio: free tools for local humanitarian organisations</title>
+<meta name="description" content="Free, private tools for local humanitarian organisations: get ready for partner assessments, work out a fair overhead, plan risk sharing, and find the best free resources. Nothing you type leaves your device.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='4' width='26' height='26' rx='7' fill='%230F6B5F'/%3E%3Crect x='20' y='1' width='10' height='7' rx='2' fill='%23F2B33D'/%3E%3Cpath d='M9 17.5l4.5 4.5L22 12' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<!-- Analytics (production only): paste your Cloudflare Web Analytics beacon here. It sets no cookies and never reads form answers. -->
+<style>
+/* Layout concept: a well-kept evidence binder. Tabs down the side for the nine areas, plain sheets for answers, a printed pack at the end. */
+html{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+:root{
+  --paper:#F5F7F6; --sheet:#FFFFFF; --ink:#14302B; --muted:#4A5A56; --line:#D5DEDB; --line-strong:#AFC0BB;
+  --action:#0F6B5F; --action-ink:#FFFFFF; --action-hover:#0B564C; --tint:#E4F0EC;
+  --tab:#F2B33D; --tab-ink:#14302B;
+  --ready:#1F6F3A; --ready-bg:#E3F2E7; --stale:#8A5A00; --stale-bg:#FBF0D9; --missing:#9B2C2C; --missing-bg:#F8E3E3; --na:#4A5A56; --na-bg:#ECEFEE;
+  --focus:#F2B33D;
+  --display: "Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans","Noto Sans Sinhala","Noto Sans Tamil","Noto Sans Arabic",sans-serif;
+  --body: system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Sinhala","Noto Sans Tamil","Noto Sans Arabic",sans-serif;
+  --label: ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --r:10px; --gap:clamp(16px,3vw,28px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F1A18; --sheet:#16231F; --ink:#EDF3F0; --muted:#A9BAB5; --line:#2A3A36; --line-strong:#3D514C;
+  --action:#5CC2AE; --action-ink:#0F1A18; --action-hover:#7FD3C2; --tint:#1C2E29;
+  --tab:#F2B33D; --tab-ink:#14302B;
+  --ready:#7FD39A; --ready-bg:#18311F; --stale:#F2C46D; --stale-bg:#33280F; --missing:#F0A3A3; --missing-bg:#3A1C1C; --na:#A9BAB5; --na-bg:#22302C;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F1A18; --sheet:#16231F; --ink:#EDF3F0; --muted:#A9BAB5; --line:#2A3A36; --line-strong:#3D514C;
+  --action:#5CC2AE; --action-ink:#0F1A18; --action-hover:#7FD3C2; --tint:#1C2E29;
+  --tab:#F2B33D; --tab-ink:#14302B;
+  --ready:#7FD39A; --ready-bg:#18311F; --stale:#F2C46D; --stale-bg:#33280F; --missing:#F0A3A3; --missing-bg:#3A1C1C; --na:#A9BAB5; --na-bg:#22302C;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--action)}
+a:hover{color:var(--action-hover)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2.1rem,5.2vw,3.6rem);font-weight:750;letter-spacing:-0.02em}
+h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:720;letter-spacing:-0.01em}
+h3{font-size:1.15rem;font-weight:680}
+p{margin:0}
+.eyebrow{font-family:var(--label);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:60ch}
+.skip{position:absolute;left:-999px;top:8px;background:var(--sheet);padding:8px 12px;border-radius:6px;z-index:20}
+.skip:focus{left:16px}
+
+/* header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:760;font-size:1.15rem;letter-spacing:-0.01em}
+.brand svg{width:30px;height:30px;flex:none}
+nav.top{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+nav.top a{color:var(--ink);text-decoration:none;padding:8px 10px;border-radius:8px;font-size:.95rem}
+nav.top a:hover{background:var(--tint)}
+@media (max-width:1000px){nav.top a.navopt{display:none}}
+nav.top a.btn,nav.top a.btn:hover{color:var(--action-ink)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:650;border-radius:10px;padding:12px 18px;border:2px solid var(--action);background:var(--action);color:var(--action-ink);cursor:pointer;text-decoration:none;min-height:48px}
+.btn:hover{background:var(--action-hover);border-color:var(--action-hover);color:var(--action-ink)}
+.btn.ghost{background:transparent;color:var(--action)}
+.btn.ghost:hover{background:var(--tint);color:var(--action)}
+.btn.small{padding:8px 12px;min-height:40px;font-size:.92rem}
+.btn.quiet{background:transparent;border-color:var(--line-strong);color:var(--ink)}
+.btn.quiet:hover{background:var(--tint)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* hero */
+.hero{padding-block:clamp(36px,7vw,80px) clamp(28px,5vw,56px)}
+.hero .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,56px);align-items:center}
+@media (max-width:860px){.hero .grid{grid-template-columns:minmax(0,1fr)}}
+.hero h1 .mark{background:linear-gradient(transparent 62%,color-mix(in srgb,var(--tab) 70%,transparent) 62%);padding:0 .05em}
+.hero .lede{margin-top:18px}
+.hero .row{margin-top:26px}
+.promise{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;padding:0;list-style:none;color:var(--muted);font-size:.95rem}
+.promise li{display:flex;align-items:center;gap:8px}
+.promise svg{width:18px;height:18px;flex:none;color:var(--action)}
+
+/* binder preview */
+.binder{position:relative;background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px 20px;box-shadow:0 1px 0 var(--line),0 18px 40px -28px rgba(15,40,35,.45)}
+.binder .tag{position:absolute;top:-12px;left:18px;background:var(--tab);color:var(--tab-ink);font-family:var(--label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:6px}
+.binder h3{font-size:1rem;margin-top:6px}
+.binder .who{color:var(--muted);font-size:.88rem;margin-top:2px}
+.areas-mini{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.areas-mini li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:.92rem}
+.meter{grid-column:1 / -1;height:6px;border-radius:4px;background:var(--na-bg);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--action);border-radius:4px}
+.count{font-family:var(--label);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.binder .foot{margin-top:14px;font-size:.82rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px}
+
+/* sections */
+section.band{padding-block:clamp(40px,6vw,72px);border-top:1px solid var(--line)}
+section.band .head{display:grid;gap:10px;max-width:70ch;margin-bottom:28px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);counter-reset:s;list-style:none;padding:0;margin:0}
+@media (max-width:820px){.steps{grid-template-columns:minmax(0,1fr)}}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--label);font-weight:700;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:var(--tab);color:var(--tab-ink)}
+.steps p{color:var(--muted)}
+.outputs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap)}
+@media (max-width:900px){.outputs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.outputs{grid-template-columns:minmax(0,1fr)}}
+.outputs div{border-top:3px solid var(--action);padding-top:12px;display:grid;gap:6px;align-content:start}
+.outputs p{color:var(--muted);font-size:.95rem}
+.frameworks{width:100%;border-collapse:collapse;font-size:.95rem}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--sheet)}
+.frameworks th,.frameworks td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.frameworks th{font-family:var(--label);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.frameworks tr:last-child td{border-bottom:0}
+.note{font-size:.92rem;color:var(--muted);margin-top:12px;max-width:75ch}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--gap);align-items:start}
+@media (max-width:820px){.split{grid-template-columns:minmax(0,1fr)}}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:12px}
+.msg{font-family:var(--body);font-size:.95rem;white-space:pre-wrap;background:var(--tint);border-radius:8px;padding:14px;margin:0}
+.privacy{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.privacy li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px}
+.privacy svg{width:22px;height:22px;color:var(--action);margin-top:2px}
+details.faq{border-bottom:1px solid var(--line);padding-block:14px}
+details.faq summary{cursor:pointer;font-weight:650;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.faq summary::after{content:"+";font-family:var(--label);color:var(--muted)}
+details.faq[open] summary::after{content:"−"}
+details.faq p{margin-top:8px;color:var(--muted);max-width:70ch}
+.support{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+@media (max-width:820px){.support{grid-template-columns:minmax(0,1fr)}}
+.support .sheet p{color:var(--muted);font-size:.95rem}
+.also{margin-top:14px;color:var(--muted)}
+.toolcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+@media (max-width:900px){.toolcards{grid-template-columns:minmax(0,1fr)}}
+.toolcard{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:10px;align-content:start}
+.toolcard p{color:var(--muted)}
+.toolcard .btn{justify-self:start;margin-top:6px}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:640px){.formgrid{grid-template-columns:minmax(0,1fr)}}
+.rows{display:grid;gap:8px}
+.rowline{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.3fr) auto;gap:8px;align-items:end}
+.rowline.two{grid-template-columns:minmax(0,2fr) minmax(0,1.2fr) auto}
+@media (max-width:700px){.rowline,.rowline.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.rowline .del{grid-column:1 / -1;justify-self:start}}
+.mini{display:grid;gap:4px;font-size:.82rem;color:var(--muted);min-width:0}
+input[type="number"],textarea{font:inherit;color:var(--ink);background:var(--sheet);border:1px solid var(--line-strong);border-radius:8px;padding:9px 10px;min-height:44px;width:100%;min-width:0}
+textarea{min-height:76px;resize:vertical}
+.del{background:transparent;border:1px solid var(--line-strong);color:var(--ink);border-radius:8px;min-height:44px;padding:0 12px;cursor:pointer;font:inherit}
+.del:hover{background:var(--tint)}
+.costcat{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.costcat small{display:block;color:var(--muted)}
+@media (max-width:560px){.costcat{grid-template-columns:minmax(0,1fr)}}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.kpis{grid-template-columns:minmax(0,1fr)}}
+.brief{white-space:pre-wrap;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px;font-size:.95rem;max-width:80ch}
+.riskcard{border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px;background:var(--sheet)}
+.riskcard h3{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.riskcard .def{color:var(--muted);font-size:.92rem}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.three{grid-template-columns:minmax(0,1fr)}}
+.measures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+@media (max-width:640px){.measures{grid-template-columns:minmax(0,1fr)}}
+.measures label{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;font-size:.92rem;align-items:start}
+.measures input{width:24px;height:24px;margin:0;accent-color:var(--action)}
+.flag{font-size:.85rem;background:var(--stale-bg);color:var(--stale);border-radius:8px;padding:6px 10px}
+.band-high{background:var(--missing-bg);color:var(--missing)}
+.band-med{background:var(--stale-bg);color:var(--stale)}
+.band-low{background:var(--ready-bg);color:var(--ready)}
+table.index td.num,table.index th.num{text-align:right;font-variant-numeric:tabular-nums}
+footer.site{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.9rem}
+footer.site .wrap{display:grid;gap:8px}
+.placeholder{outline:2px dashed var(--tab);outline-offset:3px;border-radius:4px}
+
+/* app */
+#app,.toolapp{padding-block:24px 64px}
+.app-grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:var(--gap);align-items:start}
+@media (max-width:860px){.app-grid{grid-template-columns:minmax(0,1fr)}}
+.app-grid>nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);max-height:calc(100vh - 96px);overflow-y:auto}
+@media (max-width:860px){.app-grid>nav{position:static;max-height:none;overflow:visible}}
+#panel{scroll-margin-top:84px}
+#landing section[id]{scroll-margin-top:72px}
+.tabs{display:grid;gap:6px;list-style:none;margin:0;padding:0}
+@media (max-width:860px){.tabs{grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;padding-bottom:6px}}
+.tabs button{all:unset;box-sizing:border-box;cursor:pointer;min-height:44px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;padding:10px 12px;border-radius:8px 0 0 8px;border-left:4px solid transparent;color:var(--ink);font-size:.95rem}
+@media (max-width:860px){.tabs button{border-radius:8px;border-left:0;border-bottom:4px solid transparent}}
+.tabs button:hover{background:var(--tint)}
+.tabs button[aria-current="step"]{background:var(--sheet);border-left-color:var(--tab);font-weight:650}
+@media (max-width:860px){.tabs button[aria-current="step"]{border-bottom-color:var(--tab)}}
+.tabs button.off{color:var(--muted);text-decoration:line-through}
+.tabs .count{font-size:.78rem}
+.panel{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:clamp(16px,3vw,28px);display:grid;gap:22px;min-width:0}
+.panel-head{display:grid;gap:8px}
+.maps{font-family:var(--label);font-size:.78rem;color:var(--muted)}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:8px;min-width:0}
+legend{font-weight:650;padding:0;margin-bottom:4px}
+.opt{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.opt:hover{border-color:var(--line-strong)}
+.opt input{margin-top:3px;width:18px;height:18px;accent-color:var(--action)}
+.opt:has(input:checked){border-color:var(--action);background:var(--tint)}
+.group-title{font-family:var(--label);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px}
+.ev{display:grid;grid-template-columns:minmax(0,1fr) 190px 150px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.ev:last-child{border-bottom:0}
+@media (max-width:640px){.ev{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ev .ev-label{grid-column:1 / -1}}
+.ev-label{display:grid;gap:2px}
+.datefield{display:grid;gap:4px;font-size:.8rem;color:var(--muted);min-width:0}
+.ev{align-items:end}
+.ev-label small{color:var(--muted)}
+.core{font-family:var(--label);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;background:var(--tab);color:var(--tab-ink);border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:2px}
+select,input[type="text"],input[type="month"]{font:inherit;color:var(--ink);background:var(--sheet);border:1px solid var(--line-strong);border-radius:8px;padding:9px 10px;min-height:44px;width:100%;min-width:0}
+label.field{display:grid;gap:6px;font-weight:600}
+label.field span.hint{font-weight:400;color:var(--muted);font-size:.9rem}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:650;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.chip.ready{background:var(--ready-bg);color:var(--ready)}
+.chip.stale{background:var(--stale-bg);color:var(--stale)}
+.chip.missing{background:var(--missing-bg);color:var(--missing)}
+.chip.na{background:var(--na-bg);color:var(--na)}
+.chip.unanswered{background:var(--na-bg);color:var(--muted)}
+.chip.undated{background:var(--stale-bg);color:var(--stale)}
+.navrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
+.skiparea{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:.95rem}
+.skiparea input{width:18px;height:18px;accent-color:var(--action)}
+.callout{background:var(--tint);border-radius:10px;padding:14px 16px;font-size:.95rem}
+.confirm{border:2px solid var(--missing);border-radius:10px;padding:14px;display:grid;gap:10px;background:var(--missing-bg);color:var(--ink)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-size:.95rem;z-index:30}
+
+/* pack */
+.pack{display:grid;gap:26px;min-width:0}
+.panel>*,.pack>*,.pack section{min-width:0}
+.panel>.btn{justify-self:start}
+.pack-head{display:grid;gap:6px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.pack-head .meta{color:var(--muted);font-size:.92rem}
+.profile{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.profile{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.profile{grid-template-columns:minmax(0,1fr)}}
+.pcard{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:6px;align-content:start;background:var(--sheet)}
+.pcard .big{font-family:var(--display);font-size:1.5rem;font-weight:750;font-variant-numeric:tabular-nums}
+.pcard .sub{color:var(--muted);font-size:.85rem}
+.gaps{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.gaps li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--sheet)}
+.gaps .pri{font-family:var(--label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:3px 8px;white-space:nowrap}
+.pri.p1{background:var(--missing-bg);color:var(--missing)}
+.pri.p2{background:var(--stale-bg);color:var(--stale)}
+.pri.p3{background:var(--na-bg);color:var(--muted)}
+.gaps p{color:var(--muted);font-size:.92rem}
+details.gapgroup{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px;background:var(--paper)}
+details.gapgroup summary{cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap;list-style:none}
+details.gapgroup[open] summary{margin-bottom:12px}
+details.gapgroup summary::-webkit-details-marker{display:none}
+.stmt{border-left:4px solid var(--tab);padding:4px 0 4px 14px;display:grid;gap:6px}
+.stmt p{max-width:75ch}
+.draftlabel{font-family:var(--label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--stale)}
+table.index{width:100%;border-collapse:collapse;font-size:.92rem}
+table.index th,table.index td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.index th{font-family:var(--label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.disclaimer{border:1px solid var(--line-strong);border-radius:10px;padding:14px;font-size:.9rem;color:var(--muted)}
+table.plan input{min-height:40px;padding:6px 8px}
+table.plan td.act{min-width:14em}
+@media (max-width:640px){table.plan thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}table.plan,table.plan tbody{display:block}table.plan tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}table.plan td{display:block;border:0;padding:0}table.plan td:nth-child(1),table.plan td.act{grid-column:1 / -1;min-width:0}table.plan td:nth-child(3)::before{content:"Done by";display:block;font-size:.8rem;color:var(--muted)}table.plan td:nth-child(4)::before{content:"Who";display:block;font-size:.8rem;color:var(--muted)}}
+.sharebox{border:1px dashed var(--line-strong);border-radius:12px;padding:14px;margin-top:16px;display:grid;gap:10px;background:var(--paper)}
+.sharebox pre{white-space:pre-wrap;font:inherit;font-size:.88rem;margin:0;background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:10px;max-width:100%;overflow-wrap:anywhere}
+.firsttime{margin-top:4px}
+.tbx{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:14px}
+.tbx section{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--sheet);min-width:0}
+.tbx h3{font-size:1.02rem}
+.tbx ul{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:12px}
+.tbx li{min-width:0}
+.tbx li a{font-weight:650;overflow-wrap:anywhere}
+.tbx small{display:block;color:var(--muted);font-size:.86rem;margin-top:2px}
+.freehelp{margin-top:6px;font-size:.9rem}
+.freehelp a{font-weight:650}
+.supportnote{border-top:1px solid var(--line);padding-top:12px;margin-top:16px;font-size:.92rem;color:var(--muted)}
+
+@media print{
+  header.site,footer.site,#landing,.no-print,.tabs,.toast{display:none!important}
+  .riskcard,.toolcard{break-inside:avoid}
+  body{background:#fff;color:#000;font-size:11pt}
+  #app{padding:0}.app-grid{display:block}
+  .panel{border:0;padding:0}
+  .gaps li,.pcard{break-inside:avoid}
+  table.plan input{border:0;padding:0;min-height:0;background:none;color:#000}
+  .sharebox,.supportnote{display:none!important}
+  .pack a.res::after{content:" (" attr(href) ")";font-weight:400;font-size:9pt;overflow-wrap:anywhere}
+  a{color:#000}
+}
+</style>
+<meta property="og:title" content="Aidfolio: free tools for local humanitarian organisations">
+<meta property="og:description" content="Free, private tools for local organisations: a fair overhead, readiness for partner assessments, and a risk-sharing plan. Nothing you type leaves your device.">
+<meta property="og:image" content="https://aidfolio.org/og.png">
+<meta property="og:url" content="https://aidfolio.org/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="theme-color" content="#0F6B5F">
+</head>
+<body>
+
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Aidfolio home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="4" width="26" height="26" rx="7" fill="var(--action)"/><rect x="20" y="1" width="10" height="7" rx="2" fill="var(--tab)"/><path d="M9 17.5l4.5 4.5L22 12" fill="none" stroke="var(--action-ink)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Aidfolio
+    </a>
+    <nav class="top" aria-label="Main">
+      <a class="navopt" href="#check">Readiness check</a>
+      <a class="navopt" href="#cost">Fair cost</a>
+      <a class="navopt" href="#risk">Risk-sharing plan</a>
+      <a class="navopt" href="#toolbox">Toolbox</a>
+      <a class="navopt" href="#partners">For partners</a>
+      <a class="navopt" href="#support">Support</a>
+      <a class="btn small" href="#tools">Free tools</a>
+    </nav>
+  </div>
+</header>
+
+<div id="main">
+<!-- ============ LANDING ============ -->
+<div id="landing">
+  <section class="hero" id="top">
+    <div class="wrap grid">
+      <div>
+        <p class="eyebrow">Free for local organisations</p>
+        <h1>You already do the work. <span class="mark">Now show it.</span></h1>
+        <p class="lede">When a donor or partner assesses your organisation, Aidfolio helps you get ready. Answer short questions about how you really work, list the documents you hold, and get a readiness pack to bring to the assessment.</p>
+        <div class="row">
+          <a class="btn" href="#check">Start the check (about 30 minutes)</a>
+          <button class="btn ghost" type="button" id="seeExample">See an example pack</button>
+        </div>
+        <p class="also">Also free: <a href="#cost">work out your true overhead rate</a>, <a href="#risk">plan how to share risk with a partner</a>, and find the best free resources in the <a href="#toolbox">Toolbox</a>.</p>
+        <ul class="promise" aria-label="Our promises">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 12l4 4 10-10"/></svg>Free, always</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 12l4 4 10-10"/></svg>Nothing you type leaves your device</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 12l4 4 10-10"/></svg>No account needed</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 12l4 4 10-10"/></svg>Open source</li>
+        </ul>
+      </div>
+      <figure class="binder" aria-label="Example readiness profile" style="margin:0">
+        <span class="tag">Example</span>
+        <h3>Riverbank Community Trust</h3>
+        <p class="who">A fictional organisation, for illustration</p>
+        <ul class="areas-mini" id="heroProfile"></ul>
+        <p class="foot">Counts show documents that are held and current. No scores, no grades: just what is ready and what to do next.</p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band" id="tools">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Three free tools</p>
+        <h2>For the three problems local organisations raise most</h2>
+        <p class="lede">Each one runs in your browser, saves only on your device, and gives you a document to take to your partner.</p>
+      </div>
+      <div class="toolcards">
+        <article class="toolcard">
+          <p class="eyebrow">About 30 minutes</p>
+          <h3>Readiness check</h3>
+          <p>Get ready for a partner assessment, even your first: list your documents, describe how you work, and get a pack and a dated action plan organised the way assessors work.</p>
+          <a class="btn small" href="#check">Start the readiness check</a>
+        </article>
+        <article class="toolcard">
+          <p class="eyebrow">About 20 minutes</p>
+          <h3>Fair cost</h3>
+          <p>Work out what it really costs to run your organisation, how much of it your grants leave unfunded, and get a brief to negotiate a fair overhead.</p>
+          <a class="btn small" href="#cost">Work out my overhead rate</a>
+        </article>
+        <article class="toolcard">
+          <p class="eyebrow">About 30 minutes</p>
+          <h3>Risk-sharing plan</h3>
+          <p>Prepare a fair conversation with your donor or intermediary about who carries each risk, and what support would share it.</p>
+          <a class="btn small" href="#risk">Plan a risk-sharing dialogue</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="how">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">How the readiness check works</p>
+        <h2>Three steps, in your own time</h2>
+        <p class="lede">How the readiness check works. You can stop at any point; your answers are saved in this browser, on this device.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Describe how you really work</h3><p>Short multiple-choice questions in nine areas, from finance to safeguarding and security. Skip any area that does not apply.</p></li>
+        <li><h3>List what you hold</h3><p>For each standard document, say whether you have it and when it was last updated. Old documents are flagged, not counted against you.</p></li>
+        <li><h3>Take your pack</h3><p>Print it or save it as a PDF. Bring it to the assessment, or use it to fill in the donor's form faster.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">What you get</p>
+        <h2>A pack built only from your answers</h2>
+        <p class="lede">Aidfolio never invents policies or practice. If you do not do something yet, the pack says so plainly and suggests a first step.</p>
+      </div>
+      <div class="outputs">
+        <div><h3>Readiness profile</h3><p>For each area, how many documents are ready, out of date or missing.</p></div>
+        <div><h3>Priority gaps</h3><p>What to fix first, starting with what assessors ask for most.</p></div>
+        <div><h3>Practice statements</h3><p>Plain drafts of how you work, from your own answers, ready for you to check and edit.</p></div>
+        <div><h3>Evidence index</h3><p>A list of your documents with dates, like the front page of a binder.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Built around real assessments</p>
+        <h2>Helps you prepare for the forms you already face</h2>
+      </div>
+      <div class="tablewrap">
+        <table class="frameworks">
+          <thead><tr><th scope="col">Assessment</th><th scope="col">Used by</th><th scope="col">How Aidfolio helps</th></tr></thead>
+          <tbody>
+            <tr><td>HACT micro-assessment</td><td>UN agencies such as UNICEF, UNDP, UNFPA and WFP</td><td>Covers its seven areas, from accounting policies and fixed assets to procurement</td></tr>
+            <tr><td>UN Implementing Partner PSEA assessment</td><td>UN agencies working with implementing partners</td><td>Walks through its eight core standards, from policy to corrective action</td></tr>
+            <tr><td>Charter for Change due-diligence passport</td><td>INGOs that agree to share one assessment, using the open C4C Passporting Tool</td><td>Your pack includes a summary organised by the passport's capacity areas, and a file your assessor can open in a spreadsheet</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Aidfolio is an independent, free tool. It is not affiliated with any of these bodies, and it does not certify or verify anything. The pack is your own self-assessment.</p>
+    </div>
+  </section>
+
+  <section class="band" id="toolbox">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Toolbox</p>
+        <h2>The best free resources, by task</h2>
+        <p class="lede">A short, hand-picked list: for each job a local organisation faces, one or two free resources that do it well. The readiness check links to the right one for every gap it finds.</p>
+      </div>
+      <div class="tbx" id="toolboxGrid"></div>
+      <p class="note">Every link is free to use and was checked in October 2026. Aidfolio is not affiliated with these organisations. Know a better free resource? Email <a href="mailto:hello@aidfolio.org?subject=Toolbox%20suggestion">hello@aidfolio.org</a>.</p>
+    </div>
+  </section>
+
+  <section class="band" id="partners">
+    <div class="wrap split">
+      <div class="head" style="margin:0">
+        <p class="eyebrow">For INGOs, pooled funds and NGO networks</p>
+        <h2>Send it to your partners</h2>
+        <p class="lede">Partners who prepare arrive with their evidence in order, a clear picture of their true costs, and a list of risks to discuss with you. You keep your own processes; Aidfolio helps partners prepare for them.</p>
+        <ul class="privacy" style="margin-top:8px">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 12l4 4 10-10"/></svg><span>Free for your partners, with no account and no data shared with you or us.</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 12l4 4 10-10"/></svg><span>Want it in another language, or mapped to your own form? <a href="#work">See how we work with partners</a>.</span></li>
+        </ul>
+      </div>
+      <div class="sheet">
+        <h3>A message you can forward</h3>
+        <p class="msg" id="shareMsg">Free tools for local organisations: see what your grants leave unfunded and get a brief to negotiate a fair overhead; get ready for partner assessments; and plan a fair risk-sharing conversation with your donor. It runs in your browser and nothing you type is uploaded. https://aidfolio.org</p>
+        <div class="row">
+          <button class="btn small" type="button" id="copyShare">Copy message</button>
+          <a class="btn small quiet" id="waShare" href="#" target="_blank" rel="noopener">Share on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="work">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">For INGOs, UN agencies, pooled funds and networks</p>
+        <h2>Work with us</h2>
+        <p class="lede">Local organisations never pay. Organisations that fund or partner with them can commission work that makes the free tools fit their partners better. Everything we build this way is released free to everyone.</p>
+      </div>
+      <div class="support">
+        <div class="sheet"><h3>Map it to your form</h3><p>We map your own partner assessment or due-diligence questions to the readiness check, so your partners prepare for exactly what you ask.</p></div>
+        <div class="sheet"><h3>Partner preparation sessions</h3><p>Live online sessions for a group of your partners: the three tools, step by step, with time for their questions.</p></div>
+        <div class="sheet"><h3>Sponsor a language</h3><p>Fund the translation and testing of one language with local organisations. Your support is credited on the site.</p></div>
+      </div>
+      <div class="row" style="margin-top:18px">
+        <a class="btn small" href="mailto:hello@aidfolio.org?subject=Working%20with%20Aidfolio">Email hello@aidfolio.org</a>
+      </div>
+      <p class="note">Our rule: paid work never changes what the free tools say or recommend, and no funder sees anyone's answers. We list every paying client and every amount in our public monthly ledger.</p>
+    </div>
+  </section>
+
+  <section class="band" id="privacy">
+    <div class="wrap split">
+      <div class="head" style="margin:0">
+        <p class="eyebrow">Privacy</p>
+        <h2>Your answers stay with you</h2>
+        <p class="lede">We built Aidfolio so we could never see your answers, even if we wanted to.</p>
+      </div>
+      <ul class="privacy">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 11V8a6 6 0 0112 0v3M5 11h14v10H5z"/></svg><span><strong>Nothing is uploaded.</strong> The tool runs entirely in your browser. There is no server that receives your answers. If you choose to share anonymous cost percentages, you send them yourself, by email.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5"/></svg><span><strong>Saved on this device only.</strong> Answers are kept in this browser so you can continue later. On a shared computer, use "Clear my answers" when you finish.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg><span><strong>You own the file.</strong> Save your progress as a file and open it again on any device.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span><strong>Visits are counted, people are not.</strong> We count page visits with a cookie-free service. It never sees what you type.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="support">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Support the work</p>
+        <h2>Free for every local organisation, always</h2>
+        <p class="lede">The tools stay free for local organisations whatever happens, and the website itself costs about US$11 a year. If you work for an organisation that funds local partners, or simply believe in this work, your support pays for new languages, testing with local organisations, and new tools. Every dollar in and out is published in a monthly ledger.</p>
+      </div>
+      <div class="support">
+        <div class="sheet"><h3>Give once</h3><p>A one-off gift through Ko-fi. About US$25 pays to translate one page of guidance.</p><a class="btn small placeholder" href="#support" data-setup="ko-fi">Give on Ko-fi</a></div>
+        <div class="sheet"><h3>Give monthly</h3><p>Steady support through GitHub Sponsors; gifts from personal accounts reach us in full. US$40 thanks one local organisation for testing a new language.</p><a class="btn small placeholder" href="#support" data-setup="github-sponsors">Sponsor on GitHub</a></div>
+        <div class="sheet"><h3>Sponsor a language</h3><p>Fund the translation and testing of one language, credited on the site.</p><a class="btn small quiet" href="#work">How it works</a></div>
+      </div>
+      <p class="note"><a class="placeholder" href="#support" data-setup="ledger">See the monthly ledger</a> · Dashed outlines mark links to set up before launch.</p>
+    </div>
+  </section>
+
+  <section class="band" id="faq">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Questions</p><h2>Common questions</h2></div>
+      <details class="faq"><summary>Is this a certification?</summary><p>No. Aidfolio is a self-assessment. Nobody checks your answers, and the pack says so. Donors and partners will still run their own checks; the pack helps you get ready for them.</p></details>
+      <details class="faq"><summary>Will it write policies for us?</summary><p>It drafts short statements of what you told it you already do, so you can check, edit and adopt them. It never claims you do something you said you don't. For a full policy, use the draft as a starting point and get advice where you need it.</p></details>
+      <details class="faq"><summary>We have never been assessed. Is this for us?</summary><p>Yes, especially. Organisations facing their first assessment have the least support and no earlier assessment to reuse. Tick "We have never had an assessment" at the start: your pack then includes an action plan with the dates you choose, so a first funder can see what you already do and what you will put in place.</p></details>
+      <details class="faq"><summary>What is a due-diligence passport?</summary><p>Some international NGOs now share one assessment of a partner instead of each doing their own, using the open Charter for Change Due Diligence Passporting Tool. The assessing organisation completes and rates it; you review and sign it, and it can then be shared, with your consent, so you are not assessed again. Aidfolio organises your pack by the passport's capacity areas to make that first assessment quicker. Aidfolio is independent and not affiliated with Charter for Change or Humentum.</p></details>
+      <details class="faq"><summary>Who can use it?</summary><p>Any local or national organisation preparing for a partner assessment: NGOs, community groups, faith-based organisations and associations. It is also useful for an annual check-up.</p></details>
+      <details class="faq"><summary>Which languages are available?</summary><p>English now. Sinhala, Tamil, French and Arabic are next, translated and tested with local organisations. You can help translate.</p></details>
+      <details class="faq"><summary>How do you decide a document is out of date?</summary><p>Some documents, like bank statements or board minutes, are only useful if recent. Aidfolio uses simple default periods, shown next to each document, for example 3 months for bank statements. These are our defaults, not an official rule; your donor may use different ones.</p></details>
+      <details class="faq"><summary>Is this legal advice?</summary><p>No. Aidfolio gives practical, general guidance. Laws differ by country; take advice on legal questions.</p></details>
+      <details class="faq"><summary>Who built it?</summary><p id="about"><span class="placeholder">[Your name, and one or two sentences on why you built Aidfolio.]</span> The code is open source, and the questions are free for anyone to reuse. Contact: <a href="mailto:hello@aidfolio.org">hello@aidfolio.org</a>.</p></details>
+      <details class="faq"><summary>How is Aidfolio funded?</summary><p>By small donations, grants, and paid work for international organisations that partner with local ones (see <a href="#work">Work with us</a>). Local organisations never pay, and no funder can change what the tools say. Every amount in and out is published in our monthly ledger.</p></details>
+    </div>
+  </section>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" hidden>
+  <div class="wrap">
+    <div class="app-grid">
+      <nav aria-label="Areas"><ul class="tabs" id="tabs"></ul></nav>
+      <div class="panel" id="panel" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+<div id="costApp" class="toolapp" hidden><div class="wrap"><div class="panel" id="costPanel"></div></div></div>
+<div id="riskApp" class="toolapp" hidden><div class="wrap"><div class="panel" id="riskPanel"></div></div></div>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Aidfolio</strong> is a free, independent self-assessment tool. It does not certify or verify organisations.</p>
+    <p>Code: MIT licence. Questions and templates: CC BY 4.0. Contact: <a href="mailto:hello@aidfolio.org">hello@aidfolio.org</a></p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- Content (English). Translators: copy this object per language. ---------- */
+var AREAS = [
+ {id:"gov", name:"Governance and registration", c4c:"gov", maps:"HACT: Implementing partner; Organizational structure and staffing. C4C passport: General; Governance",
+  intro:"Who is responsible for the organisation, and is it legally registered?",
+  practice:[
+   {id:"gov_board", res:"gov", q:"Who oversees the organisation?", opts:[
+     {v:"a", t:"A board or committee that meets at least twice a year", s:"A governing board or committee oversees the organisation and meets at least twice a year."},
+     {v:"b", t:"A board or committee, but it meets less often", s:"A governing board or committee exists but meets less than twice a year.", gap:2, why:"Assessors usually look for regular, recorded oversight by people other than the director.", fix:"Schedule two board meetings a year and keep minutes."},
+     {v:"c", t:"No board yet; the director decides", s:"The organisation does not yet have a governing board.", gap:1, why:"Many donors expect independent oversight of the organisation.", fix:"Form a small board of people who are independent of daily management."}]},
+   {id:"gov_coi", res:"gov", q:"When someone has a personal interest in a decision (a relative bidding for a contract, for example), what happens?", opts:[
+     {v:"a", t:"They declare it, it is recorded, and they step out of the decision", s:"Conflicts of interest are declared, recorded, and the person concerned does not take part in the decision."},
+     {v:"b", t:"It is discussed, but not recorded", s:"Conflicts of interest are discussed informally but not recorded.", gap:2, why:"Without a record, you cannot show the conflict was handled.", fix:"Keep a simple register of declared interests."},
+     {v:"c", t:"We have no set way of handling it", s:"The organisation does not yet have a process for conflicts of interest.", gap:1, why:"Unmanaged conflicts of interest are a recognised fraud risk, and assessors ask about them.", fix:"Adopt a one-page conflict-of-interest rule and a declaration form."}]},
+   {id:"gov_reg", res:"reg", c4c:"general", q:"Is the organisation registered with the relevant authority?", opts:[
+     {v:"a", t:"Yes, and the registration is current", s:"The organisation is registered with the relevant authority and its registration is current."},
+     {v:"b", t:"Registration is being renewed or applied for", s:"The organisation's registration is being renewed or applied for.", gap:1, why:"Many partners cannot fund an organisation without current registration.", fix:"Keep proof of the application or renewal with your pack."},
+     {v:"c", t:"No", s:"The organisation is not currently registered.", gap:1, why:"Many partners cannot fund an unregistered organisation.", fix:"Ask a local NGO forum about the registration route in your country."}]}
+  ],
+  evidence:[
+   {id:"gov_cert", res:"reg", c4c:"general", t:"Registration certificate", core:1, why:"Proves the organisation legally exists."},
+   {id:"gov_const", res:"gov", t:"Constitution or governing document", core:1, why:"Shows purpose, powers and how leaders are chosen."},
+   {id:"gov_list", res:"gov", t:"List of board members", core:1, valid:12, why:"Shows who is accountable today."},
+   {id:"gov_min", res:"gov", t:"Board minutes from the last 12 months", valid:12, why:"Shows oversight actually happens."},
+   {id:"gov_coipol", res:"gov", t:"Conflict-of-interest policy or declaration form", why:"Shows how personal interests are handled."},
+   {id:"gov_org", res:"gov", t:"Organisation chart", valid:24, why:"Shows roles and who reports to whom."}
+  ]},
+ {id:"acc", name:"Strategy and accountability", c4c:"acc", maps:"C4C passport: Strategy; Accountability. Core Humanitarian Standard: feedback and complaints",
+  intro:"Where the organisation is heading, and how the people you serve and the groups you fund can hold you to account.",
+  practice:[
+   {id:"acc_plan", res:"strat", c4c:"strat", q:"Do you have a written plan for the next few years: what you aim to achieve, and how?", opts:[
+     {v:"a", t:"Yes, approved by the board and less than five years old", s:"A written strategic plan, approved by the board, sets out the organisation's aims and approach for the coming years."},
+     {v:"b", t:"A draft, or a plan that is out of date", s:"A strategic plan exists in draft or is out of date.", gap:2, why:"Assessors use the plan to see whether a project fits what the organisation does.", fix:"Update the plan with the board: two pages on aims, people served and main activities is enough."},
+     {v:"c", t:"No", s:"The organisation does not yet have a written strategic plan.", gap:2, why:"Assessors use the plan to see whether a project fits what the organisation does.", fix:"Write a two-page plan with the board: your aims, who you serve, and your main activities for the next three years."}]},
+   {id:"acc_cfm", res:"chs", q:"Can the people you serve give feedback or complain about your work, not only about abuse?", opts:[
+     {v:"a", t:"Yes, and we record and respond to every complaint", s:"Community members can give feedback or complain about the organisation's work, and every complaint is recorded and answered."},
+     {v:"b", t:"Informally, without records", s:"Community members can give feedback informally, but complaints are not recorded.", gap:2, why:"A record shows that complaints are heard and acted on.", fix:"Keep a simple complaints log: date, issue, action taken, and when you replied."},
+     {v:"c", t:"No", s:"There is not yet a way for community members to complain about the organisation's work.", gap:1, why:"Accountability to affected people is a core commitment in humanitarian standards, and assessors ask about it.", fix:"Set up one channel, such as a phone number, a box or a regular meeting, and tell people about it in local languages."}]},
+   {id:"acc_sub", res:"c4c", q:"Do you pass funds to other groups (sub-grants or downstream partners)?", opts:[
+     {v:"a", t:"Yes, with written agreements and our own checks", s:"Funds passed to downstream partners are covered by written agreements and checked by the organisation."},
+     {v:"b", t:"Yes, without written agreements", s:"Funds are passed to other groups without written agreements.", gap:1, why:"Funders will ask how you control money you pass on.", fix:"Use a one-page agreement for every group you fund: purpose, amount, reporting and what happens if money is misused."},
+     {v:"n", t:"We do not pass funds to other groups", s:"The organisation does not pass funds to other groups."}]}
+  ],
+  evidence:[
+   {id:"acc_strat", res:"strat", c4c:"strat", t:"Strategic plan", valid:60, why:"Shows the organisation's aims and direction."},
+   {id:"acc_annrep", res:"strat", c4c:"strat", t:"Annual report or activity report", valid:18, why:"Shows what the organisation actually achieved."},
+   {id:"acc_cfmpol", res:"chs", t:"Complaints and feedback policy or procedure", core:1, valid:36, why:"Shows how people can raise concerns and how you respond."},
+   {id:"acc_subagr", res:"c4c", t:"Sample agreement with a downstream partner", why:"Only if you fund other groups. Shows how you control money you pass on."}
+  ]},
+ {id:"fin", name:"Financial management", c4c:"fam", maps:"HACT: Accounting policies and procedures; Financial reporting and monitoring. C4C passport: Financial and Asset Management",
+  intro:"How money is held, approved, recorded and checked.",
+  practice:[
+   {id:"fin_bank", res:"fin", q:"Where is the organisation's money held?", opts:[
+     {v:"a", t:"In a bank account in the organisation's name", s:"Funds are held in a bank account in the organisation's name."},
+     {v:"b", t:"Partly in a personal account", s:"Some funds are held in a personal account.", gap:1, why:"Mixing personal and organisational money is a serious concern in financial assessments.", fix:"Open an account in the organisation's name and move all funds to it."},
+     {v:"c", t:"Mostly in cash", s:"Most funds are held in cash.", gap:1, why:"Cash is hard to trace and to protect.", fix:"Open an organisational bank account; keep a cash book for any cash you must hold."}]},
+   {id:"fin_sod", res:"fin", q:"Who approves, pays and records spending?", opts:[
+     {v:"a", t:"Different people do each of these", s:"Approving, paying and recording spending are done by different people."},
+     {v:"b", t:"One person sometimes does two of these", s:"One person sometimes both approves and pays, or pays and records.", gap:2, why:"Splitting these duties is the basic protection against error and fraud.", fix:"Require a second signature or approval for every payment."},
+     {v:"c", t:"One person does all of it", s:"One person approves, pays and records spending.", gap:1, why:"Assessors usually treat this as a high risk.", fix:"Ask a board member to approve payments and review the cash book monthly."}]},
+   {id:"fin_rec", res:"fin", q:"Do you check bank statements against your own records?", opts:[
+     {v:"a", t:"Every month, and a second person reviews it", s:"Bank statements are reconciled to the accounts every month and reviewed by a second person."},
+     {v:"b", t:"Yes, but irregularly or without review", s:"Bank statements are reconciled, but not every month or without a second review.", gap:2, why:"Monthly reconciliation catches errors early.", fix:"Reconcile monthly and have the reviewer sign and date it."},
+     {v:"c", t:"No", s:"Bank statements are not yet reconciled to the accounts.", gap:1, why:"Without reconciliation, missing money can go unnoticed.", fix:"Start a simple monthly reconciliation sheet."}]},
+   {id:"fin_audit", res:"fin", q:"Are your accounts audited?", opts:[
+     {v:"a", t:"Yes, by an independent external auditor each year", s:"Annual accounts are audited by an independent external auditor."},
+     {v:"b", t:"Reviewed by someone internal or a volunteer accountant", s:"Annual accounts are reviewed internally but not externally audited.", gap:2, why:"Many partners ask for an external audit, especially for larger grants.", fix:"Ask a local audit firm for a quote, or budget the audit into your next grant."},
+     {v:"c", t:"No", s:"Annual accounts are not yet audited or reviewed.", gap:1, why:"Assessors usually ask for the latest audited or reviewed accounts.", fix:"Prepare annual accounts and arrange an independent review."}]}
+  ],
+  evidence:[
+   {id:"fin_stmt", res:"fin", t:"Bank statements for the last 3 months", core:1, valid:3, why:"Shows the account exists and is active."},
+   {id:"fin_aud", res:"fin", t:"Latest audited or reviewed annual accounts", core:1, valid:18, why:"A document assessors commonly ask for."},
+   {id:"fin_man", res:"fin", t:"Finance manual or written financial procedures", core:1, valid:36, why:"Shows how money is meant to be handled."},
+   {id:"fin_bud", res:"budget", t:"Budget for the current year", valid:12, why:"Shows planning and control of spending."},
+   {id:"fin_recs", res:"fin", t:"Bank reconciliations for the last 3 months", valid:3, why:"Shows records are checked against the bank."}
+  ]},
+ {id:"proc", name:"Procurement", c4c:"fam", maps:"HACT: Procurement. C4C passport: Financial and Asset Management",
+  intro:"How you buy goods and services fairly and keep a record of it.",
+  practice:[
+   {id:"proc_quotes", res:"log", q:"Before a larger purchase, do you compare suppliers?", opts:[
+     {v:"a", t:"Yes, we get written quotes above a set amount", s:"For purchases above a set amount, written quotes are obtained from more than one supplier."},
+     {v:"b", t:"Sometimes, but there is no set amount", s:"Quotes are sometimes compared, without a set threshold.", gap:2, why:"A written threshold shows purchases are competitive and fair.", fix:"Set an amount above which three written quotes are required."},
+     {v:"c", t:"No", s:"Suppliers are not yet routinely compared.", gap:1, why:"Assessors check that purchases give value for money.", fix:"Start with three quotes for any purchase above an amount you choose."}]},
+   {id:"proc_appr", res:"log", q:"Who approves a purchase?", opts:[
+     {v:"a", t:"Someone other than the person who requested it", s:"Purchases are approved by someone other than the person who requested them."},
+     {v:"b", t:"Usually the same person who requested it", s:"Purchases are usually approved by the person who requested them.", gap:2, why:"Separate approval prevents one person controlling a purchase end to end.", fix:"Require a second person to approve every purchase request."}]},
+   {id:"proc_file", res:"log", q:"What records do you keep for a purchase?", opts:[
+     {v:"a", t:"Request, quotes, approval, invoice and delivery note, filed together", s:"Each purchase is filed with its request, quotes, approval, invoice and delivery note."},
+     {v:"b", t:"Invoices and receipts only", s:"Invoices and receipts are kept for purchases.", gap:2, why:"Assessors often trace one purchase from request to delivery.", fix:"Use one folder or envelope per purchase with every document in it."}]}
+  ],
+  evidence:[
+   {id:"proc_pol", res:"log", t:"Procurement policy or written purchasing rules", core:1, valid:36, why:"Sets out thresholds and approvals."},
+   {id:"proc_eg", res:"log", t:"One complete purchase file from the last 12 months", core:1, valid:12, why:"Shows the rules are followed in practice."},
+   {id:"proc_sup", res:"log", t:"List of regular suppliers", valid:24, why:"Helps show competitive, checked suppliers."}
+  ]},
+ {id:"asset", name:"Assets and inventory", c4c:"fam", maps:"HACT: Fixed assets and inventory. C4C passport: Financial and Asset Management",
+  intro:"Equipment you own and goods you store or distribute.",
+  practice:[
+   {id:"asset_reg", res:"log", q:"Do you keep a list of equipment you own (vehicles, computers, phones)?", opts:[
+     {v:"a", t:"Yes, and we check it physically at least once a year", s:"An asset register is kept and checked against the physical items at least once a year."},
+     {v:"b", t:"Yes, but it is not checked", s:"An asset register is kept but not physically checked.", gap:2, why:"A yearly count shows the list is accurate.", fix:"Count and sign off the register once a year."},
+     {v:"c", t:"No", s:"An asset register is not yet kept.", gap:2, why:"Donors want to know what their money bought and where it is.", fix:"List every item worth more than a set amount, with its location and user."}]},
+   {id:"asset_stock", res:"log", q:"If you store or distribute goods (food, relief items), do you record what comes in and goes out?", opts:[
+     {v:"a", t:"Yes, with signed records for each movement", s:"Stock movements are recorded with signed documents for each delivery and distribution."},
+     {v:"b", t:"Partly", s:"Stock movements are partly recorded.", gap:2, why:"Without records, losses are hard to detect or explain.", fix:"Use a simple stock card per item, signed at each movement."},
+     {v:"n", t:"We do not store or distribute goods", s:"The organisation does not store or distribute goods."}]}
+  ],
+  evidence:[
+   {id:"asset_reg_doc", res:"log", t:"Fixed asset register", core:1, valid:12, why:"Lists equipment, location and responsible person."},
+   {id:"asset_stock_doc", res:"log", t:"Stock cards or inventory records", valid:6, why:"Shows goods are tracked."},
+   {id:"asset_count", res:"log", t:"Record of the last physical count", valid:12, why:"Shows the register matches reality."}
+  ]},
+ {id:"hr", name:"People and security", c4c:"hrss", maps:"HACT: Organizational structure and staffing; UN PSEA standard 3: Human resources systems. C4C passport: HR, Safeguarding and Security",
+  intro:"How you hire, contract and set expectations for staff and volunteers, and how you keep them safe.",
+  practice:[
+   {id:"hr_contract", res:"dready", q:"Do staff have written contracts or agreements?", opts:[
+     {v:"a", t:"Yes, all staff, and volunteers sign an agreement", s:"All staff have written contracts, and volunteers sign a volunteer agreement."},
+     {v:"b", t:"Some do", s:"Some staff have written contracts.", gap:2, why:"Written terms protect staff and the organisation.", fix:"Use one contract template for all staff and one agreement for volunteers."},
+     {v:"c", t:"No", s:"Staff do not yet have written contracts.", gap:1, why:"Assessors check that staff are properly employed and paid.", fix:"Adopt a basic contract template that complies with local labour law."}]},
+   {id:"hr_check", res:"mds", q:"Before hiring, do you check references or background?", opts:[
+     {v:"a", t:"Yes, for every hire, including questions about past misconduct", s:"References are checked for every hire, including questions about past misconduct."},
+     {v:"b", t:"Sometimes", s:"References are sometimes checked before hiring.", gap:2, why:"Screening is a core part of keeping people safe.", fix:"Make two reference checks a required step for every hire."},
+     {v:"c", t:"No", s:"References are not yet checked before hiring.", gap:1, why:"Screening is a core part of keeping people safe.", fix:"Add reference checks to your hiring steps now."}]},
+   {id:"hr_coc", res:"psea_kit", q:"Do staff and volunteers sign a code of conduct?", opts:[
+     {v:"a", t:"Yes, everyone signs it when they join", s:"All staff and volunteers sign a code of conduct when they join."},
+     {v:"b", t:"We have one, but not everyone has signed", s:"A code of conduct exists but has not been signed by everyone.", gap:2, why:"A signed code shows each person knows the rules.", fix:"Collect signatures from everyone, and add it to induction."},
+     {v:"c", t:"We do not have one", s:"The organisation does not yet have a code of conduct.", gap:1, why:"Many partners require one, including rules against sexual exploitation and abuse.", fix:"Adopt a short code of conduct and have everyone sign it."}]},
+   {id:"hr_sec", res:"sec", q:"Do staff and volunteers working in the field have security rules and a plan for emergencies?", opts:[
+     {v:"a", t:"Yes, written down, and everyone is briefed on it", s:"Written security rules and an emergency plan are in place, and staff and volunteers are briefed on them."},
+     {v:"b", t:"We have informal rules", s:"Security rules are followed informally but are not written down.", gap:2, why:"Assessors ask how you protect staff, volunteers and the people you serve.", fix:"Write one page: main threats, rules for travel and communication, and who to call in an emergency."},
+     {v:"c", t:"No", s:"Security rules and an emergency plan are not yet in place.", gap:1, why:"Assessors ask how you protect staff, volunteers and the people you serve.", fix:"Agree basic rules for field travel and a contact plan for emergencies, and brief everyone."}]}
+  ],
+  evidence:[
+   {id:"hr_pol", res:"dready", t:"HR policy or staff handbook", core:1, valid:36, why:"Sets out hiring, pay and conduct rules."},
+   {id:"hr_ctemplate", res:"dready", t:"Staff contract template", core:1, why:"Shows standard employment terms."},
+   {id:"hr_cocdoc", res:"psea_kit", t:"Signed code of conduct (one example)", core:1, why:"Shows the code is in use."},
+   {id:"hr_jd", res:"dready", t:"Job descriptions for key roles", valid:36, why:"Shows clear responsibilities."},
+   {id:"hr_pay", res:"dready", t:"Payroll records for the last 3 months", valid:3, why:"Shows staff are paid as stated."},
+   {id:"hr_secplan", res:"sec", t:"Security plan or security procedures", valid:12, why:"Shows how staff and volunteers are kept safe."}
+  ]},
+ {id:"psea", name:"Safeguarding and PSEA", c4c:"hrss", maps:"UN Implementing Partner PSEA assessment: core standards 1 to 8. C4C passport: HR, Safeguarding and Security",
+  intro:"Protecting the people you serve from sexual exploitation and abuse (PSEA), and responding if it happens.",
+  practice:[
+   {id:"psea_pol", res:"psea_kit", q:"Do you have a written policy against sexual exploitation and abuse? (Standard 1: Organizational policy)", opts:[
+     {v:"a", t:"Yes, adopted by the board and shared with all staff", s:"A written policy on preventing sexual exploitation and abuse has been adopted and shared with all staff."},
+     {v:"b", t:"Draft, or not yet shared", s:"A policy on preventing sexual exploitation and abuse is in draft or not yet shared with staff.", gap:1, why:"All eight UN PSEA standards must be met for full capacity.", fix:"Adopt the policy formally and share it with every staff member and volunteer."},
+     {v:"c", t:"No", s:"The organisation does not yet have a policy on sexual exploitation and abuse.", gap:1, why:"This is the first of the eight UN PSEA standards.", fix:"Adopt a short PSEA policy; free templates exist from PSEA networks."}]},
+   {id:"psea_fp", res:"psea_kit", q:"Is a named person responsible for PSEA? (Standard 2: Organizational management)", opts:[
+     {v:"a", t:"Yes, a focal point with written responsibilities", s:"A named focal point is responsible for PSEA, with written responsibilities."},
+     {v:"c", t:"No", s:"No one is yet named as responsible for PSEA.", gap:1, why:"Assessors check that someone is accountable.", fix:"Appoint a focal point and write down their role."}]},
+   {id:"psea_train", res:"psea_ip", q:"Have staff and volunteers been trained on PSEA? (Standard 4: Mandatory training)", opts:[
+     {v:"a", t:"Yes, everyone, with records kept", s:"All staff and volunteers have been trained on PSEA, and attendance records are kept."},
+     {v:"b", t:"Some people", s:"Some staff and volunteers have been trained on PSEA.", gap:2, why:"Training must reach everyone, including volunteers.", fix:"Run a short session for everyone not yet trained and keep the sign-in sheet."},
+     {v:"c", t:"No", s:"Staff and volunteers have not yet been trained on PSEA.", gap:1, why:"Mandatory training is one of the eight UN PSEA standards.", fix:"Use a free online PSEA course and record who completes it."}]},
+   {id:"psea_report", res:"cbcm", q:"Can community members report concerns safely and confidentially? (Standard 5: Reporting)", opts:[
+     {v:"a", t:"Yes, through more than one channel, and people know about it", s:"Community members can report concerns safely and confidentially through more than one channel, and the channels are publicised."},
+     {v:"b", t:"There is a channel, but few people know about it", s:"A reporting channel exists but is not widely known.", gap:2, why:"A channel nobody knows about does not work.", fix:"Publicise the channel in local languages at every site."},
+     {v:"c", t:"No", s:"There is not yet a safe way for community members to report concerns.", gap:1, why:"Reporting mechanisms are one of the eight UN PSEA standards.", fix:"Set up at least one confidential channel, such as a phone number or a box, and publicise it."}]},
+   {id:"psea_ref", res:"psea_kit", q:"Do you know where to refer a survivor for medical, psychosocial and legal help? (Standard 6: Assistance and referrals)", opts:[
+     {v:"a", t:"Yes, we keep an up-to-date list of services", s:"An up-to-date list of medical, psychosocial and legal services is kept for referring survivors."},
+     {v:"c", t:"No", s:"A referral list for survivors is not yet in place.", gap:1, why:"Assistance and referral is one of the eight UN PSEA standards.", fix:"Ask the local protection or GBV coordination group for its referral pathway."}]},
+   {id:"psea_inv", res:"seah_inv", q:"If a concern is reported, how is it investigated and acted on? (Standards 7 and 8: Investigations; Corrective action)", opts:[
+     {v:"a", t:"We have a written procedure, and we record actions taken", s:"Concerns are handled under a written procedure for investigation or referral, and corrective actions are recorded."},
+     {v:"b", t:"We would handle it case by case", s:"Concerns would be handled case by case, without a written procedure.", gap:1, why:"Investigation and corrective action are two of the eight UN PSEA standards.", fix:"Write a one-page procedure: who receives a report, who investigates or refers it, and how action is recorded."}]}
+  ],
+  evidence:[
+   {id:"psea_poldoc", res:"psea_kit", t:"PSEA or safeguarding policy", core:1, valid:36, why:"Standard 1."},
+   {id:"psea_fpdoc", res:"psea_kit", t:"Focal point appointment or terms of reference", core:1, why:"Standard 2."},
+   {id:"psea_trdoc", res:"psea_ip", t:"Training attendance records", core:1, valid:24, why:"Standard 4."},
+   {id:"psea_repdoc", res:"cbcm", t:"Description of community reporting channels", core:1, why:"Standard 5."},
+   {id:"psea_refdoc", res:"psea_kit", t:"Referral list for survivor services", valid:12, why:"Standard 6."},
+   {id:"psea_invdoc", res:"seah_inv", t:"Investigation and corrective action procedure", valid:36, why:"Standards 7 and 8."}
+  ]},
+ {id:"risk", name:"Fraud, sanctions and risk", c4c:"add", maps:"Common donor anti-fraud, counter-terrorism and sanctions clauses. C4C passport: often added as agreed additional criteria",
+  intro:"Preventing misuse of funds and checking who you work with.",
+  practice:[
+   {id:"risk_fraud", res:"u4", q:"If someone suspects fraud, what happens?", opts:[
+     {v:"a", t:"There is a written way to report it, and people who report are protected", s:"Suspected fraud can be reported through a written procedure, and people who report in good faith are protected."},
+     {v:"b", t:"They would tell the director", s:"Suspected fraud would be reported informally to the director.", gap:2, why:"A report channel should not depend on one person, who may be involved.", fix:"Add a second route, such as a board member, and write it down."},
+     {v:"c", t:"We have no set way", s:"There is not yet a set way to report suspected fraud.", gap:1, why:"Many grant agreements require you to report fraud to the donor.", fix:"Adopt a short anti-fraud and whistleblowing policy."}]},
+   {id:"risk_screen", res:"un_list", q:"Do you check staff, partners and suppliers against sanctions lists?", opts:[
+     {v:"a", t:"Yes, before contracting, and we keep a record", s:"Staff, partners and suppliers are checked against sanctions lists before contracting, and the checks are recorded."},
+     {v:"b", t:"Sometimes", s:"Sanctions checks are done sometimes.", gap:1, why:"Many donors require it; funding a listed person or group can breach sanctions law.", fix:"Check every new partner and supplier against the UN Security Council Consolidated List and keep a dated record."},
+     {v:"c", t:"No", s:"Sanctions checks are not yet done.", gap:1, why:"Many donors require it; funding a listed person or group can breach sanctions law.", fix:"Start checking new partners and suppliers against the UN Security Council Consolidated List, which is free online."}]},
+   {id:"risk_reg", res:"rsf", q:"Do you list your main risks and how you reduce them?", opts:[
+     {v:"a", t:"Yes, and we review the list at least once a year", s:"Main risks and their controls are listed and reviewed at least once a year."},
+     {v:"c", t:"No", s:"A list of main risks is not yet kept.", gap:2, why:"A short risk list shows you plan for problems.", fix:"List your top ten risks, with one action for each."}]}
+  ],
+  evidence:[
+   {id:"risk_fpol", res:"u4", t:"Anti-fraud and anti-corruption policy", core:1, valid:36, why:"Sets rules and reporting duties."},
+   {id:"risk_wb", res:"u4", t:"Whistleblowing procedure", valid:36, why:"Shows how concerns can be raised safely."},
+   {id:"risk_scr", res:"un_list", t:"Sanctions screening records for the last 12 months", core:1, valid:12, why:"Shows checks are actually done."},
+   {id:"risk_regdoc", res:"rsf", t:"Risk register", valid:12, why:"Shows risks are understood and managed."}
+  ]},
+ {id:"data", name:"Data protection and IT", c4c:"dit", maps:"IASC Operational Guidance on Data Responsibility; your national law. C4C passport: Data and IT",
+  intro:"Looking after personal information about the people you serve and your staff, and keeping your systems safe.",
+  practice:[
+   {id:"data_consent", res:"data", q:"When you collect personal information, do people know why and agree?", opts:[
+     {v:"a", t:"Yes, we explain the purpose and record consent", s:"People are told why their personal information is collected, and consent is recorded."},
+     {v:"b", t:"Usually, but not recorded", s:"People are usually told why their information is collected, but consent is not recorded.", gap:2, why:"Recorded consent shows information was collected fairly.", fix:"Add a short consent statement to your registration forms."},
+     {v:"c", t:"No", s:"People are not yet told why their information is collected.", gap:1, why:"Many countries now have data protection laws that require this.", fix:"Write a plain-language explanation for every form you use."}]},
+   {id:"data_access", res:"data", q:"Who can see personal information?", opts:[
+     {v:"a", t:"Only staff who need it; files and devices are locked or passworded", s:"Only staff who need personal information can access it, and files and devices are secured."},
+     {v:"b", t:"Most staff can see it", s:"Most staff can access personal information.", gap:2, why:"Limiting access reduces harm if something goes wrong.", fix:"Lock paper files and password-protect shared folders."}]},
+   {id:"data_keep", res:"data", q:"Do you delete personal information you no longer need?", opts:[
+     {v:"a", t:"Yes, on a set schedule", s:"Personal information is deleted on a set schedule when no longer needed."},
+     {v:"c", t:"No, we keep everything", s:"Personal information is not yet deleted when no longer needed.", gap:2, why:"Keeping data longer than needed increases risk to the people it describes.", fix:"Decide how long you keep each type of record, and write it down."}]},
+   {id:"data_it", res:"helpline", q:"Are your files and accounts protected and backed up?", opts:[
+     {v:"a", t:"Yes: every account has a password, and we back up regularly", s:"Every device and account is password-protected, and the organisation's files are backed up regularly."},
+     {v:"b", t:"Partly", s:"Some devices or accounts are protected, and backups are irregular.", gap:2, why:"A lost phone or laptop should not mean lost records or exposed personal data.", fix:"Turn on passwords for every device and account, and back up key files every month."},
+     {v:"c", t:"No", s:"Devices and files are not yet protected or backed up.", gap:1, why:"A lost phone or laptop should not mean lost records or exposed personal data.", fix:"Turn on passwords for every device and account, and start a monthly backup."}]}
+  ],
+  evidence:[
+   {id:"data_pol", res:"data", t:"Data protection policy", core:1, valid:36, why:"Sets out how personal data is handled."},
+   {id:"data_form", res:"data", t:"Consent statement or form", core:1, why:"Shows how consent is obtained."},
+   {id:"data_ret", res:"data", t:"Retention schedule", valid:36, why:"Shows how long records are kept."},
+   {id:"data_ict", res:"helpline", t:"IT or information security policy", valid:36, why:"Shows how devices, accounts and backups are managed."}
+  ]}
+];
+
+/* Capacity areas of the Charter for Change Due Diligence Passporting Tool, as published in its instructions
+   (Humentum and C4C, 2023). Mapping is at capacity-area level; question numbers may differ in later versions. */
+var C4C = [
+ {k:"general", t:"General", q:"questions 1 to 5"},
+ {k:"gov", t:"Governance", q:"questions 6 to 8"},
+ {k:"strat", t:"Strategy", q:"questions 9 to 10"},
+ {k:"acc", t:"Accountability", q:"questions 11 to 13"},
+ {k:"hrss", t:"HR, Safeguarding and Security", q:"questions 14 to 18"},
+ {k:"fam", t:"Financial and Asset Management", q:"questions 19 to 25"},
+ {k:"dit", t:"Data and IT", q:"question 26"},
+ {k:"add", t:"Additional criteria", q:"question 27 onward, if agreed"}];
+function c4cOf(a,item){return (item&&item.c4c)||a.c4c;}
+/* ---------- Toolbox: free resources (checked October 2026). Keep each entry free to use. ---------- */
+var RESOURCES = {
+ reg:{t:"Civic Freedom Monitor", by:"ICNL", u:"https://www.icnl.org/resources/civic-freedom-monitor/", d:"Country reports on the laws that affect civil society, including registration."},
+ gov:{t:"Effective governance: a guide for small and diaspora NGOs", by:"INTRAC", u:"https://www.intrac.org/resources/effective-governance-guide-small-diaspora-ngos/", d:"Tools and tips for building a board that works."},
+ strat:{t:"Strategic planning: a toolkit for small NGOs", by:"INTRAC", u:"https://www.intrac.org/resources/strategic-planning-a-toolkit-for-small-ngos/", d:"Step-by-step planning for small organisations. Open licence."},
+ chs:{t:"Core Humanitarian Standard (2024)", by:"CHS Alliance, Sphere, Groupe URD", u:"https://corehumanitarianstandard.org/", d:"The shared commitments on quality and accountability, including feedback and complaints. Many languages."},
+ cbcm:{t:"Best practice guide: community-based complaint mechanisms", by:"IASC (2016)", u:"https://psea.interagencystandingcommittee.org/sites/default/files/Best%20Practice%20Guide%20on%20inter-agency%20CBCMs.pdf", d:"How to set up safe channels for communities to report concerns, with a checklist."},
+ fin:{t:"Finance Health Check", by:"Humentum", u:"https://humentum.org/resources/humentum-finance-health-check", d:"Free self-check of budgeting, accounting, controls and reporting, for small and medium NGOs."},
+ budget:{t:"Budgeting guide for NGOs", by:"Humentum", u:"https://humentum.org/resources/a-budgeting-guide-for-ngos", d:"Plan, monitor and review a budget, with a monitoring checklist."},
+ log:{t:"Logistics Operational Guide", by:"Logistics Cluster", u:"https://log.logcluster.org/en", d:"Procurement, supplier management, warehousing and stock control, with fraud prevention."},
+ sec:{t:"Security risk management: a basic guide for smaller NGOs", by:"GISF (EISF, 2017)", u:"https://www.gisf.ngo/wp-content/uploads/2020/12/Security-Risk-Management-A-basic-guide-for-smaller-NGOs.pdf", d:"Written for staff in smaller NGOs who are responsible for security."},
+ psea_kit:{t:"PSEA practical guide and toolkit", by:"UNICEF, via the Safeguarding Resource and Support Hub", u:"https://safeguardingsupporthub.org/documents/protection-sexual-exploitation-and-abuse-psea-practical-guide-and-toolkit-unicef-and", d:"Policy, reporting, investigation and survivor support, with 13 templates and forms."},
+ psea_ip:{t:"PSEA resource package for UN partners", by:"UN Partner Portal", u:"https://supportcso.unpartnerportal.org/hc/en-us/articles/12970598056727-Interagency-PSEA-IP-Protocol-Resource-Package-for-Partners", d:"The UN PSEA self-assessment, guidance in many languages, and an e-learning course."},
+ seah_inv:{t:"SEAH investigation guide", by:"CHS Alliance", u:"https://www.chsalliance.org/get-support/resource/sexual-exploitation-abuse-and-harassment-seah-investigation-guide/", d:"Survivor-centred investigation practice, in eight languages."},
+ mds:{t:"Misconduct Disclosure Scheme", by:"CHS Alliance and SCHR", u:"https://misconduct-disclosure-scheme.org/", d:"Lets employers check whether a candidate has substantiated SEAH findings. Free to join, according to CHS Alliance; used by over 380 organisations."},
+ u4:{t:"Essentials of anti-corruption (online course)", by:"U4 Anti-Corruption Resource Centre", u:"https://u4.no/courses/essentials-of-anti-corruption-ii-development-programming", d:"Free, self-paced, about three hours."},
+ un_list:{t:"UN Security Council Consolidated List", by:"United Nations", u:"https://scsanctions.un.org/search", d:"Search the UN sanctions list before contracting a partner or supplier. Six languages."},
+ opens:{t:"OpenSanctions research tool", by:"OpenSanctions", u:"https://opensanctions.org/research/", d:"Search many sanctions and watch lists at once in your browser; free for non-commercial users."},
+ rsf:{t:"Risk Sharing Framework", by:"Risk Sharing Platform", u:"https://interagencystandingcommittee.org/system/files/2023-06/Risk%20Sharing%20Framework.pdf", d:"How partners can agree who carries each risk, and how to share it."},
+ data:{t:"Operational guidance on data responsibility", by:"IASC (2023), via the Centre for Humanitarian Data", u:"https://centre.humdata.org/revised-iasc-operational-guidance-on-data-responsibility-in-humanitarian-action/", d:"Handling personal and sensitive data safely in humanitarian work."},
+ helpline:{t:"Digital Security Helpline", by:"Access Now", u:"https://www.accessnow.org/help/", d:"Free, 24/7 help for civil society with hacked accounts, device security and backups. Ten languages."},
+ overheads:{t:"Guidance on overheads for local and national partners", by:"IASC (2022)", u:"https://www.ngocoordination.org/en/library/iasc-guidance-provision-overheads-local-and-national-partners", d:"The sector's guidance on passing overheads to local partners."},
+ pooled:{t:"How UN pooled funds work", by:"Explainer hosted by InterAction", u:"https://www.interaction.org/wp-content/uploads/2026/03/UN-Humanitarian-Funding-Mechanisms-.pdf", d:"Country-based pooled funds are open to national NGOs that meet minimum standards."},
+ c4c:{t:"C4C Due Diligence Passporting Tool", by:"Charter for Change and Humentum", u:"https://humentum.org/charter-for-change-due-diligence-passporting-tool/", d:"The shared assessment some INGOs reuse, so partners are not assessed again. English, French, Spanish."},
+ kaya:{t:"Kaya free courses", by:"Humanitarian Leadership Academy", u:"https://www.humanitarianleadershipacademy.org/learning-with-us/", d:"Over 900 free online courses, in up to 12 languages."},
+ dready:{t:"DisasterReady", by:"Cornerstone Foundation", u:"https://disasterready.org/free-leadership-training", d:"Over 1,800 free courses, including safety, security and safeguarding; offline mobile app."},
+ kobo:{t:"KoboToolbox", by:"Kobo", u:"https://kobotoolbox.org/kobo", d:"Free mobile data collection for non-profits, including offline forms."},
+ alnap:{t:"HELP Library", by:"ALNAP", u:"https://alnap.org/about-library/about-the-help-library/", d:"More than 20,000 evaluations, guidance documents and tools."},
+ rwr:{t:"ReliefWeb Response", by:"UN OCHA", u:"https://response.reliefweb.int/about", d:"Operational information for each country and emergency."}
+};
+var TOOLBOX = [
+ {t:"Get ready for assessments", k:["c4c","psea_ip","fin"]},
+ {t:"Registration, board and strategy", k:["reg","gov","strat"]},
+ {t:"Money and fair overheads", k:["fin","budget","overheads","pooled"]},
+ {t:"Buying and supplies", k:["log"]},
+ {t:"Safeguarding", k:["psea_kit","cbcm","seah_inv","mds"]},
+ {t:"Fraud and sanctions", k:["u4","un_list","opens"]},
+ {t:"Staff safety and digital security", k:["sec","helpline"]},
+ {t:"Accountability and data", k:["chs","data","kobo"]},
+ {t:"Sharing risk with partners", k:["rsf"]},
+ {t:"Free learning and information", k:["kaya","dready","alnap","rwr"]}
+];
+function resLink(k){ var r=RESOURCES[k]; if(!r) return ""; return '<a class="res" href="'+esc(r.u)+'" target="_blank" rel="noopener">'+esc(r.t)+'</a> <span style="color:var(--muted)">('+esc(r.by)+')</span>'; }
+function resText(k){ var r=RESOURCES[k]; return r? r.t+" ("+r.by+"): "+r.u : ""; }
+function renderToolbox(){ var g=document.getElementById("toolboxGrid"); if(!g) return; g.innerHTML="";
+  TOOLBOX.forEach(function(grp){ var sec=el("section"); sec.appendChild(el("h3",{text:grp.t})); var ul=el("ul");
+    grp.k.forEach(function(k){ var r=RESOURCES[k]; var li=el("li"); li.innerHTML='<a href="'+esc(r.u)+'" target="_blank" rel="noopener">'+esc(r.t)+'</a><small>'+esc(r.by)+' · '+esc(r.d)+'</small>'; ul.appendChild(li); });
+    sec.appendChild(ul); g.appendChild(sec); }); }
+function supportNote(){ var d=el("p",{"class":"supportnote no-print"}); d.innerHTML='<strong>Found this useful?</strong> Aidfolio is free for every local organisation, always. If you work for an organisation that funds local partners, or want to help, your support pays for new languages and testing with local organisations. <a href="#support">See how you can help</a>.'; return d; }
+var EVIDENCE_OPTS = [["","Choose…"],["have","We have it"],["stale","We have it, but it is out of date"],["missing","We don't have it"],["na","Doesn't apply to us"]];
+
+/* ---------- Example (fictional) ---------- */
+var EXAMPLE = {org:{name:"Riverbank Community Trust", country:"Example country", never:true, lastAssess:"", frameworks:""}, plan:{psea_repdoc:{by:"2027-01",who:"PSEA focal point"},risk_scr:{by:"2026-12",who:"Finance officer"}}, example:true, skipped:{}, cost:null, riskplan:null,
+  answers:{acc_plan:"b",acc_cfm:"b",acc_sub:"n",hr_sec:"b",data_it:"a",gov_board:"a",gov_coi:"b",gov_reg:"a",fin_bank:"a",fin_sod:"b",fin_rec:"a",fin_audit:"b",proc_quotes:"a",proc_appr:"a",proc_file:"b",asset_reg:"b",asset_stock:"a",hr_contract:"a",hr_check:"b",hr_coc:"a",psea_pol:"a",psea_fp:"a",psea_train:"b",psea_report:"b",psea_ref:"a",psea_inv:"b",risk_fraud:"b",risk_screen:"b",risk_reg:"c",data_consent:"b",data_access:"a",data_keep:"c"},
+  evidence:{acc_strat:{s:"have",d:"2021-03"},acc_annrep:{s:"have",d:"2026-04"},acc_cfmpol:{s:"missing"},acc_subagr:{s:"na"},hr_secplan:{s:"missing"},data_ict:{s:"missing"},gov_cert:{s:"have",d:"2026-02"},gov_const:{s:"have"},gov_list:{s:"have",d:"2026-03"},gov_min:{s:"have",d:"2026-06"},gov_coipol:{s:"missing"},gov_org:{s:"have",d:"2025-08"},
+    fin_stmt:{s:"have",d:"2026-09"},fin_aud:{s:"have",d:"2024-12"},fin_man:{s:"have",d:"2023-01"},fin_bud:{s:"have",d:"2026-01"},fin_recs:{s:"have",d:"2026-09"},
+    proc_pol:{s:"have",d:"2024-05"},proc_eg:{s:"have",d:"2026-07"},proc_sup:{s:"missing"},
+    asset_reg_doc:{s:"have",d:"2025-03"},asset_stock_doc:{s:"have",d:"2026-08"},asset_count:{s:"missing"},
+    hr_pol:{s:"have",d:"2024-11"},hr_ctemplate:{s:"have"},hr_cocdoc:{s:"have"},hr_jd:{s:"have",d:"2023-04"},hr_pay:{s:"have",d:"2026-09"},
+    psea_poldoc:{s:"have",d:"2025-02"},psea_fpdoc:{s:"have"},psea_trdoc:{s:"have",d:"2023-10"},psea_repdoc:{s:"missing"},psea_refdoc:{s:"have",d:"2026-01"},psea_invdoc:{s:"missing"},
+    risk_fpol:{s:"have",d:"2024-06"},risk_wb:{s:"missing"},risk_scr:{s:"missing"},risk_regdoc:{s:"missing"},
+    data_pol:{s:"missing"},data_form:{s:"have"},data_ret:{s:"missing"}}};
+
+/* ---------- State ---------- */
+var KEY = "aidfolio.v1"; var SITE="aidfolio.org"; /* change here if you use another domain */
+var state = blank();
+function blank(){return {org:{name:"",country:"",never:false,lastAssess:"",frameworks:""}, answers:{}, evidence:{}, skipped:{}, plan:{}, example:false, cost:blankCost(), riskplan:blankRisk()};}
+function load(){try{var raw=localStorage.getItem(KEY); if(raw){var s=JSON.parse(raw); if(s&&s.answers){state=Object.assign(blank(),s); normalise();}}}catch(e){}}
+function normalise(){ var b=blank(); if(!state.plan) state.plan={}; if(!state.org) state.org=b.org; if(!state.cost||!state.cost.direct) state.cost=b.cost; if(!state.cost.shared) state.cost.shared={}; if(!state.cost.grants) state.cost.grants=[]; if(!state.riskplan||!state.riskplan.items) state.riskplan=b.riskplan; }
+function save(){if(state.example) return; try{localStorage.setItem(KEY, JSON.stringify(state));}catch(e){}}
+function clone(o){return JSON.parse(JSON.stringify(o));}
+
+/* ---------- Model: readiness (Phase 1) ---------- */
+// An item is ready only if held and within its validity window (months). Expired = "stale" (needs update), never "missing".
+var TODAY = new Date();
+function parseYM(v){ if(!v) return null; v=String(v).trim(); var m;
+  if((m=/^(\d{4})[-\/.](\d{1,2})/.exec(v))) return {y:+m[1],mo:+m[2]};
+  if((m=/^(\d{1,2})[-\/.](\d{4})$/.exec(v))) return {y:+m[2],mo:+m[1]};
+  if((m=/^(\d{4})$/.exec(v))) return {y:+m[1],mo:1};
+  return null; }
+function monthsSince(v){ var d=parseYM(v); if(!d||d.mo<1||d.mo>12) return null; return (TODAY.getFullYear()-d.y)*12 + (TODAY.getMonth()+1-d.mo); }
+function itemStatus(item){
+  var ev = state.evidence[item.id]; if(!ev || !ev.s) return "unanswered";
+  if(ev.s==="have" && item.valid){ if(!ev.d) return "undated"; var age=monthsSince(ev.d); if(age===null) return "undated"; if(age>item.valid) return "stale"; }
+  return ev.s==="have" ? "ready" : ev.s;
+}
+function areaSummary(a){
+  var r={ready:0,stale:0,undated:0,missing:0,na:0,unanswered:0,applicable:0,practiceGaps:0,answered:0,total:a.practice.length+a.evidence.length};
+  a.evidence.forEach(function(it){var s=itemStatus(it); r[s]++; if(s!=="na") r.applicable++; if(s!=="unanswered") r.answered++;});
+  a.practice.forEach(function(p){var v=state.answers[p.id]; if(v){r.answered++; var o=p.opts.filter(function(x){return x.v===v;})[0]; if(o&&o.gap) r.practiceGaps++;}});
+  return r;
+}
+function activeAreas(){return AREAS.filter(function(a){return !state.skipped[a.id];});}
+
+/* ---------- Helpers ---------- */
+function el(tag, attrs, html){var e=document.createElement(tag); if(attrs) for(var k in attrs){ if(k==="text") e.textContent=attrs[k]; else e.setAttribute(k,attrs[k]); } if(html!==undefined) e.innerHTML=html; return e;}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
+var STATUS_LABEL={ready:"Ready",stale:"Needs update",undated:"Add a date",missing:"Missing",na:"Doesn't apply",unanswered:"Not answered"};
+function chip(s){return '<span class="chip '+s+'">'+STATUS_LABEL[s]+'</span>';}
+function toast(msg){var t=document.getElementById("toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(function(){t.hidden=true;},2600);}
+function copyText(text, okMsg){
+  var done=function(){toast(okMsg||"Copied");};
+  var fallback=function(){var ta=el("textarea"); ta.value=text; ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); var ok=false; try{ok=document.execCommand("copy");}catch(e){} document.body.removeChild(ta); toast(ok?(okMsg||"Copied"):"Select the text and copy it with your keyboard");};
+  try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, fallback); } else fallback(); }catch(e){fallback();}
+}
+
+/* ---------- Hero example profile ---------- */
+function renderHero(){
+  var saved=state; state=clone(EXAMPLE); normalise();
+  var ul=document.getElementById("heroProfile"); ul.innerHTML="";
+  AREAS.slice(0,6).forEach(function(a){ var s=areaSummary(a); var pct=s.applicable?Math.round(100*s.ready/s.applicable):0;
+    var li=el("li"); li.innerHTML='<span>'+esc(a.name)+'</span><span class="count">'+s.ready+' of '+s.applicable+' ready</span><span class="meter" aria-hidden="true"><i style="width:'+pct+'%"></i></span>'; ul.appendChild(li); });
+  var more=el("li"); more.innerHTML='<span class="count">+ '+(AREAS.length-6)+' more areas</span>'; ul.appendChild(more);
+  state=saved;
+}
+
+/* ---------- App views ---------- */
+var view = {step:"start"}; // "start" | area id | "pack"
+function showApp(on,which){which=which||"app"; document.getElementById("landing").hidden=!!on; ["app","costApp","riskApp"].forEach(function(id){document.getElementById(id).hidden=!(on&&id===which);}); window.scrollTo(0,0);}
+
+function renderTabs(){
+  var ul=document.getElementById("tabs"); ul.innerHTML="";
+  var items=[{id:"start",name:"Your organisation"}].concat(AREAS).concat([{id:"pack",name:"Your readiness pack"}]);
+  items.forEach(function(a){
+    var li=el("li"); var b=el("button",{type:"button"});
+    var cnt="";
+    if(a.practice){ if(state.skipped[a.id]) {b.className="off"; cnt="skipped";} else { var s=areaSummary(a); cnt=s.answered+"/"+s.total; } }
+    b.innerHTML='<span>'+esc(a.name)+'</span><span class="count">'+cnt+'</span>';
+    if(view.step===a.id) b.setAttribute("aria-current","step");
+    b.addEventListener("click",function(){go(a.id);});
+    li.appendChild(b); ul.appendChild(li);
+  });
+}
+
+function go(step){view.step=step; if(location.hash!=="#"+(step==="pack"?"pack":"check")){ history.replaceState(null,"","#"+(step==="pack"?"pack":"check")); } render(); var p=document.getElementById("panel"); if(p&&p.getBoundingClientRect().top<0) p.scrollIntoView({block:"start"});}
+
+function render(){ renderTabs(); var p=document.getElementById("panel"); p.innerHTML="";
+  if(view.step==="start") renderStart(p); else if(view.step==="pack") renderPack(p); else renderArea(p, AREAS.filter(function(a){return a.id===view.step;})[0]); }
+
+function exampleBanner(p){ if(!state.example) return;
+  var d=el("div",{"class":"callout no-print"}); d.innerHTML='<strong>You are viewing a fictional example.</strong> Nothing you change here is saved. ';
+  var b=el("button",{type:"button","class":"btn small",style:"margin-top:8px"}); b.textContent="Start my own check"; b.addEventListener("click",function(){state=blank(); load(); state.example=false; go("start");});
+  d.appendChild(el("br")); d.appendChild(b); p.appendChild(d); }
+
+function renderStart(p){
+  exampleBanner(p);
+  var h=el("div",{"class":"panel-head"}); h.innerHTML='<p class="eyebrow">Step 1 of '+(AREAS.length+2)+'</p><h2>Your organisation</h2><p class="lede">Your answers stay in this browser. Save a progress file at any time to continue on another device.</p>'; p.appendChild(h);
+  var f1=el("label",{"class":"field","for":"orgName"}); f1.innerHTML='Organisation name <span class="hint">Printed on your pack</span>';
+  var i1=el("input",{type:"text",id:"orgName",autocomplete:"organization"}); i1.value=state.org.name||""; i1.addEventListener("input",function(){state.org.name=i1.value; save();}); f1.appendChild(i1); p.appendChild(f1);
+  var f2=el("label",{"class":"field","for":"orgCountry"}); f2.innerHTML='Country <span class="hint">Optional</span>';
+  var i2=el("input",{type:"text",id:"orgCountry",autocomplete:"country-name"}); i2.value=state.org.country||""; i2.addEventListener("input",function(){state.org.country=i2.value; save();}); f2.appendChild(i2); p.appendChild(f2);
+  var pa=el("fieldset"); pa.innerHTML='<legend>Earlier assessments</legend><p class="hint" style="color:var(--muted);margin:0 0 6px">Assessors ask about these first. Optional.</p>';
+  var nl=el("label",{"class":"opt"}); var nc=el("input",{type:"checkbox",id:"orgNever"}); nc.checked=!!state.org.never; nl.appendChild(nc); nl.appendChild(el("span",{text:"We have never had a due diligence or capacity assessment"})); pa.appendChild(nl);
+  var fl=el("label",{"class":"field","for":"orgLast"}); fl.innerHTML='Month of the last assessment <span class="hint">YYYY-MM</span>'; var il=el("input",{type:"month",id:"orgLast",placeholder:"YYYY-MM"}); il.value=state.org.lastAssess||""; il.disabled=!!state.org.never; il.addEventListener("change",function(){state.org.lastAssess=il.value; save();}); fl.appendChild(il); pa.appendChild(fl);
+  var ff=el("label",{"class":"field","for":"orgFw","style":"margin-top:10px"}); ff.innerHTML='Assessments or standards you have been through <span class="hint">For example HACT, Core Humanitarian Standard, UN Partner Portal</span>'; var ifw=el("input",{type:"text",id:"orgFw"}); ifw.value=state.org.frameworks||""; ifw.disabled=!!state.org.never; ifw.addEventListener("input",function(){state.org.frameworks=ifw.value; save();}); ff.appendChild(ifw); pa.appendChild(ff);
+  var ft=el("p",{"class":"callout firsttime"}); ft.innerHTML='<strong>Getting ready for your first assessment.</strong> Your pack will include an action plan with the dates you choose. A first funder can then see what you already do, and what you will put in place and when.'; ft.hidden=!state.org.never; pa.appendChild(ft);
+  nc.addEventListener("change",function(){state.org.never=nc.checked; il.disabled=nc.checked; ifw.disabled=nc.checked; ft.hidden=!nc.checked; save();});
+  p.appendChild(pa);
+  var fs=el("fieldset"); fs.innerHTML='<legend>Which areas apply to you?</legend><p class="hint" style="color:var(--muted);margin:0 0 6px">Untick any area that does not apply. You can change this later.</p>';
+  AREAS.forEach(function(a){ var lab=el("label",{"class":"opt"}); var cb=el("input",{type:"checkbox",id:"use_"+a.id}); cb.checked=!state.skipped[a.id];
+    cb.addEventListener("change",function(){state.skipped[a.id]=!cb.checked; save(); renderTabs();});
+    var sp=el("span"); sp.innerHTML='<strong>'+esc(a.name)+'</strong><br><span style="color:var(--muted);font-size:.92rem">'+esc(a.intro)+'</span>'; lab.appendChild(cb); lab.appendChild(sp); fs.appendChild(lab); });
+  p.appendChild(fs);
+  var tools=el("div",{"class":"row no-print"});
+  var saveBtn=el("button",{type:"button","class":"btn small quiet"}); saveBtn.textContent="Save progress file"; saveBtn.addEventListener("click",downloadProgress);
+  var loadLab=el("label",{"class":"btn small quiet","for":"loadFile"}); loadLab.textContent="Open a progress file";
+  var loadIn=el("input",{type:"file",id:"loadFile",accept:".json,application/json",hidden:""}); loadIn.addEventListener("change",function(){ if(loadIn.files[0]) readProgress(loadIn.files[0]); });
+  tools.appendChild(saveBtn); tools.appendChild(loadLab); tools.appendChild(loadIn); p.appendChild(tools);
+  p.appendChild(navRow(null, firstArea()));
+}
+function firstArea(){var a=activeAreas()[0]; return a?a.id:"pack";}
+function nextOf(id){var list=activeAreas().map(function(a){return a.id;}); var i=list.indexOf(id); return i<0||i===list.length-1?"pack":list[i+1];}
+function prevOf(id){var list=activeAreas().map(function(a){return a.id;}); var i=list.indexOf(id); return i<=0?"start":list[i-1];}
+function navRow(prev,next){ var d=el("div",{"class":"navrow no-print"});
+  var b1=el("button",{type:"button","class":"btn quiet"}); b1.textContent="Back"; if(prev){b1.addEventListener("click",function(){go(prev);});} else b1.style.visibility="hidden";
+  var b2=el("button",{type:"button","class":"btn"}); b2.textContent= next==="pack" ? "See my readiness pack" : "Next: "+AREAS.filter(function(a){return a.id===next;})[0].name;
+  b2.addEventListener("click",function(){go(next);}); d.appendChild(b1); d.appendChild(b2); return d; }
+
+function renderArea(p,a){
+  exampleBanner(p);
+  var idx=AREAS.indexOf(a)+2;
+  var h=el("div",{"class":"panel-head"}); h.innerHTML='<p class="eyebrow">Step '+idx+' of '+(AREAS.length+2)+'</p><h2>'+esc(a.name)+'</h2><p class="lede">'+esc(a.intro)+'</p><p class="maps">Relates to: '+esc(a.maps)+'</p>'; p.appendChild(h);
+  var sk=el("label",{"class":"skiparea no-print"}); var skc=el("input",{type:"checkbox",id:"skip_"+a.id}); skc.checked=!!state.skipped[a.id];
+  skc.addEventListener("change",function(){state.skipped[a.id]=skc.checked; save(); render();}); sk.appendChild(skc); sk.appendChild(document.createTextNode("This area doesn't apply to us")); p.appendChild(sk);
+  if(state.skipped[a.id]){ p.appendChild(navRow(prevOf(a.id), nextOf(a.id))); return; }
+  p.appendChild(el("p",{"class":"group-title",text:"How you work"}));
+  a.practice.forEach(function(q){ var fs=el("fieldset"); fs.appendChild(el("legend",{text:q.q}));
+    q.opts.forEach(function(o){ var lab=el("label",{"class":"opt"}); var r=el("input",{type:"radio",name:q.id,value:o.v,id:q.id+"_"+o.v}); r.checked=state.answers[q.id]===o.v;
+      r.addEventListener("change",function(){state.answers[q.id]=o.v; save(); renderTabs();}); lab.appendChild(r); lab.appendChild(el("span",{text:o.t})); fs.appendChild(lab); });
+    p.appendChild(fs); });
+  p.appendChild(el("p",{"class":"group-title",text:"Documents you hold"}));
+  var box=el("div");
+  a.evidence.forEach(function(it){ var row=el("div",{"class":"ev"}); var ev=state.evidence[it.id]||{};
+    var lab=el("div",{"class":"ev-label"}); lab.innerHTML='<span id="lbl_'+it.id+'">'+esc(it.t)+(it.core?'<span class="core" title="Assessors commonly ask for this">core</span>':'')+'</span><small>'+esc(it.why)+(it.valid?' We count it as current for '+it.valid+' months; your donor\'s rule may differ.':'')+'</small><span id="st_'+it.id+'">'+chip(itemStatus(it))+'</span>';
+    var sel=el("select",{id:"sel_"+it.id,"aria-labelledby":"lbl_"+it.id}); EVIDENCE_OPTS.forEach(function(o){var op=el("option",{value:o[0]}); op.textContent=o[1]; if((ev.s||"")===o[0]) op.selected=true; sel.appendChild(op);});
+    var dwrap=el("label",{"class":"datefield","for":"date_"+it.id}); dwrap.appendChild(el("span",{text:"Date (month and year)"}));
+    var date=el("input",{type:"month",id:"date_"+it.id,placeholder:"YYYY-MM"}); date.value=ev.d||""; date.disabled=!(ev.s==="have"||ev.s==="stale"); if(date.type!=="month"){date.placeholder="YYYY-MM, e.g. 2026-03";} dwrap.appendChild(date);
+    function upd(){ var e=state.evidence[it.id]||{}; e.s=sel.value; e.d=date.value; state.evidence[it.id]=e; date.disabled=!(e.s==="have"||e.s==="stale"); save(); document.getElementById("st_"+it.id).innerHTML=chip(itemStatus(it)); renderTabs(); }
+    sel.addEventListener("change",upd); date.addEventListener("change",upd);
+    var swrap=el("label",{"class":"datefield","for":"sel_"+it.id}); swrap.appendChild(el("span",{text:"Do you have it?"})); swrap.appendChild(sel); sel.removeAttribute("aria-labelledby"); sel.setAttribute("aria-describedby","lbl_"+it.id);
+    row.appendChild(lab); row.appendChild(swrap); row.appendChild(dwrap); box.appendChild(row); });
+  p.appendChild(box);
+  p.appendChild(navRow(prevOf(a.id), nextOf(a.id)));
+}
+
+/* ---------- Pack ---------- */
+function buildGaps(){
+  var gaps=[];
+  activeAreas().forEach(function(a){
+    a.practice.forEach(function(q){ var v=state.answers[q.id]; var o=q.opts.filter(function(x){return x.v===v;})[0];
+      if(o&&o.gap) gaps.push({id:q.id, res:q.res, c4c:c4cOf(a,q), p:o.gap===1?1:3, area:a.name, what:o.s, why:o.why, fix:o.fix, act:o.fix}); });
+    a.evidence.forEach(function(it){ var s=itemStatus(it);
+      if(s==="missing") gaps.push({id:it.id, res:it.res, c4c:c4cOf(a,it), p:it.core?1:3, area:a.name, what:it.t+": missing", why:it.why, fix:"Find, prepare or adopt this document.", act:"Find, prepare or adopt: "+it.t});
+      if(s==="stale") gaps.push({id:it.id, res:it.res, c4c:c4cOf(a,it), p:2, area:a.name, what:it.t+": out of date", why:it.why, fix:"Update it and record the new date. A quick win.", act:"Update and re-date: "+it.t});
+      if(s==="undated") gaps.push({id:it.id, res:it.res, c4c:c4cOf(a,it), p:2, area:a.name, what:it.t+": date needed", why:"This document only counts as current for "+it.valid+" months, so its date matters.", fix:"Add the month and year it was issued or last updated.", act:"Add the issue date to: "+it.t}); });
+  });
+  gaps.sort(function(x,y){return x.p-y.p;});
+  return gaps;
+}
+function renderPack(p){
+  exampleBanner(p);
+  var act=activeAreas(); var tot={ready:0,stale:0,missing:0,applicable:0,unanswered:0,pg:0};
+  act.forEach(function(a){var s=areaSummary(a); tot.ready+=s.ready; tot.stale+=s.stale; tot.missing+=s.missing; tot.applicable+=s.applicable; tot.unanswered+=s.unanswered; tot.pg+=s.practiceGaps;});
+  var name=state.org.name||"Your organisation";
+  var dateStr=TODAY.toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
+  var wrap=el("div",{"class":"pack"});
+  var head=el("div",{"class":"pack-head"});
+  head.innerHTML='<p class="eyebrow">Readiness pack</p><h2>'+esc(name)+'</h2><p class="meta">'+(state.org.country?esc(state.org.country)+' · ':'')+'Prepared '+esc(dateStr)+' with Aidfolio · Self-assessment, not verified by any third party</p>';
+  wrap.appendChild(head);
+  var tools=el("div",{"class":"row no-print"});
+  var pr=el("button",{type:"button","class":"btn"}); pr.textContent="Print or save as PDF"; pr.addEventListener("click",function(){try{window.print();}catch(e){}});
+  var cp=el("button",{type:"button","class":"btn quiet"}); cp.textContent="Copy pack as text"; cp.addEventListener("click",function(){copyText(packText(),"Pack copied. Paste it into a document or email.");});
+  var sv=el("button",{type:"button","class":"btn quiet"}); sv.textContent="Save progress file"; sv.addEventListener("click",downloadProgress);
+  var clr=el("button",{type:"button","class":"btn quiet"}); clr.textContent="Clear my answers"; clr.addEventListener("click",function(){confirmClear(wrap);});
+  var csvb=el("button",{type:"button","class":"btn quiet"}); csvb.textContent="Download for your assessor (spreadsheet)"; csvb.addEventListener("click",downloadPassportCSV);
+  tools.appendChild(pr); tools.appendChild(cp); tools.appendChild(csvb); tools.appendChild(sv); if(!state.example) tools.appendChild(clr); wrap.appendChild(tools);
+  if(tot.unanswered>0){ var c=el("p",{"class":"callout no-print"}); c.textContent=tot.unanswered+" document question"+(tot.unanswered>1?"s are":" is")+" not answered yet. They are left out of the counts below."; wrap.appendChild(c); }
+
+  // Profile
+  var sec1=el("section"); sec1.appendChild(el("h3",{text:"1. Readiness profile"}));
+  sec1.appendChild(el("p",{"class":"note",style:"margin:4px 0 12px",text:tot.ready+" of "+tot.applicable+" documents are ready (held and current). "+tot.stale+" need updating and "+tot.missing+" are missing. "+tot.pg+" practice point"+(tot.pg===1?"":"s")+" to strengthen."}));
+  var grid=el("div",{"class":"profile"});
+  act.forEach(function(a){var s=areaSummary(a); var pct=s.applicable?Math.round(100*s.ready/s.applicable):0;
+    var c=el("div",{"class":"pcard"}); c.innerHTML='<span>'+esc(a.name)+'</span><span class="big">'+s.ready+' <span style="font-size:1rem;color:var(--muted)">of '+s.applicable+'</span></span><span class="meter" aria-hidden="true"><i style="width:'+pct+'%"></i></span><span class="sub">'+s.stale+' to update · '+s.missing+' missing · '+s.practiceGaps+' practice point'+(s.practiceGaps===1?'':'s')+'</span>'; grid.appendChild(c);});
+  sec1.appendChild(grid); wrap.appendChild(sec1);
+
+  // Gaps
+  var gaps=buildGaps(); var sec2=el("section"); sec2.appendChild(el("h3",{text:"2. What to do first"}));
+  if(!gaps.length){ sec2.appendChild(el("p",{"class":"note",text:"No gaps found in the areas you completed."})); }
+  else { sec2.appendChild(el("p",{"class":"note",style:"margin:4px 0 12px",text:"Ordered by priority: first what assessors ask for most, then quick updates, then the rest."}));
+    var GROUPS=[[1,"Do first","What assessors ask for most",true],[2,"Quick wins","Documents you have that only need updating",false],[3,"Next","Worth doing once the first items are done",false]];
+    GROUPS.forEach(function(G){ var items=gaps.filter(function(g){return g.p===G[0];}); if(!items.length) return;
+      var det=el("details",{"class":"gapgroup"}); if(G[3]) det.open=true;
+      var sum=el("summary"); sum.innerHTML='<span class="pri p'+G[0]+'">'+G[1]+'</span> <strong>'+items.length+' item'+(items.length>1?'s':'')+'</strong> <span style="color:var(--muted)">· '+G[2]+'</span>'; det.appendChild(sum);
+      var ul=el("ul",{"class":"gaps"});
+      items.forEach(function(g){var li=el("li"); li.innerHTML='<span class="pri p'+g.p+'" aria-hidden="true">'+G[1]+'</span><div><strong>'+esc(g.what)+'</strong><p>'+esc(g.area)+'. '+esc(g.why)+' <em>First step:</em> '+esc(g.fix)+'</p>'+(g.res?'<p class="freehelp">Free help: '+resLink(g.res)+'</p>':'')+'</div>'; ul.appendChild(li);});
+      det.appendChild(ul); sec2.appendChild(det); }); }
+  wrap.appendChild(sec2);
+
+  // Action plan (commitments with dates)
+  var secP=el("section"); secP.appendChild(el("h3",{text:"3. Action plan"}));
+  secP.appendChild(el("p",{"class":"note",style:"margin:4px 0 12px",text:(state.org.never?"For a first assessment, this plan shows a funder what you will put in place and when. ":"")+"Choose a realistic month and a person for each action, agree the plan with your partner, and update it as you go."}));
+  if(!gaps.length){ secP.appendChild(el("p",{"class":"note",text:"No actions needed in the areas you completed."})); }
+  else { var ptw=el("div",{"class":"tablewrap"}); var pt=el("table",{"class":"index plan"});
+    pt.innerHTML='<thead><tr><th scope="col">Priority</th><th scope="col">Action</th><th scope="col">Done by</th><th scope="col">Who</th></tr></thead>';
+    var ptb=el("tbody"); var PLN={1:"Do first",2:"Quick win",3:"Next"};
+    gaps.forEach(function(g,i){ var pl=state.plan[g.id]||{}; var tr=el("tr");
+      tr.innerHTML='<td><span class="pri p'+g.p+'" style="font-family:var(--label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:3px 8px;white-space:nowrap">'+PLN[g.p]+'</span></td><td class="act">'+esc(g.act)+'<br><span style="color:var(--muted);font-size:.85rem">'+esc(g.area)+'</span>'+(g.res?'<div class="freehelp">Free help: '+resLink(g.res)+'</div>':'')+'</td>';
+      var td1=el("td"); var ib=el("input",{type:"month",id:"plby_"+i,"aria-label":"Done by (month) for: "+g.act,placeholder:"YYYY-MM"}); ib.value=pl.by||""; td1.appendChild(ib);
+      var td2=el("td"); var iw=el("input",{type:"text",id:"plwho_"+i,"aria-label":"Who is responsible for: "+g.act}); iw.value=pl.who||""; td2.appendChild(iw);
+      function upd(){ state.plan[g.id]={by:ib.value,who:iw.value}; save(); var pb=document.getElementById("passportBody"); if(pb) fillPassport(pb); }
+      ib.addEventListener("change",upd); iw.addEventListener("input",upd);
+      tr.appendChild(td1); tr.appendChild(td2); ptb.appendChild(tr); });
+    pt.appendChild(ptb); ptw.appendChild(pt); secP.appendChild(ptw); }
+  wrap.appendChild(secP);
+
+  // Statements
+  var sec3=el("section"); sec3.appendChild(el("h3",{text:"4. Practice statements"}));
+  sec3.appendChild(el("p",{"class":"note",style:"margin:4px 0 12px",text:"Drafted only from your answers. Read each one and change anything that does not match what you really do before you share it."}));
+  act.forEach(function(a){ var lines=a.practice.map(function(q){var o=q.opts.filter(function(x){return x.v===state.answers[q.id];})[0]; return o?o.s:null;}).filter(Boolean);
+    var d=el("div",{"class":"stmt",style:"margin-bottom:14px"}); d.innerHTML='<span class="draftlabel">Draft · '+esc(a.name)+'</span><p>'+(lines.length?esc(lines.join(" ")):'<span style="color:var(--muted)">No answers yet.</span>')+'</p>'; sec3.appendChild(d); });
+  wrap.appendChild(sec3);
+
+  // Index
+  var sec4=el("section"); sec4.appendChild(el("h3",{text:"5. Evidence index"}));
+  var tw=el("div",{"class":"tablewrap",style:"margin-top:10px"}); var t=el("table",{"class":"index"});
+  t.innerHTML='<thead><tr><th scope="col">Area</th><th scope="col">Document</th><th scope="col">Date</th><th scope="col">Status</th></tr></thead>';
+  var tb=el("tbody"); act.forEach(function(a){ a.evidence.forEach(function(it){ var ev=state.evidence[it.id]||{}; var s=itemStatus(it); if(s==="na") return;
+    var tr=el("tr"); tr.innerHTML='<td>'+esc(a.name)+'</td><td>'+esc(it.t)+(it.core?' <span class="core">core</span>':'')+'</td><td style="font-variant-numeric:tabular-nums">'+esc(ev.d||"")+'</td><td>'+chip(s)+'</td>'; tb.appendChild(tr); }); });
+  t.appendChild(tb); tw.appendChild(t); sec4.appendChild(tw); wrap.appendChild(sec4);
+
+  // Passport summary
+  var sec5=el("section"); sec5.appendChild(el("h3",{text:"6. Passport summary"}));
+  sec5.appendChild(el("p",{"class":"note",style:"margin:4px 0 12px",text:"Organised by the capacity areas of the Charter for Change Due Diligence Passporting Tool, so an assessor using it can find your evidence quickly. The assessor, not you, gives the ratings. Once an assessment is complete and you have signed it, it can be shared with other organisations, with your consent, so you are not assessed again."}));
+  var gl=el("p",{"class":"note",style:"margin:0 0 10px"}); gl.textContent="Earlier assessments: "+generalLine()+"."; sec5.appendChild(gl);
+  var stw=el("div",{"class":"tablewrap"}); var st=el("table",{"class":"index"});
+  st.innerHTML='<thead><tr><th scope="col">Capacity area</th><th scope="col">Where in this pack</th><th scope="col">Documents ready</th><th scope="col">Practice points</th><th scope="col">Planned actions</th></tr></thead>';
+  var stb=el("tbody",{id:"passportBody"}); fillPassport(stb);
+  st.appendChild(stb); stw.appendChild(st); sec5.appendChild(stw);
+  sec5.appendChild(el("p",{"class":"note",style:"margin-top:8px",text:"Aidfolio is independent and is not affiliated with Charter for Change or Humentum. The C4C tool is free from Humentum."}));
+  wrap.appendChild(sec5);
+
+  var disc=el("p",{"class":"disclaimer"}); disc.textContent="This pack is a self-assessment prepared by the organisation named above using Aidfolio, a free tool at "+SITE+". No one has verified it. It is not a certification and not legal advice. Donors and partners will carry out their own checks.";
+  wrap.appendChild(disc);
+
+  // share prompt (practical value)
+  var sh=el("div",{"class":"callout no-print"}); sh.innerHTML='<strong>Know another organisation preparing for an assessment?</strong> Send them the tool. Only the link is shared, never your answers. ';
+  var sb=el("button",{type:"button","class":"btn small",style:"margin-top:8px"}); sb.textContent="Copy a message to send"; sb.addEventListener("click",function(){copyText(document.getElementById("shareMsg").textContent,"Message copied");});
+  sh.appendChild(el("br")); sh.appendChild(sb); wrap.appendChild(sh);
+  wrap.appendChild(supportNote());
+  p.appendChild(wrap);
+}
+function confirmClear(wrap){ if(document.getElementById("confirmBox")) return;
+  var c=el("div",{"class":"confirm no-print",id:"confirmBox"}); c.innerHTML='<strong>Clear all answers from this browser?</strong><span>This cannot be undone. Save a progress file first if you may need them.</span>';
+  var r=el("div",{"class":"row"}); var y=el("button",{type:"button","class":"btn small"}); y.textContent="Yes, clear everything"; var n=el("button",{type:"button","class":"btn small quiet"}); n.textContent="Cancel";
+  y.addEventListener("click",function(){ try{localStorage.removeItem(KEY);}catch(e){} state=blank(); toast("Answers cleared"); go("start"); });
+  n.addEventListener("click",function(){c.remove();}); r.appendChild(y); r.appendChild(n); c.appendChild(r); wrap.insertBefore(c, wrap.children[2]); y.focus(); }
+
+function fillPassport(tb){ tb.innerHTML=""; passportRows().forEach(function(r){ var tr=el("tr"); tr.innerHTML='<td><strong>'+esc(r.t)+'</strong><br><span style="color:var(--muted);font-size:.85rem">'+esc(r.q)+'</span></td><td>'+esc(r.where||"Not covered by Aidfolio; ask your assessor")+'</td><td style="font-variant-numeric:tabular-nums">'+(r.app?r.ready+" of "+r.app:"–")+'</td><td style="font-variant-numeric:tabular-nums">'+r.pg+'</td><td style="font-variant-numeric:tabular-nums">'+r.actions+(r.actions?' ('+r.dated+' dated)':'')+'</td>'; tb.appendChild(tr); }); }
+function generalLine(){ var o=state.org;
+  if(o.never) return "none yet; preparing for a first assessment";
+  var bits=[]; if(o.lastAssess) bits.push("last assessment "+o.lastAssess); if(o.frameworks) bits.push("assessed against "+o.frameworks);
+  return bits.length?bits.join("; "):"not stated"; }
+function passportRows(){ var gaps=buildGaps();
+  return C4C.map(function(c){ var r={t:c.t,q:c.q,k:c.k,where:[],ready:0,app:0,pg:0,actions:0,dated:0};
+    activeAreas().forEach(function(a){ var hit=false;
+      a.evidence.forEach(function(it){ if(c4cOf(a,it)!==c.k) return; hit=true; var s=itemStatus(it); if(s==="ready") r.ready++; if(s!=="na"&&s!=="unanswered") r.app++; });
+      a.practice.forEach(function(q){ if(c4cOf(a,q)!==c.k) return; hit=true; var o=q.opts.filter(function(x){return x.v===state.answers[q.id];})[0]; if(o&&o.gap) r.pg++; });
+      if(hit&&r.where.indexOf(a.name)<0) r.where.push(a.name); });
+    gaps.forEach(function(g){ if(g.c4c!==c.k) return; r.actions++; var pl=state.plan[g.id]; if(pl&&pl.by) r.dated++; });
+    if(c.k==="general"){ r.where.unshift("Your organisation"); }
+    r.where=r.where.join(", "); return r; }); }
+function csvCell(v){ v=String(v==null?"":v); return '"'+v.replace(/"/g,'""')+'"'; }
+function passportCSV(){
+  var C4CN={}; C4C.forEach(function(c){C4CN[c.k]=c.t;}); var gapBy={}; buildGaps().forEach(function(g){gapBy[g.id]=g;});
+  var PL={1:"Do first",2:"Quick win",3:"Next"};
+  var rows=[["C4C capacity area","Aidfolio area","Type","Item","Answer or status","Date","Priority","Planned action","Done by","Who","Free resource"]];
+  rows.push(["General","Your organisation","Information","Organisation name",state.org.name||"","","","","","",""]);
+  rows.push(["General","Your organisation","Information","Country",state.org.country||"","","","","","",""]);
+  rows.push(["General","Your organisation","Information","Earlier assessments",generalLine(),state.org.lastAssess||"","","","","",""]);
+  activeAreas().forEach(function(a){
+    a.practice.forEach(function(q){ var o=q.opts.filter(function(x){return x.v===state.answers[q.id];})[0]; var g=gapBy[q.id]; var pl=state.plan[q.id]||{};
+      rows.push([C4CN[c4cOf(a,q)],a.name,"Practice",q.q,o?o.s:"Not answered","",g?PL[g.p]:"",g?g.act:"",g?pl.by||"":"",g?pl.who||"":"",g&&g.res?resText(g.res):""]); });
+    a.evidence.forEach(function(it){ var s=itemStatus(it); var ev=state.evidence[it.id]||{}; var g=gapBy[it.id]; var pl=state.plan[it.id]||{};
+      rows.push([C4CN[c4cOf(a,it)],a.name,"Document",it.t,STATUS_LABEL[s],ev.d||"",g?PL[g.p]:"",g?g.act:"",g?pl.by||"":"",g?pl.who||"":"",g&&g.res?resText(g.res):""]); });
+  });
+  rows.push(["","","Note","Self-assessment prepared with Aidfolio ("+SITE+"), "+TODAY.toISOString().slice(0,10)+". Not verified by any third party. Ratings are for the assessing organisation to give.","","","","","","",""]);
+  return "\uFEFF"+rows.map(function(r){return r.map(csvCell).join(",");}).join("\r\n");
+}
+function downloadPassportCSV(){ var data=passportCSV();
+  try{ var blob=new Blob([data],{type:"text/csv;charset=utf-8"}); var a=el("a",{href:URL.createObjectURL(blob),download:"aidfolio-passport-"+TODAY.toISOString().slice(0,10)+".csv"}); document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},500); toast("Spreadsheet file saved"); }
+  catch(e){ copyText(data,"Saving files is blocked here. The spreadsheet data was copied instead."); } }
+function packText(){
+  var L=[]; var name=state.org.name||"Your organisation";
+  L.push("READINESS PACK: "+name); L.push("Prepared "+TODAY.toISOString().slice(0,10)+" with Aidfolio (free at "+SITE+"). Self-assessment, not verified by any third party."); L.push("");
+  L.push("1. READINESS PROFILE");
+  activeAreas().forEach(function(a){var s=areaSummary(a); L.push("- "+a.name+": "+s.ready+" of "+s.applicable+" documents ready; "+s.stale+" to update; "+s.missing+" missing; "+s.practiceGaps+" practice points");});
+  L.push(""); L.push("2. WHAT TO DO FIRST"); var PL={1:"First",2:"Quick win",3:"Next"};
+  buildGaps().forEach(function(g){L.push("- ["+PL[g.p]+"] "+g.what+" ("+g.area+"). First step: "+g.fix+(g.res?" Free help: "+resText(g.res):""));});
+  L.push(""); L.push("3. ACTION PLAN"); var gp=buildGaps(); if(!gp.length) L.push("- No actions needed.");
+  gp.forEach(function(g){ var pl=state.plan[g.id]||{}; L.push("- ["+PL[g.p]+"] "+g.act+" ("+g.area+"). Done by: "+(pl.by||"to agree")+". Who: "+(pl.who||"to agree")+"."); });
+  L.push(""); L.push("4. PRACTICE STATEMENTS (drafts; check before sharing)");
+  activeAreas().forEach(function(a){var lines=a.practice.map(function(q){var o=q.opts.filter(function(x){return x.v===state.answers[q.id];})[0]; return o?o.s:null;}).filter(Boolean); if(lines.length){L.push(a.name+": "+lines.join(" "));}});
+  L.push(""); L.push("5. EVIDENCE INDEX");
+  activeAreas().forEach(function(a){a.evidence.forEach(function(it){var s=itemStatus(it); if(s==="na") return; var ev=state.evidence[it.id]||{}; L.push("- "+a.name+" | "+it.t+" | "+(ev.d||"-")+" | "+STATUS_LABEL[s]);});});
+  L.push(""); L.push("6. PASSPORT SUMMARY (Charter for Change capacity areas; ratings are for the assessor)");
+  L.push("Earlier assessments: "+generalLine()+".");
+  passportRows().forEach(function(r){ L.push("- "+r.t+": "+(r.app?r.ready+" of "+r.app+" documents ready":"no documents listed")+"; "+r.pg+" practice points; "+r.actions+" planned actions"+(r.where?" (see "+r.where+")":"")); });
+  return L.join("\n");
+}
+function downloadProgress(){
+  var data=JSON.stringify({app:"Aidfolio",version:1,saved:new Date().toISOString(),state:state},null,1);
+  try{ var blob=new Blob([data],{type:"application/json"}); var a=el("a",{href:URL.createObjectURL(blob),download:"aidfolio-progress.json"}); document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},500); toast("Progress file saved"); }
+  catch(e){ copyText(data,"Saving files is blocked here. The progress data was copied instead."); }
+}
+function readProgress(file){ var fr=new FileReader(); fr.onload=function(){ try{ var o=JSON.parse(fr.result); if(!o||o.app!=="Aidfolio"||!o.state) throw 0; state=Object.assign(blank(),o.state); normalise(); state.example=false; save(); toast("Progress opened"); go("start"); }catch(e){ toast("That file is not a Aidfolio progress file."); } }; fr.readAsText(file); }
+
+/* =====================================================================
+   FAIR COST (Module 1): true overhead rate, unfunded shared costs, negotiation brief.
+   r = I / D  (indirect cost rate on direct costs);  s = I / (D + I)  (share of total spend)
+   Grant g: allowed rate a_g on its stated basis; on a total basis a_direct = a / (1 - a).
+   received_g = a_direct,g * d_g ; needed_g = r * d_g ; gap_g = max(0, needed_g - received_g)
+   shortfall = max(0, I - sum(received_g) - U) ; rate needed on grants = max(0, I - U) / sum(d_g)
+   Direct-allocation alternative: shared-cost share of grant g = I * d_g / D
+   ===================================================================== */
+var COST_CATS = [
+  {id:"lead", t:"Leadership and management", h:"Salaries of the director and managers, for the time not charged to projects"},
+  {id:"fin", t:"Finance, HR and administration staff", h:"Time not charged to projects"},
+  {id:"office", t:"Office rent, utilities and maintenance", h:"The share not charged to projects"},
+  {id:"it", t:"Communications and IT", h:"Phones, internet, software, devices"},
+  {id:"audit", t:"Audit, legal and registration fees", h:"Annual audit, legal advice, renewals"},
+  {id:"ins", t:"Insurance and security", h:"Insurance, security measures, staff safety"},
+  {id:"gov", t:"Governance", h:"Board meetings, general assemblies"},
+  {id:"comp", t:"Safeguarding, compliance and monitoring", h:"Central safeguarding, compliance and monitoring work not charged to projects"},
+  {id:"fund", t:"Fundraising and proposal writing", h:"Time and costs of finding new funding"},
+  {id:"train", t:"Staff training and development", h:"Training not funded by a project"},
+  {id:"equip", t:"Equipment replacement", h:"Yearly cost of replacing shared equipment, such as computers and vehicles"},
+  {id:"other", t:"Other shared costs", h:"Anything else that keeps the organisation running"}
+];
+var COST_EXAMPLE = {currency:"USD", direct:[{name:"Food assistance",amount:"420000"},{name:"Livelihoods",amount:"180000"}],
+  shared:{lead:"52000",fin:"38000",office:"24000",it:"9000",audit:"8000",ins:"6000",gov:"2000",comp:"11000",fund:"7000",train:"3000",equip:"5000",other:"2000"},
+  unrestricted:"15000", grants:[{name:"INGO partner grant",direct:"420000",rate:"7",basis:"direct"},{name:"Pooled fund grant",direct:"180000",rate:"7",basis:"total"}]};
+
+function num(v){ if(v===undefined||v===null) return 0; var n=Number(String(v).replace(/[\s,]/g,"")); return isFinite(n)&&n>0?n:0; }
+function money(n,cur){ var r=Math.round(n).toLocaleString(undefined); return (cur?cur+" ":"")+r; }
+function pct(x,dp){ return (100*x).toFixed(dp===undefined?1:dp)+"%"; }
+function costModel(c){
+  var D=c.direct.reduce(function(t,r){return t+num(r.amount);},0);
+  var I=COST_CATS.reduce(function(t,k){return t+num(c.shared[k.id]);},0);
+  var U=num(c.unrestricted);
+  var r=D>0?I/D:0, sTot=(D+I)>0?I/(D+I):0;
+  var grants=c.grants.map(function(g){ var d=num(g.direct), a=num(g.rate)/100; if(a>=1) a=0.99;
+    var aD=g.basis==="total"?a/(1-a):a; var rec=aD*d, need=r*d;
+    return {name:g.name||"Unnamed grant", d:d, aD:aD, rec:rec, need:need, gap:Math.max(0,need-rec), alloc:D>0?I*d/D:0}; });
+  var Dg=grants.reduce(function(t,g){return t+g.d;},0), R=grants.reduce(function(t,g){return t+g.rec;},0);
+  var shortfall=Math.max(0,I-R-U), rNeed=Dg>0?Math.max(0,I-U)/Dg:0, avgAllowed=Dg>0?R/Dg:0;
+  return {D:D,I:I,U:U,r:r,sTot:sTot,grants:grants,Dg:Dg,R:R,shortfall:shortfall,rNeed:rNeed,avgAllowed:avgAllowed,covered:Math.min(I,R+U)};
+}
+function costBrief(c,m){
+  var org=state.org.name||"Our organisation", cur=c.currency;
+  var L=[];
+  L.push("OUR TRUE OVERHEAD RATE: "+org);
+  L.push("");
+  L.push(org+" spends "+money(m.D,cur)+" a year on direct programme costs and "+money(m.I,cur)+" on shared costs that keep the organisation running: management, finance, office, audit, safeguarding and compliance. That is an indirect cost rate of "+pct(m.r)+" of direct costs ("+pct(m.sTot)+" of total spending).");
+  if(m.grants.length){ L.push(""); L.push("Our current grants allow an average of "+pct(m.avgAllowed)+" of direct costs for overheads. After "+money(m.U,cur)+" of unrestricted income, "+money(m.shortfall,cur)+" of our shared costs are unfunded this year. To cover them, our grants would need to allow about "+pct(m.rNeed)+"."); }
+  L.push(""); L.push("WHAT WE ARE ASKING FOR (any one of these would help)");
+  L.push("1. An overhead line at our actual rate of "+pct(m.r)+" of direct costs, or as close to it as your rules allow.");
+  L.push("2. If your own rate is capped by your donor: a fair share of the overhead you receive. The IASC Guidance on the Provision of Overheads to Local and National Partners (2022) gives a 50:50 split as one example, and says overheads passed on should be unrestricted and flexible, like the donor's.");
+  var big=m.grants.slice().sort(function(a,b){return b.d-a.d;})[0];
+  if(big&&big.d>0) L.push("3. Or: budget our shared costs as direct lines, in proportion to the project's share of our programme. For \""+big.name+"\" that would be about "+money(big.alloc,cur)+" a year.");
+  L.push(""); L.push("CONTEXT");
+  L.push("- Development Initiatives (2024) found most intermediaries pass on about 7% to local partners, while published rates range from 4% to 15%; the Ford Foundation sets a minimum of 25% for eligible grants.");
+  L.push("- US federal rules allow organisations without a negotiated rate to charge up to 15% of modified total direct costs (2 CFR 200.414(f), since October 2024).");
+  L.push("- The State of the Humanitarian System 2026 reports a 7% default ceiling, while some studies estimate local actors need 27-30%.");
+  L.push(""); L.push("Our cost breakdown is available on request. Figures prepared with Aidfolio, a free tool at "+SITE+"; they are our own estimates.");
+  return L.join("\n");
+}
+var SIZE_BANDS=[["","Prefer not to say"],["lt100k","Under US$100,000"],["100k-500k","US$100,000 to 500,000"],["500k-2m","US$500,000 to 2 million"],["gt2m","Over US$2 million"]];
+var ORG_TYPES=[["","Prefer not to say"],["women","Women-led"],["refugee","Refugee-led"],["faith","Faith-based"],["community","Community-based group"],["national","National NGO"],["other","Other"]];
+function shareText(c,m){ var sh=c.share||{}; var L=[];
+  L.push("Aidfolio anonymous cost result (shared by choice)");
+  L.push("Year: "+TODAY.getFullYear());
+  L.push("True overhead rate (shared costs / direct costs): "+pct(m.r));
+  L.push("Shared costs as a share of all spending: "+pct(m.sTot));
+  L.push("Number of grants entered: "+m.grants.length);
+  if(m.grants.length){ L.push("Average overhead allowed by grants (of direct costs): "+pct(m.avgAllowed)); }
+  L.push("Share of shared costs unfunded: "+pct(m.I>0?m.shortfall/m.I:0));
+  L.push("Unrestricted income as a share of shared costs: "+pct(m.I>0?Math.min(1,m.U/m.I):0));
+  var sb=SIZE_BANDS.filter(function(x){return x[0]===(sh.size||"");})[0]; L.push("Annual spending, self-reported band: "+sb[1]);
+  var ot=ORG_TYPES.filter(function(x){return x[0]===(sh.type||"");})[0]; L.push("Organisation type, self-reported: "+ot[1]);
+  L.push("Country: "+(sh.country&&state.org.country?state.org.country:"not shared"));
+  L.push(""); L.push("No names or amounts are included. Results are published only as totals across many organisations.");
+  return L.join("\n"); }
+function shareBox(c,m){ if(!c.share) c.share={size:"",type:"",country:false}; var sh=c.share;
+  var box=el("section",{"class":"sharebox","aria-labelledby":"shareHead"});
+  box.innerHTML='<h3 id="shareHead" style="font-size:1rem">Help build the first open evidence on what local work really costs</h3><p class="note" style="margin:0">No public data shows what local organisations\' running costs are compared with what grants pay. If you choose, you can email us your percentages, without names or amounts. We publish them only as totals across many organisations, to argue for fairer overheads. Nothing is sent unless you send the email yourself, and your email address will be visible to us, so you can send it from any address you like.</p>';
+  var g=el("div",{"class":"formgrid"});
+  var l1=el("label",{"class":"field","for":"shSize"}); l1.innerHTML='Annual spending, roughly <span class="hint">Optional</span>'; var s1=el("select",{id:"shSize"}); SIZE_BANDS.forEach(function(o){var op=el("option",{value:o[0]}); op.textContent=o[1]; if((sh.size||"")===o[0]) op.selected=true; s1.appendChild(op);}); l1.appendChild(s1);
+  var l2=el("label",{"class":"field","for":"shType"}); l2.innerHTML='Type of organisation <span class="hint">Optional</span>'; var s2=el("select",{id:"shType"}); ORG_TYPES.forEach(function(o){var op=el("option",{value:o[0]}); op.textContent=o[1]; if((sh.type||"")===o[0]) op.selected=true; s2.appendChild(op);}); l2.appendChild(s2);
+  g.appendChild(l1); g.appendChild(l2); box.appendChild(g);
+  var cl=el("label",{"class":"opt"}); var cc=el("input",{type:"checkbox",id:"shCountry"}); cc.checked=!!sh.country; cl.appendChild(cc); cl.appendChild(el("span",{text:"Include our country"+(state.org.country?" ("+state.org.country+")":" (add it in the readiness check first)")})); box.appendChild(cl);
+  box.appendChild(el("p",{"class":"note",style:"margin:0",text:"This is exactly what the email will contain:"}));
+  var pre=el("pre",{id:"shareText"}); box.appendChild(pre);
+  var a=el("a",{"class":"btn small",id:"shareMail"}); a.textContent="Open the email to send"; box.appendChild(a);
+  function upd(){ sh.size=s1.value; sh.type=s2.value; sh.country=cc.checked; save(); var t=shareText(c,m); pre.textContent=t;
+    a.href="mailto:hello@"+SITE+"?subject="+encodeURIComponent("Anonymous cost result")+"&body="+encodeURIComponent(t); }
+  s1.addEventListener("change",upd); s2.addEventListener("change",upd); cc.addEventListener("change",upd); upd();
+  return box; }
+function renderCost(){
+  var p=document.getElementById("costPanel"); p.innerHTML="";
+  var c=state.cost;
+  var h=el("div",{"class":"panel-head"}); h.innerHTML='<p class="eyebrow">Fair cost</p><h2>What does it really cost to run your organisation?</h2><p class="lede">Shared costs, such as management, finance, rent and audit, are real costs of delivering every project. Enter this year\'s figures to see your true overhead rate and how much your grants leave unfunded. Estimates are fine.</p>'; p.appendChild(h);
+  var tools=el("div",{"class":"row no-print"});
+  var ex=el("button",{type:"button","class":"btn small quiet"}); ex.textContent="Fill with example figures"; ex.addEventListener("click",function(){state.cost=clone(COST_EXAMPLE); save(); renderCost(); toast("Example figures filled in. Replace them with yours.");});
+  var clr=el("button",{type:"button","class":"btn small quiet"}); clr.textContent="Clear figures"; clr.addEventListener("click",function(){state.cost=blankCost(); save(); renderCost();});
+  tools.appendChild(ex); tools.appendChild(clr); p.appendChild(tools);
+  // currency + org
+  var fg=el("div",{"class":"formgrid"});
+  var f0=el("label",{"class":"field","for":"costOrg"}); f0.innerHTML='Organisation name <span class="hint">Shared with the readiness check</span>'; var i0=el("input",{type:"text",id:"costOrg"}); i0.value=state.org.name||""; i0.addEventListener("input",function(){state.org.name=i0.value; save(); updCost();}); f0.appendChild(i0);
+  var f1=el("label",{"class":"field","for":"costCur"}); f1.innerHTML='Currency <span class="hint">For example USD, LKR, KES</span>'; var i1=el("input",{type:"text",id:"costCur",maxlength:"8"}); i1.value=c.currency||""; i1.addEventListener("input",function(){c.currency=i1.value.trim(); save(); updCost();}); f1.appendChild(i1);
+  fg.appendChild(f0); fg.appendChild(f1); p.appendChild(fg);
+  // A. direct
+  p.appendChild(el("p",{"class":"group-title",text:"A. Direct programme costs this year"}));
+  p.appendChild(el("p",{"class":"hint",style:"color:var(--muted);margin:-8px 0 0",text:"Everything you spend directly on projects: project staff, activities, supplies and distributions."}));
+  var drows=el("div",{"class":"rows"}); p.appendChild(drows);
+  function drawDirect(){ drows.innerHTML=""; c.direct.forEach(function(r,i){ var line=el("div",{"class":"rowline two"});
+      var a=el("label",{"class":"mini","for":"dn"+i}); a.appendChild(el("span",{text:"Project"})); var ai=el("input",{type:"text",id:"dn"+i}); ai.value=r.name||""; ai.addEventListener("input",function(){r.name=ai.value; save(); updCost();}); a.appendChild(ai);
+      var b=el("label",{"class":"mini","for":"da"+i}); b.appendChild(el("span",{text:"Direct costs this year"})); var bi=el("input",{type:"text",inputmode:"decimal",id:"da"+i}); bi.value=r.amount||""; bi.addEventListener("input",function(){r.amount=bi.value; save(); updCost();}); b.appendChild(bi);
+      var del=el("button",{type:"button","class":"del","aria-label":"Remove project "+(i+1)}); del.textContent="Remove"; del.addEventListener("click",function(){c.direct.splice(i,1); if(!c.direct.length) c.direct.push({name:"",amount:""}); save(); drawDirect(); updCost();});
+      line.appendChild(a); line.appendChild(b); line.appendChild(del); drows.appendChild(line); }); }
+  drawDirect();
+  var addD=el("button",{type:"button","class":"btn small quiet no-print"}); addD.textContent="Add a project"; addD.addEventListener("click",function(){c.direct.push({name:"",amount:""}); save(); drawDirect();}); p.appendChild(addD);
+  // B. shared
+  p.appendChild(el("p",{"class":"group-title",text:"B. Shared costs this year"}));
+  p.appendChild(el("p",{"class":"hint",style:"color:var(--muted);margin:-8px 0 0",text:"Costs that support the whole organisation and are not charged to any project. Leave a line empty if it does not apply."}));
+  var sbox=el("div");
+  COST_CATS.forEach(function(k){ var row=el("div",{"class":"costcat"}); var lab=el("label",{"for":"sc_"+k.id}); lab.innerHTML='<strong>'+esc(k.t)+'</strong><small>'+esc(k.h)+'</small>';
+    var inp=el("input",{type:"text",inputmode:"decimal",id:"sc_"+k.id}); inp.value=c.shared[k.id]||""; inp.addEventListener("input",function(){c.shared[k.id]=inp.value; save(); updCost();});
+    row.appendChild(lab); row.appendChild(inp); sbox.appendChild(row); });
+  p.appendChild(sbox);
+  // C. unrestricted
+  p.appendChild(el("p",{"class":"group-title",text:"C. Unrestricted income"}));
+  var fu=el("label",{"class":"field","for":"costU"}); fu.innerHTML='Income you can spend on shared costs <span class="hint">For example donations, membership fees or core funding with no project restriction</span>'; var iu=el("input",{type:"text",inputmode:"decimal",id:"costU"}); iu.value=c.unrestricted||""; iu.addEventListener("input",function(){c.unrestricted=iu.value; save(); updCost();}); fu.appendChild(iu); p.appendChild(fu);
+  // D. grants
+  p.appendChild(el("p",{"class":"group-title",text:"D. Your grants and the overhead they allow"}));
+  p.appendChild(el("p",{"class":"hint",style:"color:var(--muted);margin:-8px 0 0",text:"For each grant: its direct costs this year, and the overhead rate it allows. Check whether the rate is a percentage of direct costs or of the total grant; your agreement says which."}));
+  var grows=el("div",{"class":"rows"}); p.appendChild(grows);
+  function drawGrants(){ grows.innerHTML=""; c.grants.forEach(function(g,i){ var line=el("div",{"class":"rowline"});
+      var a=el("label",{"class":"mini","for":"gn"+i}); a.appendChild(el("span",{text:"Grant"})); var ai=el("input",{type:"text",id:"gn"+i}); ai.value=g.name||""; ai.addEventListener("input",function(){g.name=ai.value; save(); updCost();}); a.appendChild(ai);
+      var b=el("label",{"class":"mini","for":"gd"+i}); b.appendChild(el("span",{text:"Direct costs this year"})); var bi=el("input",{type:"text",inputmode:"decimal",id:"gd"+i}); bi.value=g.direct||""; bi.addEventListener("input",function(){g.direct=bi.value; save(); updCost();}); b.appendChild(bi);
+      var cc=el("label",{"class":"mini","for":"gr"+i}); cc.appendChild(el("span",{text:"Overhead allowed (%)"})); var ci=el("input",{type:"text",inputmode:"decimal",id:"gr"+i}); ci.value=g.rate||""; ci.addEventListener("input",function(){g.rate=ci.value; save(); updCost();}); cc.appendChild(ci);
+      var d=el("label",{"class":"mini","for":"gb"+i}); d.appendChild(el("span",{text:"Percentage of"})); var di=el("select",{id:"gb"+i}); [["direct","direct costs"],["total","the total grant"]].forEach(function(o){var op=el("option",{value:o[0]}); op.textContent=o[1]; if((g.basis||"direct")===o[0]) op.selected=true; di.appendChild(op);}); di.addEventListener("change",function(){g.basis=di.value; save(); updCost();}); d.appendChild(di);
+      var del=el("button",{type:"button","class":"del","aria-label":"Remove grant "+(i+1)}); del.textContent="Remove"; del.addEventListener("click",function(){c.grants.splice(i,1); save(); drawGrants(); updCost();});
+      line.appendChild(a); line.appendChild(b); line.appendChild(cc); line.appendChild(d); line.appendChild(del); grows.appendChild(line); }); }
+  drawGrants();
+  var addG=el("button",{type:"button","class":"btn small quiet no-print"}); addG.textContent="Add a grant"; addG.addEventListener("click",function(){c.grants.push({name:"",direct:"",rate:"",basis:"direct"}); save(); drawGrants();}); p.appendChild(addG);
+  // Results
+  var res=el("section",{id:"costResults","aria-live":"polite"}); p.appendChild(res);
+  function updCost(){ var m=costModel(c); var cur=c.currency; res.innerHTML="";
+    res.appendChild(el("p",{"class":"group-title",text:"Your results"}));
+    if(m.D<=0||m.I<=0){ res.appendChild(el("p",{"class":"callout",text:"Enter your direct programme costs (A) and shared costs (B) to see your overhead rate."})); return; }
+    var k=el("div",{"class":"kpis"});
+    [[pct(m.r),"Your true overhead rate","shared costs as a share of direct costs"],[money(m.I,cur),"Shared costs this year",pct(m.sTot)+" of all spending"],[m.grants.length?pct(m.avgAllowed):"–","What your grants allow","average, as a share of direct costs"],[money(m.shortfall,cur),"Unfunded shared costs","after grants and unrestricted income"]].forEach(function(x,i){ var d=el("div",{"class":"pcard"}); d.innerHTML='<span>'+esc(x[1])+'</span><span class="big">'+esc(x[0])+'</span><span class="sub">'+esc(x[2])+'</span>'; k.appendChild(d); });
+    res.appendChild(k);
+    if(m.grants.length){
+      res.appendChild(el("p",{"class":"note",text:"To cover your shared costs from these grants, they would need to allow about "+pct(m.rNeed)+" of direct costs."}));
+      var tw=el("div",{"class":"tablewrap",style:"margin-top:12px"}); var t=el("table",{"class":"index"});
+      t.innerHTML='<thead><tr><th scope="col">Grant</th><th scope="col" class="num">Direct costs</th><th scope="col" class="num">Allowed (of direct)</th><th scope="col" class="num">Overhead received</th><th scope="col" class="num">At your true rate</th><th scope="col" class="num">Gap</th><th scope="col" class="num">If budgeted as direct lines</th></tr></thead>';
+      var tb=el("tbody"); m.grants.forEach(function(g){ var tr=el("tr"); tr.innerHTML='<td>'+esc(g.name)+'</td><td class="num">'+money(g.d,"")+'</td><td class="num">'+pct(g.aD)+'</td><td class="num">'+money(g.rec,"")+'</td><td class="num">'+money(g.need,"")+'</td><td class="num">'+money(g.gap,"")+'</td><td class="num">'+money(g.alloc,"")+'</td>'; tb.appendChild(tr); });
+      t.appendChild(tb); tw.appendChild(t); res.appendChild(tw);
+      res.appendChild(el("p",{"class":"note",text:"\"If budgeted as direct lines\" shares your shared costs across grants in proportion to each grant's direct costs. Some donors prefer this to an overhead percentage. Amounts in "+(cur||"your currency")+"."}));
+    }
+    res.appendChild(el("p",{"class":"group-title",style:"margin-top:18px",text:"Your negotiation brief"}));
+    var b=costBrief(c,m); var pre=el("div",{"class":"brief",id:"costBriefText"}); pre.textContent=b; res.appendChild(pre);
+    var row=el("div",{"class":"row no-print",style:"margin-top:10px"}); var cp=el("button",{type:"button","class":"btn"}); cp.textContent="Copy the brief"; cp.addEventListener("click",function(){copyText(b,"Brief copied. Paste it into an email or proposal.");});
+    var pr=el("button",{type:"button","class":"btn quiet"}); pr.textContent="Print or save as PDF"; pr.addEventListener("click",function(){try{window.print();}catch(e){}});
+    row.appendChild(cp); row.appendChild(pr); res.appendChild(row);
+    res.appendChild(el("p",{"class":"disclaimer",style:"margin-top:14px",text:"These are your own estimates. Donors define overheads and their calculation base differently; check your agreement. This is practical guidance, not accounting or legal advice."}));
+    if(!state.example) res.appendChild(shareBox(c,m));
+    res.appendChild(supportNote());
+  }
+  updCost();
+}
+function blankCost(){ return {currency:"", direct:[{name:"",amount:""}], shared:{}, unrestricted:"", grants:[{name:"",direct:"",rate:"",basis:"direct"}]}; }
+
+/* =====================================================================
+   RISK-SHARING PLAN (Module 2): structured preparation for a risk-sharing dialogue.
+   Categories and seven-stage process from the Risk Sharing Framework (Risk Sharing Platform, 2023).
+   Score = likelihood (1-3) x impact (1-3); High >= 6, Medium 3-4, Low <= 2.
+   ===================================================================== */
+var RISK_CATS = [
+  {id:"safety", t:"Safety", d:"Accidents, illness or harm to staff and volunteers.", eg:"Staff travelling on dangerous roads to distribution sites"},
+  {id:"security", t:"Security", d:"Deliberate harm: violence, theft, threats, detention.", eg:"Theft of cash or goods during distribution"},
+  {id:"operational", t:"Operational", d:"Things that stop the work being delivered: access, supply, staffing, weather.", eg:"Flooding cuts access to project areas for weeks"},
+  {id:"ethical", t:"Ethical", d:"Harm to the people you serve, including sexual exploitation and abuse.", eg:"A volunteer abuses their position with aid recipients"},
+  {id:"reputational", t:"Reputational", d:"Loss of trust from communities, authorities or funders.", eg:"Rumours that aid is distributed unfairly"},
+  {id:"legal", t:"Legal and compliance", d:"Breaking laws, sanctions or grant conditions.", eg:"A supplier later found on a sanctions list"},
+  {id:"fiduciary", t:"Fiduciary", d:"Loss or misuse of funds: fraud, error, diversion, currency loss.", eg:"A staff member falsifies receipts"},
+  {id:"data", t:"Information and data", d:"Personal or sensitive information lost, leaked or misused.", eg:"A phone with beneficiary lists is stolen"}
+];
+var MEASURES = [
+  ["controls","The donor or intermediary funds the cost of controls, such as training, systems and audits"],
+  ["ohshare","Overheads shared with us, at least 50:50"],
+  ["insurance","Insurance and health cover accepted as budget lines"],
+  ["incident","Agree in advance how incidents will be handled, without automatic penalties"],
+  ["predictable","Clear, proportionate procedures if something goes wrong"],
+  ["pool","A contingency or risk pool for losses outside our control"],
+  ["transfer","Safer ways to transfer or hold funds"],
+  ["flex","Flexibility to move budget when conditions change"],
+  ["report","One common reporting format"],
+  ["expertise","The donor or intermediary shares legal or policy expertise, such as data protection"],
+  ["joint","A joint risk assessment before the project starts"],
+  ["derog","Emergency exceptions agreed in advance"]
+];
+var AREA_TO_RISK = {gov:["legal"], acc:["reputational","ethical"], fin:["fiduciary"], proc:["fiduciary"], asset:["fiduciary"], hr:["operational","ethical","security","safety"], psea:["ethical"], risk:["legal","fiduciary"], data:["data"]};
+var LV = [["","Choose…"],["1","Low"],["2","Medium"],["3","High"]];
+var BEARER = [["","Choose…"],["us","Mostly us"],["partner","Mostly the donor or intermediary"],["shared","Shared"],["none","No one has addressed it"]];
+function blankRisk(){ return {partner:"", project:"", review:"", items:{}}; }
+function riskItem(id){ var R=state.riskplan.items; if(!R[id]) R[id]={risk:"",L:"",I:"",bearer:"",m:[],ask:"",offer:""}; return R[id]; }
+function riskScore(it){ var L=+it.L, I=+it.I; return (L&&I)?L*I:0; }
+function riskBand(s){ return s>=6?["High","band-high"]:s>=3?["Medium","band-med"]:s>0?["Low","band-low"]:["Not scored","na"]; }
+function readinessGapsFor(cat){ var n=0; activeAreas().forEach(function(a){ if((AREA_TO_RISK[a.id]||[]).indexOf(cat)<0) return;
+  a.practice.forEach(function(q){var o=q.opts.filter(function(x){return x.v===state.answers[q.id];})[0]; if(o&&o.gap===1) n++;});
+  a.evidence.forEach(function(it){ if(it.core&&itemStatus(it)==="missing") n++; }); }); return n; }
+function riskPlanText(){
+  var R=state.riskplan, org=state.org.name||"Our organisation", L=[];
+  L.push("RISK-SHARING PLAN: "+org+(R.partner?" and "+R.partner:"")+(R.project?" ("+R.project+")":""));
+  L.push("A starting point for dialogue, prepared with Aidfolio ("+SITE+"). Not a contract."); L.push("");
+  sortedRisks().forEach(function(x){ var it=x.it, b=riskBand(riskScore(it));
+    L.push(x.c.t.toUpperCase()+": "+b[0]+(riskScore(it)?" (score "+riskScore(it)+" of 9)":""));
+    if(it.risk) L.push("Main risk: "+it.risk);
+    if(it.bearer) L.push("Carried now by: "+BEARER.filter(function(o){return o[0]===it.bearer;})[0][1]);
+    if(it.m.length) L.push("Proposed sharing: "+it.m.map(function(k){return MEASURES.filter(function(m){return m[0]===k;})[0][1];}).join("; "));
+    if(it.ask) L.push("We ask: "+it.ask);
+    if(it.offer) L.push("We commit to: "+it.offer);
+    L.push(""); });
+  if(R.review) L.push("Next joint review: "+R.review);
+  L.push("Categories and process follow the Risk Sharing Framework (Risk Sharing Platform, 2023).");
+  return L.join("\n");
+}
+function sortedRisks(){ return RISK_CATS.map(function(c){return {c:c,it:riskItem(c.id)};}).filter(function(x){return x.it.risk||x.it.L||x.it.bearer||x.it.m.length;})
+  .sort(function(a,b){return riskScore(b.it)-riskScore(a.it);}); }
+function renderRisk(){
+  var p=document.getElementById("riskPanel"); p.innerHTML=""; var R=state.riskplan;
+  var h=el("div",{"class":"panel-head"}); h.innerHTML='<p class="eyebrow">Risk-sharing plan</p><h2>Who carries the risk, and how could it be shared?</h2><p class="lede">Prepare for a fair conversation with your donor or intermediary. For each kind of risk, note what could go wrong, who carries it today, and what support would share it. You get a plan to discuss together.</p><p class="maps">Uses the eight risk categories and seven-stage process of the Risk Sharing Framework (Risk Sharing Platform, 2023).</p>'; p.appendChild(h);
+  var fg=el("div",{"class":"formgrid"});
+  [["riskOrg","Your organisation","org"],["riskPartner","Donor or intermediary","partner"],["riskProject","Project (optional)","project"],["riskReview","When will you review this together?","review"]].forEach(function(f){
+    var lab=el("label",{"class":"field","for":f[0]}); lab.appendChild(document.createTextNode(f[1])); var inp=el("input",{type:"text",id:f[0]});
+    inp.value=f[2]==="org"?(state.org.name||""):(R[f[2]]||""); inp.addEventListener("input",function(){ if(f[2]==="org") state.org.name=inp.value; else R[f[2]]=inp.value; save(); updPlan();}); lab.appendChild(inp); fg.appendChild(lab); });
+  p.appendChild(fg);
+  var anyAnswers=Object.keys(state.answers).length>0;
+  if(!anyAnswers) p.appendChild(el("p",{"class":"callout",text:"Tip: complete the readiness check first. Its gaps are then shown under each risk below, so the plan reflects where you need support."}));
+  RISK_CATS.forEach(function(c){ var it=riskItem(c.id); var card=el("section",{"class":"riskcard","aria-labelledby":"rh_"+c.id});
+    var hh=el("h3",{id:"rh_"+c.id}); hh.textContent=c.t; var bandSpan=el("span",{"class":"chip",id:"rb_"+c.id}); hh.appendChild(bandSpan); card.appendChild(hh);
+    card.appendChild(el("p",{"class":"def",text:c.d}));
+    var g=readinessGapsFor(c.id); if(g>0) card.appendChild(el("p",{"class":"flag",text:"Your readiness check found "+g+" priority gap"+(g>1?"s":"")+" linked to this risk. Support for these is a fair ask."}));
+    var l1=el("label",{"class":"mini","for":"rr_"+c.id}); l1.appendChild(el("span",{text:"Main risk, in your words"})); var t1=el("textarea",{id:"rr_"+c.id,placeholder:"Example: "+c.eg}); t1.value=it.risk; t1.addEventListener("input",function(){it.risk=t1.value; save(); updPlan();}); l1.appendChild(t1); card.appendChild(l1);
+    var three=el("div",{"class":"three"});
+    [["L","How likely?",LV],["I","How serious if it happens?",LV],["bearer","Who carries it now?",BEARER]].forEach(function(f){ var lab=el("label",{"class":"mini","for":"r"+f[0]+"_"+c.id}); lab.appendChild(el("span",{text:f[1]})); var sel=el("select",{id:"r"+f[0]+"_"+c.id});
+      f[2].forEach(function(o){var op=el("option",{value:o[0]}); op.textContent=o[1]; if((it[f[0]]||"")===o[0]) op.selected=true; sel.appendChild(op);}); sel.addEventListener("change",function(){it[f[0]]=sel.value; save(); paintBand(); updPlan();}); lab.appendChild(sel); three.appendChild(lab); });
+    card.appendChild(three);
+    var fs=el("fieldset"); fs.appendChild(el("legend",{text:"What would share this risk fairly?"})); var ms=el("div",{"class":"measures"});
+    MEASURES.forEach(function(m){ var lab=el("label"); var cb=el("input",{type:"checkbox",id:"m_"+c.id+"_"+m[0]}); cb.checked=it.m.indexOf(m[0])>=0;
+      cb.addEventListener("change",function(){ var i=it.m.indexOf(m[0]); if(cb.checked&&i<0) it.m.push(m[0]); if(!cb.checked&&i>=0) it.m.splice(i,1); save(); updPlan();}); lab.setAttribute("for","m_"+c.id+"_"+m[0]); lab.appendChild(cb); lab.appendChild(el("span",{text:m[1]})); ms.appendChild(lab); });
+    fs.appendChild(ms); card.appendChild(fs);
+    var two=el("div",{"class":"formgrid"});
+    [["ask","What we need from the donor or intermediary"],["offer","What we commit to"]].forEach(function(f){ var lab=el("label",{"class":"mini","for":"r"+f[0]+c.id}); lab.appendChild(el("span",{text:f[1]})); var ta=el("textarea",{id:"r"+f[0]+c.id}); ta.value=it[f[0]]; ta.addEventListener("input",function(){it[f[0]]=ta.value; save(); updPlan();}); lab.appendChild(ta); two.appendChild(lab); });
+    card.appendChild(two);
+    function paintBand(){ var b=riskBand(riskScore(it)); bandSpan.className="chip "+b[1]; bandSpan.textContent=b[0]+(riskScore(it)?" · "+riskScore(it)+"/9":""); }
+    paintBand(); p.appendChild(card); });
+  var out=el("section",{id:"riskOut"}); p.appendChild(out);
+  function updPlan(){ out.innerHTML=""; out.appendChild(el("p",{"class":"group-title",text:"Your plan for the dialogue"}));
+    var rs=sortedRisks(); if(!rs.length){ out.appendChild(el("p",{"class":"callout",text:"Fill in at least one risk above to build your plan."})); return; }
+    var mine=rs.filter(function(x){return x.it.bearer==="us";}).length, high=rs.filter(function(x){return riskScore(x.it)>=6;}).length;
+    out.appendChild(el("p",{"class":"note",text:rs.length+" risk"+(rs.length>1?"s":"")+" described; "+high+" high; "+mine+" carried mostly by you today."}));
+    var tw=el("div",{"class":"tablewrap",style:"margin-top:10px"}); var t=el("table",{"class":"index"});
+    t.innerHTML='<thead><tr><th scope="col">Risk</th><th scope="col">Level</th><th scope="col">Carried now by</th><th scope="col">Proposed sharing</th></tr></thead>'; var tb=el("tbody");
+    rs.forEach(function(x){ var b=riskBand(riskScore(x.it)); var bearer=(BEARER.filter(function(o){return o[0]===x.it.bearer;})[0]||["",""])[1];
+      var tr=el("tr"); tr.innerHTML='<td><strong>'+esc(x.c.t)+'</strong><br><span style="color:var(--muted)">'+esc(x.it.risk)+'</span></td><td><span class="chip '+b[1]+'">'+b[0]+'</span></td><td>'+esc(bearer)+'</td><td>'+esc(x.it.m.map(function(k){return MEASURES.filter(function(m){return m[0]===k;})[0][1];}).join("; "))+'</td>'; tb.appendChild(tr); });
+    t.appendChild(tb); tw.appendChild(t); out.appendChild(tw);
+    out.appendChild(el("p",{"class":"group-title",style:"margin-top:18px",text:"Suggested agenda"}));
+    var ol=el("ol",{style:"margin:0;padding-left:20px;display:grid;gap:4px;max-width:75ch"});
+    ["Who should be in the conversation, so both sides are heard equally","Agree the risks, starting with the highest and those you carry alone","How each side currently responds to each risk","Where sharing would help: go through the proposed measures","Write a short joint action plan: who does what, with what budget","Put it into the agreement and the budget","Review together"+(R.review?" ("+R.review+")":"")+", and adjust"].forEach(function(x){ol.appendChild(el("li",{text:x}));});
+    out.appendChild(ol);
+    out.appendChild(el("p",{"class":"note",text:"The seven steps follow the stages of the Risk Sharing Framework, which also asks that the dialogue be confidential and non-punitive."}));
+    var row=el("div",{"class":"row no-print",style:"margin-top:10px"}); var cp=el("button",{type:"button","class":"btn"}); cp.textContent="Copy the plan"; cp.addEventListener("click",function(){copyText(riskPlanText(),"Plan copied.");});
+    var pr=el("button",{type:"button","class":"btn quiet"}); pr.textContent="Print or save as PDF"; pr.addEventListener("click",function(){try{window.print();}catch(e){}});
+    row.appendChild(cp); row.appendChild(pr); out.appendChild(row);
+    out.appendChild(el("p",{"class":"disclaimer",style:"margin-top:14px",text:"A preparation aid for dialogue, not a contract or legal advice. Agree any change in writing with your partner."}));
+  }
+  updPlan();
+}
+
+/* ---------- Routing ---------- */
+function route(){ var h=location.hash.replace("#","");
+  if(h==="cost"||h==="risk"){ if(state.example){ state=blank(); load(); } showApp(true, h==="cost"?"costApp":"riskApp"); if(h==="cost") renderCost(); else renderRisk(); return; }
+  if(h==="check"||h==="pack"){ if(h==="check"&&state.example){ state=blank(); load(); view.step="start"; }
+    showApp(true); if(h==="pack") view.step="pack"; else if(view.step==="pack") view.step="start"; render(); }
+  else { showApp(false); if(state.example){ state=blank(); load(); }
+    var t=h&&document.getElementById(h); if(t&&t!==document.getElementById("top")&&document.getElementById("landing").contains(t)) t.scrollIntoView({block:"start",behavior:"instant"}); } }
+window.addEventListener("hashchange", route);
+window.addEventListener("beforeprint",function(){Array.prototype.forEach.call(document.querySelectorAll("details"),function(d){d.setAttribute("data-was",d.open?"1":"0"); d.open=true;});});
+window.addEventListener("afterprint",function(){Array.prototype.forEach.call(document.querySelectorAll("details[data-was]"),function(d){d.open=d.getAttribute("data-was")==="1"; d.removeAttribute("data-was");});});
+
+/* ---------- Landing wiring ---------- */
+document.getElementById("seeExample").addEventListener("click",function(){ state=clone(EXAMPLE); normalise(); view.step="pack"; location.hash="pack"; route(); });
+document.getElementById("copyShare").addEventListener("click",function(){copyText(document.getElementById("shareMsg").textContent,"Message copied");});
+document.getElementById("waShare").href="https://wa.me/?text="+encodeURIComponent(document.getElementById("shareMsg").textContent);
+Array.prototype.forEach.call(document.querySelectorAll("[data-setup]"),function(a){a.addEventListener("click",function(e){e.preventDefault(); toast("This link is set up before launch.");});});
+
+load(); renderHero(); renderToolbox(); route();
+})();
+</script>
+
+<script>if("serviceWorker" in navigator && location.protocol==="https:"){navigator.serviceWorker.register("/sw.js").catch(function(){});}</script>
+</body>
+</html>

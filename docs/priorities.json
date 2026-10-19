@@ -1,0 +1,100 @@
+{
+ "noise": "weights Dirichlet(5*w0); scores +/-1.0 uniform",
+ "criteria": [
+  "Severity",
+  "Breadth",
+  "Evidence",
+  "Tractability",
+  "Leverage",
+  "Gap in provision"
+ ],
+ "weights": [
+  0.25,
+  0.15,
+  0.15,
+  0.2,
+  0.15,
+  0.1
+ ],
+ "concentration": 5.0,
+ "draws": 20000,
+ "results": [
+  {
+   "need": "Overheads not funded (true cost)",
+   "base": 4.9,
+   "equal_weights": 4.83,
+   "need_only": 5.0,
+   "p_first": 0.901,
+   "p_top3": 0.999,
+   "score_p10": 4.37,
+   "score_p90": 4.93,
+   "median_rank": 1
+  },
+  {
+   "need": "Compliance and due-diligence burden",
+   "base": 4.25,
+   "equal_weights": 4.17,
+   "need_only": 4.5,
+   "p_first": 0.078,
+   "p_top3": 0.948,
+   "score_p10": 3.59,
+   "score_p90": 4.62,
+   "median_rank": 2
+  },
+  {
+   "need": "Risk transferred, not shared",
+   "base": 3.85,
+   "equal_weights": 3.83,
+   "need_only": 4.0,
+   "p_first": 0.02,
+   "p_top3": 0.848,
+   "score_p10": 3.39,
+   "score_p90": 4.32,
+   "median_rank": 3
+  },
+  {
+   "need": "Reporting burden",
+   "base": 3.0,
+   "equal_weights": 3.0,
+   "need_only": 3.25,
+   "p_first": 0.0,
+   "p_top3": 0.029,
+   "score_p10": 2.5,
+   "score_p90": 3.51,
+   "median_rank": 5
+  },
+  {
+   "need": "Survival of women- and refugee-led orgs",
+   "base": 3.0,
+   "equal_weights": 2.83,
+   "need_only": 4.25,
+   "p_first": 0.001,
+   "p_top3": 0.106,
+   "score_p10": 2.2,
+   "score_p90": 3.78,
+   "median_rank": 5
+  },
+  {
+   "need": "Finding and qualifying for funding",
+   "base": 2.9,
+   "equal_weights": 2.83,
+   "need_only": 3.0,
+   "p_first": 0.0,
+   "p_top3": 0.036,
+   "score_p10": 2.38,
+   "score_p90": 3.44,
+   "median_rank": 6
+  },
+  {
+   "need": "Staff retention and pay gaps",
+   "base": 2.7,
+   "equal_weights": 2.67,
+   "need_only": 3.75,
+   "p_first": 0.0,
+   "p_top3": 0.033,
+   "score_p10": 2.06,
+   "score_p90": 3.53,
+   "median_rank": 6
+  }
+ ]
+}
