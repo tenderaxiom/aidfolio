@@ -19,14 +19,13 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
-          output: lychee/out.md
+          output: lychee/out.json
+          format: json
           args: --no-progress --exclude-mail --accept '200..=299,403,429' --max-retries 3 --timeout 30 public/index.html README.md docs
       - name: Report link check results
         if: always()
         run: |
-          if [ -s lychee/out.md ]; then
-            msg=$(head -c 6000 lychee/out.md | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')
-            echo "::notice title=Link check report (exit ${{ steps.lychee.outputs.exit_code }})::$msg"
-          else
-            echo "::warning title=Link check::report file missing or empty"
-          fi
+          f=lychee/out.json
+          if [ ! -s "$f" ]; then echo "::warning title=Link check::report file missing or empty"; exit 0; fi
+          echo "::notice title=Link check summary::$(jq -c '{total,successful,errors,timeouts,redirects,excludes,unknown}' "$f" 2>/dev/null || head -c 500 "$f")"
+          jq -r '(.error_map // .fail_map // {}) | to_entries[] | .key as $file | .value[] | "\($file): \(.url) -> \(.status.text // .status.code // .status | tostring)"' "$f" 2>/dev/null | head -50 | while IFS= read -r line; do echo "::warning title=Link problem::$line"; done
