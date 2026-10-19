@@ -17,35 +17,21 @@ resources links the right one to every gap the readiness check finds (see `docs/
 
 Everything runs in the browser. Nothing is uploaded.
 
-## Publish it on Cloudflare (about 30 minutes, nothing to install)
+## How it is published
 
-The full illustrated guide is in the Aidfolio Launch Guide. The short version:
+- **Code:** github.com/tenderaxiom/aidfolio. Every change merged into `main` is published automatically by
+  `.github/workflows/deploy.yml`, which runs Cloudflare's Wrangler with two repository secrets
+  (`CLOUDFLARE_API_TOKEN`, made from the "Edit Cloudflare Workers" template, and `CLOUDFLARE_ACCOUNT_ID`).
+- **Hosting:** a Cloudflare Worker named `aidfolio` serving the `public` folder (`wrangler.jsonc`), attached to
+  `aidfolio.org` and `www.aidfolio.org` as Custom Domains.
+- **aidfolio.com:** redirect it to `https://aidfolio.org` with a Cloudflare Redirect Rule (see the launch guide, step 5).
+- **Email:** Cloudflare Email Routing forwards `richard@aidfolio.org` to the owner's inbox.
+- **Analytics:** Cloudflare Web Analytics (cookie-free); `_headers` already allows it.
+- **Support payments:** Stripe Payment Links, one-off (customer chooses the amount) and monthly (US$10 per unit).
+- **Ledger:** `docs/LEDGER.md`, linked from the Support section.
 
-1. **GitHub.** At github.com, select **+** then **New repository**. Name it `aidfolio`, choose **Public**, tick
-   **Add a README file**, then **Create repository**. Select **Add file**, then **Upload files**, and drag in
-   everything inside this folder (including the `public` folder and `wrangler.jsonc`). Select **Commit changes**.
-2. **Cloudflare.** In the Cloudflare dashboard (the same account as your other sites), go to **Workers & Pages**,
-   select **Create application**, then **Import a repository**. Connect GitHub, choose `aidfolio`, keep the
-   suggested settings (deploy command `npx wrangler deploy`, no build command) and select **Deploy**.
-   The site goes live at `aidfolio.<your-subdomain>.workers.dev`.
-3. **Domain.** `aidfolio.org` and `aidfolio.com` are already registered in the Cloudflare account. In the Worker go to
-   **Settings**, **Domains & Routes**, **Add**, **Custom Domain**, and add `aidfolio.org`, then `www.aidfolio.org`.
-   Redirect `aidfolio.com` to the .org (see the launch guide, step 5).
-4. **Analytics.** Go to **Web Analytics**, select **Manage Site** next to `aidfolio.org`, and choose automatic
-   setup. It is cookie-free, and `_headers` already allows it.
-5. **Email.** Go to **Compute**, **Email Service**, **Email Routing**. Select **Onboard Domain** and choose
-   `aidfolio.org`. Under **Destination Addresses**, add and verify your own inbox. Under **Routing Rules**, select
-   **Create routing rule**: pattern `hello`, action **Send to an email**, destination your inbox.
-6. **Donations.** Create GitHub Sponsors and Ko-fi pages. In `public/index.html`, search for `data-setup`, replace each
-   `href="#support"` with your link, and delete the `placeholder` class and the `data-setup="..."` attribute.
-7. **About and ledger.** Search `public/index.html` for `[Your name` and replace the placeholder. Then find
-   `data-setup="ledger"`, replace its `href="#support"` with the link to `docs/LEDGER.md` on GitHub, and remove the
-   `placeholder` class and the `data-setup` attribute.
-8. **Another domain?** Search for `aidfolio.org` in `public/index.html` and replace it everywhere, including
-   `var SITE`.
-
-Every later change: open the file on github.com, select the pencil icon, edit, then **Commit changes**.
-Cloudflare republishes automatically in about a minute.
+To change the site, edit files on github.com (pencil icon, then **Commit changes**) or merge a pull request;
+it goes live in about a minute.
 
 ## What is in this folder
 
