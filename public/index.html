@@ -174,7 +174,6 @@ textarea{min-height:76px;resize:vertical}
 table.index td.num,table.index th.num{text-align:right;font-variant-numeric:tabular-nums}
 footer.site{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.9rem}
 footer.site .wrap{display:grid;gap:8px}
-.placeholder{outline:2px dashed var(--tab);outline-offset:3px;border-radius:4px}
 
 /* app */
 #app,.toolapp{padding-block:24px 64px}
@@ -292,6 +291,7 @@ table.plan td.act{min-width:14em}
 <meta property="og:description" content="Free, private tools for local organisations: a fair overhead, readiness for partner assessments, and a risk-sharing plan. Nothing you type leaves your device.">
 <meta property="og:image" content="https://aidfolio.org/og.png">
 <meta property="og:url" content="https://aidfolio.org/">
+<link rel="canonical" href="https://aidfolio.org/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -1458,7 +1458,6 @@ window.addEventListener("afterprint",function(){Array.prototype.forEach.call(doc
 document.getElementById("seeExample").addEventListener("click",function(){ state=clone(EXAMPLE); normalise(); view.step="pack"; location.hash="pack"; route(); });
 document.getElementById("copyShare").addEventListener("click",function(){copyText(document.getElementById("shareMsg").textContent,"Message copied");});
 document.getElementById("waShare").href="https://wa.me/?text="+encodeURIComponent(document.getElementById("shareMsg").textContent);
-Array.prototype.forEach.call(document.querySelectorAll("[data-setup]"),function(a){a.addEventListener("click",function(e){e.preventDefault(); toast("This link is set up before launch.");});});
 
 load(); renderHero(); renderToolbox(); route();
 })();

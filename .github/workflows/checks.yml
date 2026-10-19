@@ -15,7 +15,13 @@ jobs:
       - name: Accessibility (WCAG 2 AA)
         run: npx --yes pa11y-ci@3.1.0
       - name: Broken links
+        id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
+          output: lychee/out.md
           args: --no-progress --exclude-mail --accept '200..=299,403,429' --max-retries 3 --timeout 30 public/index.html README.md docs
+      - name: List broken links as warnings
+        if: always() && steps.lychee.outputs.exit_code != '0'
+        run: |
+          grep -E '^\* \[' lychee/out.md | sed 's/^/::warning title=Broken link::/' || true
