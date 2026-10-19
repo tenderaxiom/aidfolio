@@ -15,10 +15,4 @@ jobs:
       - name: Accessibility (WCAG 2 AA)
         run: npx --yes pa11y-ci@3.1.0
       - name: Broken links (report only, never fails the build)
-        run: |
-          curl -sSfL https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-unknown-linux-gnu.tar.gz | tar xz
-          LY=$(find . -maxdepth 2 -type f -name lychee | head -1)
-          $LY --version
-          $LY --no-progress --exclude-mail --accept '200..=299,403,429' --max-retries 3 --timeout 30 --format json --output lychee.json public/index.html README.md docs || true
-          echo "::notice title=Link check summary::$(jq -c '{total,successful,errors,timeouts,redirects,excludes,unknown}' lychee.json 2>/dev/null || head -c 400 lychee.json)"
-          jq -r '(.error_map // .fail_map // {}) | to_entries[] | .key as $f | .value[] | "\($f): \(.url) -> \((.status.text // .status.code // .status) | tostring)"' lychee.json 2>/dev/null | head -50 | while IFS= read -r l; do echo "::warning title=Link problem::$l"; done
+        run: node .github/scripts/check-links.mjs
