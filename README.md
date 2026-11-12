@@ -25,7 +25,8 @@ Everything runs in the browser. Nothing is uploaded.
 - **Hosting:** a Cloudflare Worker named `aidfolio` serving the `public` folder (`wrangler.jsonc`), attached to
   `aidfolio.org` and `www.aidfolio.org` as Custom Domains.
 - **aidfolio.com:** redirect it to `https://aidfolio.org` with a Cloudflare Redirect Rule (see the launch guide, step 5).
-- **Email:** Cloudflare Email Routing forwards `richard@aidfolio.org` to the owner's inbox.
+- **Email:** the Worker forwards `richard@aidfolio.org` to the inboxes in the `FORWARD_TO` secret (comma-separated). Set it once, before deploying, with `npx wrangler secret put FORWARD_TO`; without it mail is turned away.
+- **Tests:** `node --test tests/*.test.mjs`.
 - **Analytics:** Cloudflare Web Analytics (cookie-free); `_headers` already allows it.
 - **Support payments:** Stripe Payment Links, one-off (customer chooses the amount) and monthly (US$10 per unit).
 - **Ledger:** `docs/LEDGER.md`, linked from the Support section.

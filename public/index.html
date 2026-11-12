@@ -337,7 +337,7 @@ table.plan td.act{min-width:14em}
   </div>
 </header>
 
-<div id="main">
+<main id="main">
 <!-- ============ LANDING ============ -->
 <div id="landing">
   <section class="hero" id="top">
@@ -585,7 +585,7 @@ https://aidfolio.org</p>
 </div>
 <div id="costApp" class="toolapp" hidden><span id="cost"></span><div class="wrap"><div class="panel" id="costPanel"></div></div></div>
 <div id="riskApp" class="toolapp" hidden><span id="risk"></span><div class="wrap"><div class="panel" id="riskPanel"></div></div></div>
-</div>
+</main>
 
 <footer class="site">
   <div class="wrap">
@@ -719,7 +719,8 @@ var AREAS = [
      {v:"b", t:"Some do", s:"Some staff have written contracts.", gap:2, why:"Written terms protect staff and the organisation.", fix:"Use one contract template for all staff and one agreement for volunteers."},
      {v:"c", t:"No", s:"Staff do not yet have written contracts.", gap:1, why:"Assessors check that staff are properly employed and paid.", fix:"Adopt a basic contract template that complies with local labour law."}]},
    {id:"hr_check", res:"mds", q:"Before hiring, do you check references or background?", opts:[
-     {v:"a", t:"Yes, for every hire, including questions about past misconduct", s:"References are checked for every hire, including questions about past misconduct."},
+     {v:"s", t:"Yes, for every hire, including questions about past sexual misconduct and a signed self-declaration", s:"References are checked for every hire, including questions about past sexual misconduct, and candidates sign a self-declaration (UN PSEA Standard 3)."},
+     {v:"a", t:"Yes, for every hire, but without a self-declaration or a specific question about sexual misconduct", s:"References are checked for every hire, including questions about past misconduct.", gap:2, why:"UN PSEA Standard 3 asks for reference checks on sexual misconduct and a self-declaration from each candidate.", fix:"Add a question on past sexual misconduct to your reference form and have each candidate sign a self-declaration."},
      {v:"b", t:"Sometimes", s:"References are sometimes checked before hiring.", gap:2, why:"Screening is a core part of keeping people safe.", fix:"Make two reference checks a required step for every hire."},
      {v:"c", t:"No", s:"References are not yet checked before hiring.", gap:1, why:"Screening is a core part of keeping people safe.", fix:"Add reference checks to your hiring steps now."}]},
    {id:"hr_coc", res:"psea_kit", q:"Do staff and volunteers sign a code of conduct?", opts:[
@@ -746,9 +747,13 @@ var AREAS = [
      {v:"a", t:"Yes, adopted by the board and shared with all staff", s:"A written policy on preventing sexual exploitation and abuse has been adopted and shared with all staff."},
      {v:"b", t:"Draft, or not yet shared", s:"A policy on preventing sexual exploitation and abuse is in draft or not yet shared with staff.", gap:1, why:"All eight UN PSEA standards must be met for full capacity.", fix:"Adopt the policy formally and share it with every staff member and volunteer."},
      {v:"c", t:"No", s:"The organisation does not yet have a policy on sexual exploitation and abuse.", gap:1, why:"This is the first of the eight UN PSEA standards.", fix:"Adopt a short PSEA policy; free templates exist from PSEA networks."}]},
-   {id:"psea_fp", res:"psea_kit", q:"Is a named person responsible for PSEA? (Standard 2: Organizational management)", opts:[
+   {id:"psea_fp", res:"psea_kit", q:"Is a named person responsible for PSEA? (Good practice; supports every standard)", opts:[
      {v:"a", t:"Yes, a focal point with written responsibilities", s:"A named focal point is responsible for PSEA, with written responsibilities."},
      {v:"c", t:"No", s:"No one is yet named as responsible for PSEA.", gap:1, why:"Assessors check that someone is accountable.", fix:"Appoint a focal point and write down their role."}]},
+   {id:"psea_sub", res:"psea_ip", q:"Do your agreements with sub-partners and contractors require them to prevent and respond to sexual exploitation and abuse? (Standard 2: Organizational management)", opts:[
+     {v:"a", t:"Yes, our agreements include a PSEA clause", s:"Agreements with sub-partners and contractors include a clause requiring them to prevent and respond to sexual exploitation and abuse."},
+     {v:"c", t:"No, not yet", s:"Agreements with sub-partners and contractors do not yet include a PSEA clause.", gap:1, why:"Standard 2 of the UN PSEA assessment checks for this clause.", fix:"Add a standard PSEA clause to every sub-partner and contractor agreement."},
+     {v:"n", t:"We have no sub-partners or contractors", s:"The organisation has no sub-partners or contractors. Tell your assessor, who decides whether Standard 2 applies."}]},
    {id:"psea_train", res:"psea_ip", q:"Have staff and volunteers been trained on PSEA? (Standard 4: Mandatory training)", opts:[
      {v:"a", t:"Yes, everyone, with records kept", s:"All staff and volunteers have been trained on PSEA, and attendance records are kept."},
      {v:"b", t:"Some people", s:"Some staff and volunteers have been trained on PSEA.", gap:2, why:"Training must reach everyone, including volunteers.", fix:"Run a short session for everyone not yet trained and keep the sign-in sheet."},
@@ -766,7 +771,7 @@ var AREAS = [
   ],
   evidence:[
    {id:"psea_poldoc", res:"psea_kit", t:"PSEA or safeguarding policy", core:1, valid:36, why:"Standard 1."},
-   {id:"psea_fpdoc", res:"psea_kit", t:"Focal point appointment or terms of reference", core:1, why:"Standard 2."},
+   {id:"psea_fpdoc", res:"psea_kit", t:"Focal point appointment or terms of reference", core:1, why:"Shows who is accountable for PSEA."},
    {id:"psea_trdoc", res:"psea_ip", t:"Training attendance records", core:1, valid:24, why:"Standard 4."},
    {id:"psea_repdoc", res:"cbcm", t:"Description of community reporting channels", core:1, why:"Standard 5."},
    {id:"psea_refdoc", res:"psea_kit", t:"Referral list for survivor services", valid:12, why:"Standard 6."},
@@ -884,7 +889,7 @@ var EVIDENCE_OPTS = [["","Choose…"],["have","We have it"],["stale","We have it
 
 /* ---------- Example (fictional) ---------- */
 var EXAMPLE = {org:{name:"Riverbank Community Trust", country:"Example country", never:true, lastAssess:"", frameworks:""}, plan:{psea_repdoc:{by:"2027-01",who:"PSEA focal point"},risk_scr:{by:"2026-12",who:"Finance officer"}}, example:true, skipped:{}, cost:null, riskplan:null,
-  answers:{acc_plan:"b",acc_cfm:"b",acc_sub:"n",hr_sec:"b",data_it:"a",gov_board:"a",gov_coi:"b",gov_reg:"a",fin_bank:"a",fin_sod:"b",fin_rec:"a",fin_audit:"b",proc_quotes:"a",proc_appr:"a",proc_file:"b",asset_reg:"b",asset_stock:"a",hr_contract:"a",hr_check:"b",hr_coc:"a",psea_pol:"a",psea_fp:"a",psea_train:"b",psea_report:"b",psea_ref:"a",psea_inv:"b",risk_fraud:"b",risk_screen:"b",risk_reg:"c",data_consent:"b",data_access:"a",data_keep:"c"},
+  answers:{acc_plan:"b",acc_cfm:"b",acc_sub:"n",hr_sec:"b",data_it:"a",gov_board:"a",gov_coi:"b",gov_reg:"a",fin_bank:"a",fin_sod:"b",fin_rec:"a",fin_audit:"b",proc_quotes:"a",proc_appr:"a",proc_file:"b",asset_reg:"b",asset_stock:"a",hr_contract:"a",hr_check:"b",hr_coc:"a",psea_pol:"a",psea_fp:"a",psea_sub:"n",psea_train:"b",psea_report:"b",psea_ref:"a",psea_inv:"b",risk_fraud:"b",risk_screen:"b",risk_reg:"c",data_consent:"b",data_access:"a",data_keep:"c"},
   evidence:{acc_strat:{s:"have",d:"2021-03"},acc_annrep:{s:"have",d:"2026-04"},acc_cfmpol:{s:"missing"},acc_subagr:{s:"na"},hr_secplan:{s:"missing"},data_ict:{s:"missing"},gov_cert:{s:"have",d:"2026-02"},gov_const:{s:"have"},gov_list:{s:"have",d:"2026-03"},gov_min:{s:"have",d:"2026-06"},gov_coipol:{s:"missing"},gov_org:{s:"have",d:"2025-08"},
     fin_stmt:{s:"have",d:"2026-09"},fin_aud:{s:"have",d:"2024-12"},fin_man:{s:"have",d:"2023-01"},fin_bud:{s:"have",d:"2026-01"},fin_recs:{s:"have",d:"2026-09"},
     proc_pol:{s:"have",d:"2024-05"},proc_eg:{s:"have",d:"2026-07"},proc_sup:{s:"missing"},
@@ -899,7 +904,19 @@ var KEY = "aidfolio.v1"; var SITE="aidfolio.org"; /* change here if you use anot
 var state = blank();
 function blank(){return {org:{name:"",country:"",never:false,lastAssess:"",frameworks:""}, answers:{}, evidence:{}, skipped:{}, plan:{}, example:false, cost:blankCost(), riskplan:blankRisk()};}
 function load(){try{var raw=localStorage.getItem(KEY); if(raw){var s=JSON.parse(raw); if(s&&s.answers){state=Object.assign(blank(),s); normalise();}}}catch(e){}}
-function normalise(){ var b=blank(); if(!state.plan) state.plan={}; if(!state.org) state.org=b.org; if(!state.cost||!state.cost.direct) state.cost=b.cost; if(!state.cost.shared) state.cost.shared={}; if(!state.cost.grants) state.cost.grants=[]; if(!state.riskplan||!state.riskplan.items) state.riskplan=b.riskplan; }
+function normalise(){ var b=blank(); if(!state.plan) state.plan={}; if(!state.org) state.org=b.org; if(!state.cost||!state.cost.direct) state.cost=b.cost; if(!state.cost.shared) state.cost.shared={}; if(!state.cost.grants) state.cost.grants=[]; if(!state.riskplan||!state.riskplan.items) state.riskplan=b.riskplan;
+  /* A progress file can come from anywhere: keep only the shapes and values the tools expect. */
+  var obj=function(x){return x&&typeof x==="object"&&!Array.isArray(x);};
+  ["answers","evidence","skipped","plan"].forEach(function(k){ if(!obj(state[k])) state[k]={}; });
+  if(!obj(state.org)) state.org=b.org; if(!obj(state.cost.shared)) state.cost.shared={};
+  ["direct","grants"].forEach(function(k){ state.cost[k]=Array.isArray(state.cost[k])?state.cost[k].filter(obj):[]; });
+  if(!obj(state.riskplan.items)) state.riskplan=b.riskplan;
+  Object.keys(state.answers).forEach(function(k){ if(typeof state.answers[k]!=="string") delete state.answers[k]; });
+  Object.keys(state.plan).forEach(function(k){ if(!obj(state.plan[k])) delete state.plan[k]; });
+  var okS={have:1,stale:1,missing:1,na:1};
+  Object.keys(state.evidence).forEach(function(k){ var e=state.evidence[k]; if(!obj(e)){ delete state.evidence[k]; return; }
+    if(!okS.hasOwnProperty(e.s)) e.s="";
+    e.d=(typeof e.d==="string"&&/^[\d\/.\-]{4,10}$/.test(e.d))?e.d:""; }); }
 function save(){if(state.example) return; try{localStorage.setItem(KEY, JSON.stringify(state));}catch(e){}}
 function clone(o){return JSON.parse(JSON.stringify(o));}
 
@@ -914,7 +931,7 @@ function parseYM(v){ if(!v) return null; v=String(v).trim(); var m;
 function monthsSince(v){ var d=parseYM(v); if(!d||d.mo<1||d.mo>12) return null; return (TODAY.getFullYear()-d.y)*12 + (TODAY.getMonth()+1-d.mo); }
 function itemStatus(item){
   var ev = state.evidence[item.id]; if(!ev || !ev.s) return "unanswered";
-  if(ev.s==="have" && item.valid){ if(!ev.d) return "undated"; var age=monthsSince(ev.d); if(age===null) return "undated"; if(age>item.valid) return "stale"; }
+  if(ev.s==="have" && item.valid){ if(!ev.d) return "undated"; var age=monthsSince(ev.d); if(age===null||age<0) return "undated"; if(age>item.valid) return "stale"; }
   return ev.s==="have" ? "ready" : ev.s;
 }
 function areaSummary(a){
@@ -929,7 +946,7 @@ function activeAreas(){return AREAS.filter(function(a){return !state.skipped[a.i
 function el(tag, attrs, html){var e=document.createElement(tag); if(attrs) for(var k in attrs){ if(k==="text") e.textContent=attrs[k]; else e.setAttribute(k,attrs[k]); } if(html!==undefined) e.innerHTML=html; return e;}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
 var STATUS_LABEL={ready:"Ready",stale:"Needs update",undated:"Add a date",missing:"Missing",na:"Doesn't apply",unanswered:"Not answered"};
-function chip(s){return '<span class="chip '+s+'">'+STATUS_LABEL[s]+'</span>';}
+function chip(s){ if(!STATUS_LABEL.hasOwnProperty(s)) s="unanswered"; return '<span class="chip '+s+'">'+esc(STATUS_LABEL[s])+'</span>';}
 function toast(msg){var t=document.getElementById("toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(function(){t.hidden=true;},2600);}
 function copyText(text, okMsg){
   var done=function(){toast(okMsg||"Copied");};
@@ -1045,7 +1062,8 @@ function buildGaps(){
     a.evidence.forEach(function(it){ var s=itemStatus(it);
       if(s==="missing") gaps.push({id:it.id, res:it.res, c4c:c4cOf(a,it), p:it.core?1:3, area:a.name, what:it.t+": missing", why:it.why, fix:"Find, prepare or adopt this document.", act:"Find, prepare or adopt: "+it.t});
       if(s==="stale") gaps.push({id:it.id, res:it.res, c4c:c4cOf(a,it), p:2, area:a.name, what:it.t+": out of date", why:it.why, fix:"Update it and record the new date. A quick win.", act:"Update and re-date: "+it.t});
-      if(s==="undated") gaps.push({id:it.id, res:it.res, c4c:c4cOf(a,it), p:2, area:a.name, what:it.t+": date needed", why:"This document only counts as current for "+it.valid+" months, so its date matters.", fix:"Add the month and year it was issued or last updated.", act:"Add the issue date to: "+it.t}); });
+      if(s==="undated"){ var fut=monthsSince((state.evidence[it.id]||{}).d)<0;
+        gaps.push({id:it.id, res:it.res, c4c:c4cOf(a,it), p:2, area:a.name, what:it.t+(fut?": date is in the future":": date needed"), why:"This document only counts as current for "+it.valid+" months, so its date matters.", fix:fut?"Check the date: enter the month and year it was issued, not when it expires.":"Add the month and year it was issued or last updated.", act:(fut?"Correct the issue date of: ":"Add the issue date to: ")+it.t}); } });
   });
   gaps.sort(function(x,y){return x.p-y.p;});
   return gaps;
@@ -1163,7 +1181,7 @@ function passportRows(){ var gaps=buildGaps();
     gaps.forEach(function(g){ if(g.c4c!==c.k) return; r.actions++; var pl=state.plan[g.id]; if(pl&&pl.by) r.dated++; });
     if(c.k==="general"){ r.where.unshift("Your organisation"); }
     r.where=r.where.join(", "); return r; }); }
-function csvCell(v){ v=String(v==null?"":v); return '"'+v.replace(/"/g,'""')+'"'; }
+function csvCell(v){ v=String(v==null?"":v); if(/^[=+\-@\t\r]/.test(v)&&!/^-\d[\d.,]*$/.test(v)) v="'"+v; return '"'+v.replace(/"/g,'""')+'"'; }
 function passportCSV(){
   var C4CN={}; C4C.forEach(function(c){C4CN[c.k]=c.t;}); var gapBy={}; buildGaps().forEach(function(g){gapBy[g.id]=g;});
   var PL={1:"Do first",2:"Quick win",3:"Next"};
@@ -1234,7 +1252,21 @@ var COST_EXAMPLE = {currency:"USD", direct:[{name:"Food assistance",amount:"4200
   shared:{lead:"52000",fin:"38000",office:"24000",it:"9000",audit:"8000",ins:"6000",gov:"2000",comp:"11000",fund:"7000",train:"3000",equip:"5000",other:"2000"},
   unrestricted:"15000", grants:[{name:"INGO partner grant",direct:"420000",rate:"7",basis:"direct"},{name:"Pooled fund grant",direct:"180000",rate:"7",basis:"total"}]};
 
-function num(v){ if(v===undefined||v===null) return 0; var n=Number(String(v).replace(/[\s,]/g,"")); return isFinite(n)&&n>0?n:0; }
+/* Read a number typed in any common style: 1,234.56 / 1.234,56 / 1 234,56 / 1'234 / 7,5.
+   With both marks present, the last one is the decimal mark. With one kind of mark: several of them are
+   grouping (1.234.567); a single one followed by exactly three digits is grouping (600.000) unless the
+   field is a percentage (pctField) or the number starts with 0 (0.125); otherwise it is the decimal mark. */
+function num(v, pctField){ if(v===undefined||v===null) return 0;
+  var t=String(v).replace(/[\s\u00a0\u202f'\u2019%]/g,""); if(!t) return 0;
+  var dot=t.lastIndexOf("."), com=t.lastIndexOf(",");
+  if(dot>-1&&com>-1){ var dec=dot>com?".":",", grp=dec==="."?",":"."; var k=t.lastIndexOf(dec);
+    t=t.slice(0,k).split(grp).join("")+"."+t.slice(k+1); }
+  else if(dot>-1||com>-1){ var parts=t.split(com>-1?",":".");
+    if(parts.length>2) t=parts.join("");
+    else if(!pctField&&parts[1].length===3&&parts[0]!==""&&parts[0]!=="0") t=parts.join("");
+    else t=parts[0]+"."+parts[1]; }
+  if(!/^\d*\.?\d+$|^\d+\.$/.test(t)) return 0;
+  var n=Number(t); return isFinite(n)&&n>0?n:0; }
 function money(n,cur){ var r=Math.round(n).toLocaleString(undefined); return (cur?cur+" ":"")+r; }
 function pct(x,dp){ return (100*x).toFixed(dp===undefined?1:dp)+"%"; }
 function costModel(c){
@@ -1242,7 +1274,7 @@ function costModel(c){
   var I=COST_CATS.reduce(function(t,k){return t+num(c.shared[k.id]);},0);
   var U=num(c.unrestricted);
   var r=D>0?I/D:0, sTot=(D+I)>0?I/(D+I):0;
-  var grants=c.grants.map(function(g){ var d=num(g.direct), a=num(g.rate)/100; if(a>=1) a=0.99;
+  var grants=c.grants.map(function(g){ var d=num(g.direct), a=num(g.rate,true)/100; if(a>=1) a=0.99;
     var aD=g.basis==="total"?a/(1-a):a; var rec=aD*d, need=r*d;
     return {name:g.name||"Unnamed grant", d:d, aD:aD, rec:rec, need:need, gap:Math.max(0,need-rec), alloc:D>0?I*d/D:0}; });
   var Dg=grants.reduce(function(t,g){return t+g.d;},0), R=grants.reduce(function(t,g){return t+g.rec;},0);
@@ -1255,7 +1287,7 @@ function costBrief(c,m){
   L.push("OUR TRUE OVERHEAD RATE: "+org);
   L.push("");
   L.push(org+" spends "+money(m.D,cur)+" a year on direct programme costs and "+money(m.I,cur)+" on shared costs that keep the organisation running: management, finance, office, audit, safeguarding and compliance. That is an indirect cost rate of "+pct(m.r)+" of direct costs ("+pct(m.sTot)+" of total spending).");
-  if(m.grants.length){ L.push(""); L.push("Our current grants allow an average of "+pct(m.avgAllowed)+" of direct costs for overheads. After "+money(m.U,cur)+" of unrestricted income, "+money(m.shortfall,cur)+" of our shared costs are unfunded this year. To cover them, our grants would need to allow about "+pct(m.rNeed)+"."); }
+  if(m.grants.length){ L.push(""); L.push("Our current grants allow an average of "+pct(m.avgAllowed)+" of direct costs for overheads. After "+money(m.U,cur)+" of unrestricted income, "+money(m.shortfall,cur)+" of our shared costs are unfunded this year. To cover them from these grants alone, they would need to allow about "+pct(m.rNeed)+"."+(m.Dg<m.D*0.95?" (These grants fund "+pct(m.Dg/m.D,0)+" of our direct costs; our fair rate on any single grant is "+pct(m.r)+".)":"")); }
   L.push(""); L.push("WHAT WE ARE ASKING FOR (any one of these would help)");
   L.push("1. An overhead line at our actual rate of "+pct(m.r)+" of direct costs, or as close to it as your rules allow.");
   L.push("2. If your own rate is capped by your donor: a fair share of the overhead you receive. The IASC Guidance on the Provision of Overheads to Local and National Partners (2022) gives a 50:50 split as one example, and says overheads passed on should be unrestricted and flexible, like the donor's.");
