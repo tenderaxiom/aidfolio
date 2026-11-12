@@ -4,7 +4,7 @@
 - [ ] Repository public; LICENSE and CONTENT-LICENSE present
 - [ ] Cloudflare Worker imported from GitHub; first deploy succeeded
 - [ ] Custom domain attached; site opens on https://
-- [ ] Web Analytics on; Email Routing forwards richard@aidfolio.org to your inbox (send yourself a test)
+- [ ] Web Analytics on; FORWARD_TO secret set (npx wrangler secret put FORWARD_TO), then send yourself a test at richard@aidfolio.org
 - [x] Donation (Stripe) and ledger links live; no placeholder outlines left
 - [ ] aidfolio.com redirected to aidfolio.org (both registered at Cloudflare, 19 October 2026)
 - [ ] Toolbox links checked this quarter (docs/TOOLBOX.md)

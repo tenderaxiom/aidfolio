@@ -1,7 +1,10 @@
 // Cloudflare settings for Aidfolio. You do not need to change anything here.
 // It publishes the files in the "public" folder as a static website,
-// attaches it to aidfolio.org and www.aidfolio.org, and (src/index.js)
-// forwards mail for richard@aidfolio.org to both of Richard's inboxes.
+// attaches it to aidfolio.org and www.aidfolio.org, and runs src/index.js first on
+// every request so that www.aidfolio.org is redirected to aidfolio.org.
+// src/index.js also forwards mail for richard@aidfolio.org to the inboxes in the
+// FORWARD_TO secret. Set that secret BEFORE deploying, or mail will be turned away:
+//   npx wrangler secret put FORWARD_TO
 {
   "name": "aidfolio",
   "main": "src/index.js",
@@ -9,6 +12,7 @@
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
+    "run_worker_first": true,
     "not_found_handling": "404-page"
   },
   "routes": [
